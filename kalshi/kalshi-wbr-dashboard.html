@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weekly Business Review — Growth (Illustrative) | Elliot Dabah</title>
+<meta name="description" content="An illustrative WBR-style growth metrics tree for the 'Will Kalshi hire Elliot Dabah' mock market.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F5F4F0; --surface:#FFFFFF; --ink:#14161A; --ink-dim:#565B66; --line:#E2DFD8;
+    --line-strong:#CFCBC1; --accent:#1F6F5C; --accent-dim:rgba(31,111,92,0.10);
+    --warn:#A8432B; --warn-dim:rgba(168,67,43,0.08); --amber:#B8790E; --amber-dim:rgba(184,121,14,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+    padding-bottom:60px;
+  }
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; }
+  a{ color:var(--accent); text-decoration:none; font-weight:600; }
+  a:hover{ text-decoration:underline; }
+
+  header{
+    border-bottom:1px solid var(--line-strong); padding:22px 40px; display:flex;
+    justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px;
+  }
+  .eyebrow{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:6px; }
+  h1{ font-size:24px; font-weight:700; margin:0; letter-spacing:-.01em; }
+  .header-sub{ font-size:12px; color:var(--ink-dim); margin-top:4px; }
+  .back-link{ font-size:12px; }
+
+  main{ max-width:1180px; margin:0 auto; padding:0 40px; }
+
+  /* Period toggle */
+  .period-toggle{ display:flex; justify-content:flex-end; margin-top:22px; gap:6px; }
+  .period-btn{
+    font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-dim);
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:100px; padding:6px 14px; cursor:pointer;
+  }
+  .period-btn.active{ color:#fff; background:var(--accent); border-color:var(--accent); }
+
+  /* North star hero — full width headline row */
+  .hero{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:4px;
+    margin-top:12px; padding:28px 32px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center;
+  }
+  .hero-label{ font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:8px; }
+  .hero-num{ font-size:48px; font-weight:700; letter-spacing:-.01em; cursor:pointer; border-bottom:2px dashed transparent; }
+  .hero-num:hover{ border-bottom-color:var(--line-strong); }
+  .hero-formula{ margin-top:10px; font-size:13px; color:var(--ink-dim); }
+  .hero-formula b{ color:var(--ink); font-weight:600; }
+  .hero-spark{ display:flex; align-items:flex-end; gap:4px; height:64px; }
+  .hero-spark span{ width:10px; background:var(--accent); border-radius:2px 2px 0 0; opacity:.85; }
+  .hero-delta{ font-size:12px; color:var(--accent); font-weight:700; text-align:right; margin-top:6px; }
+
+  /* Row of 3 supporting cards */
+  .card-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px; }
+  .stat-card{ background:var(--surface); border:1px solid var(--line-strong); border-radius:4px; padding:16px 18px; }
+  .stat-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-dim); margin-bottom:6px; }
+  .stat-val{ font-size:24px; font-weight:700; cursor:pointer; display:inline-block; border-bottom:2px dashed transparent; }
+  .stat-val:hover{ border-bottom-color:var(--line-strong); }
+
+  .section-title{ font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-dim); margin:36px 0 14px; }
+  .section-note{ font-size:11px; color:var(--ink-dim); margin:-8px 0 14px; }
+
+  /* Per-bettor grid */
+  .per-bettor-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .pb-card{ background:var(--surface); border:1px solid var(--line-strong); border-radius:4px; padding:16px 18px; }
+  .pb-label{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-dim); margin-bottom:6px; }
+  .pb-val{ font-size:22px; font-weight:700; }
+
+  /* Funnel */
+  .funnel{ display:flex; gap:0; align-items:stretch; position:relative; }
+  .funnel-stage{
+    flex:1 1 0; background:var(--surface); border:1px solid var(--line-strong); border-left:none;
+    padding:16px 14px; text-align:center; position:relative; cursor:pointer;
+  }
+  .funnel-stage:first-child{ border-left:1px solid var(--line-strong); border-radius:4px 0 0 4px; }
+  .funnel-stage:last-child{ border-radius:0 4px 4px 0; }
+  .funnel-stage:hover{ background:var(--accent-dim); }
+  .funnel-name{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-dim); }
+  .funnel-num{ font-size:20px; font-weight:700; margin-top:6px; }
+  .funnel-drop{ font-size:10px; color:var(--warn); margin-top:4px; }
+  .funnel-note{ font-size:11px; color:var(--ink-dim); margin-top:16px; }
+
+  .dormant-branch{
+    margin-top:14px; background:var(--amber-dim); border:1px dashed var(--amber); border-radius:4px;
+    padding:14px 18px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .dormant-title{ font-size:12px; font-weight:700; color:var(--amber); text-transform:uppercase; letter-spacing:.04em; }
+  .dormant-desc{ font-size:12px; color:var(--ink-dim); margin-top:4px; max-width:520px; }
+  .dormant-num{ font-size:26px; font-weight:700; color:var(--amber); white-space:nowrap; }
+
+  /* Pillar sections (Conversion / Engagement / Recovery) */
+  .pillar-block{ background:var(--surface); border:1px solid var(--line-strong); border-radius:4px; padding:20px 22px; margin-bottom:16px; }
+  .pillar-block-title{ font-size:14px; font-weight:700; margin-bottom:2px; }
+  .pillar-block-sub{ font-size:12px; color:var(--ink-dim); margin-bottom:14px; }
+  .metric-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; }
+  .metric-tile{ border-top:1px solid var(--line); padding-top:8px; }
+  .metric-tile-label{ font-size:11px; color:var(--ink-dim); margin-bottom:4px; }
+  .metric-tile-val{ font-size:17px; font-weight:700; cursor:pointer; }
+  .metric-tile-val:hover{ text-decoration:underline; text-decoration-style:dashed; }
+
+  /* Category / share-of-sight */
+  .cat-row{ display:flex; align-items:center; gap:12px; padding:10px 0; border-top:1px solid var(--line); }
+  .cat-row:first-of-type{ border-top:none; }
+  .cat-name{ width:88px; flex:0 0 auto; font-size:12px; font-weight:700; }
+  .cat-bar-track{ flex:1 1 auto; height:10px; background:var(--line); border-radius:100px; overflow:hidden; }
+  .cat-bar-fill{ height:100%; background:var(--accent); border-radius:100px; }
+  .cat-share{ width:42px; flex:0 0 auto; font-size:12px; font-weight:700; text-align:right; }
+  .cat-growth{ width:52px; flex:0 0 auto; font-size:11px; font-weight:700; text-align:right; }
+  .cat-growth.up{ color:var(--accent); }
+  .cat-growth.down{ color:var(--warn); }
+  .cat-topbet{ width:26px; flex:0 0 auto; text-align:right; }
+  .cat-topbet button{
+    background:none; border:1px solid var(--line-strong); border-radius:50%; width:22px; height:22px;
+    font-size:11px; font-weight:700; color:var(--ink-dim); cursor:pointer;
+  }
+  .crossers-box{ margin-top:16px; background:var(--accent-dim); border:1px dashed var(--accent); border-radius:4px; padding:12px 16px; font-size:12px; color:var(--ink); }
+
+  /* Segmentation */
+  .chip-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .chip{ font-size:11px; font-weight:600; color:var(--ink-dim); background:var(--surface); border:1px solid var(--line-strong); border-radius:100px; padding:5px 12px; }
+
+  .disclosure{
+    margin-top:36px; font-size:11px; color:var(--ink-dim); line-height:1.6; border-top:1px solid var(--line-strong);
+    padding-top:14px;
+  }
+
+  /* Drill-down popover */
+  .drill-pop{
+    position:fixed; display:none; z-index:300; background:var(--ink); color:#F5F4F0; border-radius:6px;
+    padding:12px 14px; font-size:12px; max-width:280px; box-shadow:0 12px 32px rgba(0,0,0,.3);
+  }
+  .drill-pop.open{ display:block; }
+  .drill-pop-title{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; opacity:.65; margin-bottom:8px; }
+  .drill-row{ display:flex; justify-content:space-between; gap:14px; padding:4px 0; }
+  .drill-row span:last-child{ font-family:'IBM Plex Mono',monospace; font-weight:700; }
+  .drill-close{ position:absolute; top:8px; right:10px; background:none; border:none; color:#F5F4F0; opacity:.6; font-size:13px; cursor:pointer; }
+
+  @media (max-width: 760px){
+    header{ padding:18px 20px; }
+    main{ padding:0 20px; }
+    .hero{ grid-template-columns:1fr; padding:20px; }
+    .hero-spark{ display:none; }
+    .card-row{ grid-template-columns:1fr; }
+    .per-bettor-grid{ grid-template-columns:1fr 1fr; }
+    .funnel{ flex-direction:column; }
+    .funnel-stage{ border-left:1px solid var(--line-strong) !important; border-top:none; }
+    .funnel-stage:first-child{ border-radius:4px 4px 0 0; }
+    .funnel-stage:last-child{ border-radius:0 0 4px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">Illustrative &middot; not real Kalshi data</div>
+    <h1>Weekly Business Review — Growth</h1>
+    <div class="header-sub">Prepared by Elliot Dabah for the "Will Kalshi hire Elliot Dabah?" mock market &middot; Week of Jul 20, 2026</div>
+  </div>
+  <a class="back-link" href="kalshi-elliot-mock.html">&larr; Back to the market page</a>
+</header>
+
+<main>
+
+  <div class="period-toggle">
+    <button class="period-btn active" id="periodWeekly" onclick="setPeriod('weekly')">Weekly</button>
+    <button class="period-btn" id="periodMonthly" onclick="setPeriod('monthly')">Monthly</button>
+  </div>
+
+  <div class="hero">
+    <div>
+      <div class="hero-label" id="heroLabel">North Star — Weekly $ Volume Traded</div>
+      <div class="hero-num mono" id="heroVolume" onclick="drill(event,'volume')">$1.42M</div>
+      <div class="hero-formula">$ Volume (period) = <b>Active Bettors</b> &times; <b>Bets per Active Bettor</b> &times; <b>Avg $ per Bet</b></div>
+    </div>
+    <div>
+      <div class="hero-spark" id="heroSpark"></div>
+      <div class="hero-delta" id="heroDelta">&#9650; 14% w/w</div>
+    </div>
+  </div>
+
+  <div class="card-row">
+    <div class="stat-card">
+      <div class="stat-label">Number of bets</div>
+      <div class="stat-val mono" id="statBets" onclick="drill(event,'bets')">41,600</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Average price per bet</div>
+      <div class="stat-val mono" id="statAvgPrice" onclick="drill(event,'avgPrice')">$34</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unique bettors (period)</div>
+      <div class="stat-val mono" id="statUnique" onclick="drill(event,'unique')">5,540</div>
+    </div>
+  </div>
+
+  <div class="section-title">Per bettor</div>
+  <div class="section-note">Same totals above, reframed at the individual-customer level — the "give me the breakdown per bettor" cut.</div>
+  <div class="per-bettor-grid">
+    <div class="pb-card"><div class="pb-label">$ Volume / bettor</div><div class="pb-val mono" id="pbVolume">$256</div></div>
+    <div class="pb-card"><div class="pb-label">Bets / bettor</div><div class="pb-val mono" id="pbBets">7.5</div></div>
+    <div class="pb-card"><div class="pb-label">Sessions / bettor</div><div class="pb-val mono" id="pbSessions">11.2</div></div>
+    <div class="pb-card"><div class="pb-label">Clicks / bettor</div><div class="pb-val mono" id="pbClicks">46</div></div>
+  </div>
+
+  <div class="section-title">Funnel — signup to first trade</div>
+  <div class="funnel" id="funnelWrap">
+    <div class="funnel-stage" onclick="drill(event,'signup')">
+      <div class="funnel-name">Signed up</div>
+      <div class="funnel-num mono" id="fSignup">18,400</div>
+    </div>
+    <div class="funnel-stage" onclick="drill(event,'verified')">
+      <div class="funnel-name">Verified (KYC)</div>
+      <div class="funnel-num mono" id="fVerified">14,050</div>
+      <div class="funnel-drop" id="fVerifiedDrop">&darr; 24%</div>
+    </div>
+    <div class="funnel-stage" onclick="drill(event,'funded')">
+      <div class="funnel-name">Funded</div>
+      <div class="funnel-num mono" id="fFunded">9,870</div>
+      <div class="funnel-drop" id="fFundedDrop">&darr; 30%</div>
+    </div>
+    <div class="funnel-stage" onclick="drill(event,'firstTrade')">
+      <div class="funnel-name">First Trade</div>
+      <div class="funnel-num mono" id="fFirstTrade">7,210</div>
+      <div class="funnel-drop" id="fFirstTradeDrop">&darr; 27%</div>
+    </div>
+  </div>
+  <div class="funnel-note">Active/MAU is reported above as "unique bettors," not as a funnel stage — it's a rolling-window metric, not a per-cohort conversion step, so it doesn't leak-rate cleanly alongside Signup&rarr;Verified&rarr;Funded&rarr;First Trade.</div>
+
+  <div class="dormant-branch">
+    <div>
+      <div class="dormant-title">Highest-leverage cohort: funded, zero trades (period)</div>
+      <div class="dormant-desc">Acquisition cost is already sunk on this group — they cleared signup, KYC, and funding. Nudging them costs nothing incremental to acquire.</div>
+    </div>
+    <div class="dormant-num mono" id="dormantNum">2,660 users</div>
+  </div>
+
+  <div class="section-title">Conversion</div>
+  <div class="pillar-block">
+    <div class="metric-grid">
+      <div class="metric-tile"><div class="metric-tile-label">Page views</div><div class="metric-tile-val mono" onclick="drill(event,'pageViews')" id="cvPageViews">92,300</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Clicks</div><div class="metric-tile-val mono" onclick="drill(event,'clicks')" id="cvClicks">31,400</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Time on page</div><div class="metric-tile-val mono" id="cvTimeOnPage">2m 14s</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Click-through rate</div><div class="metric-tile-val mono" id="cvCtr">34%</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Conversion rate</div><div class="metric-tile-val mono" id="cvConvRate">19.9%</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Sessions before converting</div><div class="metric-tile-val mono" id="cvSessionsToConvert">3.1</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Engagement — bet category breakdown</div>
+  <div class="pillar-block">
+    <div class="pillar-block-sub">Share of sight across categories (sums to 100%), each category's growth vs. last period, and the top bet driving it — click <span class="mono">?</span> for the top bet in that category.</div>
+    <div id="catRows"></div>
+    <div class="crossers-box" id="crossersBox"></div>
+  </div>
+
+  <div class="section-title">Recovery</div>
+  <div class="pillar-block">
+    <div class="pillar-block-sub">In-page exit-intent recovery, plus the off-app, multi-channel touchpoints that catch what the page alone can't — email and push.</div>
+    <div class="metric-grid">
+      <div class="metric-tile"><div class="metric-tile-label">In-page recovery rate</div><div class="metric-tile-val mono" id="rcRecoveryRate">23%</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Email open rate</div><div class="metric-tile-val mono" id="rcEmailOpen">41%</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Email &rarr; return rate</div><div class="metric-tile-val mono" id="rcEmailReturn">18%</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Push open rate</div><div class="metric-tile-val mono" id="rcPushOpen">52%</div></div>
+      <div class="metric-tile"><div class="metric-tile-label">Push &rarr; return rate</div><div class="metric-tile-val mono" id="rcPushReturn">22%</div></div>
+    </div>
+  </div>
+
+  <div class="section-title">Segmentation cuts (applied across every metric above)</div>
+  <div class="chip-row">
+    <span class="chip">Category: Sports / Politics / Climbing / Other</span>
+    <span class="chip">Tenure: New / Returning / Power</span>
+    <span class="chip">Channel: Organic / Referral / Paid / Event-driven</span>
+    <span class="chip">Device: Web / Mobile web / App</span>
+  </div>
+
+  <div class="disclosure">
+    All figures on this page are illustrative and authored by Elliot Dabah for demonstration purposes — they are not real Kalshi data, and no non-public information was used to produce them. Every number is clickable for a source/composition drill-down (demo only). This page exists to show how the growth ideas on the companion market page would actually be measured, the way a real weekly business review would structure it.
+  </div>
+
+</main>
+
+<div class="drill-pop" id="drillPop">
+  <button class="drill-close" onclick="closeDrill()">&times;</button>
+  <div class="drill-pop-title" id="drillTitle"></div>
+  <div id="drillBody"></div>
+</div>
+
+<script>
+  // ---- Weekly / Monthly data ----
+  const DATA = {
+    weekly: {
+      heroLabel: 'North Star — Weekly $ Volume Traded', heroVolume: '$1.42M', heroDelta: '&#9650; 14% w/w',
+      spark: [38,44,41,52,58,55,66,72,80,76,88,100],
+      bets: '41,600', avgPrice: '$34', unique: '5,540',
+      pb: { volume:'$256', bets:'7.5', sessions:'11.2', clicks:'46' },
+      funnel: { signup:'18,400', verified:'14,050', verifiedDrop:'&darr; 24%', funded:'9,870', fundedDrop:'&darr; 30%', firstTrade:'7,210', firstTradeDrop:'&darr; 27%' },
+      dormant: '2,660 users',
+      conv: { pageViews:'92,300', clicks:'31,400', timeOnPage:'2m 14s', ctr:'34%', convRate:'19.9%', sessionsToConvert:'3.1' },
+      categories: [
+        { name:'Sports', share:46, growth:'+4%', dir:'up', key:'sports' },
+        { name:'Politics', share:31, growth:'+18%', dir:'up', key:'politics' },
+        { name:'Climbing', share:8, growth:'-2%', dir:'down', key:'climbing' },
+        { name:'Other', share:15, growth:'+1%', dir:'up', key:'other' }
+      ],
+      crossers: '340 bettors placed their first bet in a new category this week — mostly sports&rarr;politics.',
+      recovery: { recoveryRate:'23%', emailOpen:'41%', emailReturn:'18%', pushOpen:'52%', pushReturn:'22%' }
+    },
+    monthly: {
+      heroLabel: 'North Star — Monthly $ Volume Traded', heroVolume: '$5.61M', heroDelta: '&#9650; 21% m/m',
+      spark: [30,36,40,46,50,58,62,70,76,82,90,100],
+      bets: '167,000', avgPrice: '$34', unique: '13,900',
+      pb: { volume:'$404', bets:'12.0', sessions:'18.6', clicks:'79' },
+      funnel: { signup:'71,200', verified:'54,400', verifiedDrop:'&darr; 24%', funded:'38,600', fundedDrop:'&darr; 29%', firstTrade:'28,300', firstTradeDrop:'&darr; 27%' },
+      dormant: '9,480 users',
+      conv: { pageViews:'358,000', clicks:'121,900', timeOnPage:'2m 26s', ctr:'34%', convRate:'20.8%', sessionsToConvert:'3.4' },
+      categories: [
+        { name:'Sports', share:44, growth:'+6%', dir:'up', key:'sports' },
+        { name:'Politics', share:33, growth:'+24%', dir:'up', key:'politics' },
+        { name:'Climbing', share:9, growth:'-1%', dir:'down', key:'climbing' },
+        { name:'Other', share:14, growth:'+2%', dir:'up', key:'other' }
+      ],
+      crossers: '1,120 bettors placed their first bet in a new category this month — mostly sports&rarr;politics.',
+      recovery: { recoveryRate:'26%', emailOpen:'43%', emailReturn:'19%', pushOpen:'54%', pushReturn:'24%' }
+    }
+  };
+
+  const DRILL = {
+    volume:      { title:'$ Volume — by category', rows:[['Sports','$653K'],['Politics','$440K'],['Climbing','$114K'],['Other','$213K']] },
+    bets:        { title:'Bets — by channel', rows:[['Organic','19,100'],['Referral','9,400'],['Paid','7,700'],['Event-driven','5,400']] },
+    avgPrice:    { title:'Avg price per bet — by tenure', rows:[['New','$21'],['Returning','$34'],['Power','$58']] },
+    unique:      { title:'Unique bettors — by device', rows:[['App','3,610'],['Mobile web','1,340'],['Web','590']] },
+    signup:      { title:'Signups — by channel', rows:[['Facebook','6,720'],['Search','5,290'],['Refer-a-friend','3,680'],['Organic / direct','2,710']] },
+    verified:    { title:'Verified (KYC) — by channel', rows:[['Facebook','5,120'],['Search','4,080'],['Refer-a-friend','2,950'],['Organic / direct','1,900']] },
+    funded:      { title:'Funded — by channel', rows:[['Facebook','3,540'],['Search','2,890'],['Refer-a-friend','2,210'],['Organic / direct','1,230']] },
+    firstTrade:  { title:'First trade — by channel', rows:[['Facebook','2,610'],['Search','2,140'],['Refer-a-friend','1,660'],['Organic / direct','800']] },
+    pageViews:   { title:'Page views — by source', rows:[['Direct','38,200'],['Social','29,800'],['Search','16,400'],['Referral link','7,900']] },
+    clicks:      { title:'Clicks — by element', rows:[['Trade buttons','14,600'],['Ladder rows','9,100'],['Share / invite','4,300'],['Rules / info','3,400']] },
+    'cat-sports':   { title:'Top bet — Sports', rows:[['Will the Yankees win the World Series?',''],['Yes price','62¢'],['Volume','$653K']] },
+    'cat-politics': { title:'Top bet — Politics', rows:[['Will the Fed cut rates in September?',''],['Yes price','71¢'],['Volume','$440K']] },
+    'cat-climbing': { title:'Top bet — Climbing', rows:[['Will a new V17 boulder problem be sent this year?',''],['Yes price','38¢'],['Volume','$114K']] },
+    'cat-other':    { title:'Top bet — Other', rows:[['Will Kalshi hire Elliot Dabah as their next PM?',''],['Yes price','87¢'],['Volume','$96K']] }
+  };
+
+  let period = 'weekly';
+
+  function bars(container, values){
+    container.innerHTML = values.map(h => `<span style="height:${h}%"></span>`).join('');
+  }
+
+  function renderCategories(cats){
+    const wrap = document.getElementById('catRows');
+    wrap.innerHTML = cats.map(c => `
+      <div class="cat-row">
+        <div class="cat-name">${c.name}</div>
+        <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${c.share}%"></div></div>
+        <div class="cat-share mono">${c.share}%</div>
+        <div class="cat-growth ${c.dir} mono">${c.growth}</div>
+        <div class="cat-topbet"><button onclick="drill(event,'cat-${c.key}')">?</button></div>
+      </div>
+    `).join('');
+  }
+
+  function render(){
+    const d = DATA[period];
+    document.getElementById('heroLabel').textContent = d.heroLabel;
+    document.getElementById('heroVolume').textContent = d.heroVolume;
+    document.getElementById('heroDelta').innerHTML = d.heroDelta;
+    bars(document.getElementById('heroSpark'), d.spark);
+    document.getElementById('statBets').textContent = d.bets;
+    document.getElementById('statAvgPrice').textContent = d.avgPrice;
+    document.getElementById('statUnique').textContent = d.unique;
+    document.getElementById('pbVolume').textContent = d.pb.volume;
+    document.getElementById('pbBets').textContent = d.pb.bets;
+    document.getElementById('pbSessions').textContent = d.pb.sessions;
+    document.getElementById('pbClicks').textContent = d.pb.clicks;
+    document.getElementById('fSignup').textContent = d.funnel.signup;
+    document.getElementById('fVerified').textContent = d.funnel.verified;
+    document.getElementById('fVerifiedDrop').innerHTML = d.funnel.verifiedDrop;
+    document.getElementById('fFunded').textContent = d.funnel.funded;
+    document.getElementById('fFundedDrop').innerHTML = d.funnel.fundedDrop;
+    document.getElementById('fFirstTrade').textContent = d.funnel.firstTrade;
+    document.getElementById('fFirstTradeDrop').innerHTML = d.funnel.firstTradeDrop;
+    document.getElementById('dormantNum').textContent = d.dormant;
+    document.getElementById('cvPageViews').textContent = d.conv.pageViews;
+    document.getElementById('cvClicks').textContent = d.conv.clicks;
+    document.getElementById('cvTimeOnPage').textContent = d.conv.timeOnPage;
+    document.getElementById('cvCtr').textContent = d.conv.ctr;
+    document.getElementById('cvConvRate').textContent = d.conv.convRate;
+    document.getElementById('cvSessionsToConvert').textContent = d.conv.sessionsToConvert;
+    renderCategories(d.categories);
+    document.getElementById('crossersBox').innerHTML = d.crossers;
+    document.getElementById('rcRecoveryRate').textContent = d.recovery.recoveryRate;
+    document.getElementById('rcEmailOpen').textContent = d.recovery.emailOpen;
+    document.getElementById('rcEmailReturn').textContent = d.recovery.emailReturn;
+    document.getElementById('rcPushOpen').textContent = d.recovery.pushOpen;
+    document.getElementById('rcPushReturn').textContent = d.recovery.pushReturn;
+  }
+
+  function setPeriod(p){
+    period = p;
+    document.getElementById('periodWeekly').classList.toggle('active', p === 'weekly');
+    document.getElementById('periodMonthly').classList.toggle('active', p === 'monthly');
+    render();
+    closeDrill();
+  }
+
+  // ---- Drill-down popover ----
+  const pop = document.getElementById('drillPop');
+  function drill(evt, key){
+    evt.stopPropagation();
+    const d = DRILL[key];
+    if (!d) return;
+    document.getElementById('drillTitle').textContent = d.title;
+    document.getElementById('drillBody').innerHTML = d.rows.map(r => `<div class="drill-row"><span>${r[0]}</span><span>${r[1]}</span></div>`).join('');
+    const rect = evt.target.getBoundingClientRect();
+    let left = rect.left;
+    let top = rect.bottom + 8;
+    if (left + 280 > window.innerWidth) left = window.innerWidth - 296;
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+    pop.classList.add('open');
+  }
+  function closeDrill(){ pop.classList.remove('open'); }
+  document.addEventListener('click', (e) => { if (!pop.contains(e.target)) closeDrill(); });
+
+  render();
+</script>
+
+</body>
+</html>
