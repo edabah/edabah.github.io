@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Will Kalshi hire Elliot Dabah as their next PM?</title>
+<meta name="description" content="An unofficial, self-authored Kalshi market on whether Elliot Dabah becomes Kalshi's next PM.">
+<meta property="og:title" content="Will Kalshi hire Elliot Dabah as their next PM?">
+<meta property="og:description" content="87% Yes. Illustrative market, real candidate. Built by Elliot Dabah.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://media.licdn.com/dms/image/v2/D4E03AQFiOpu4iH8wqA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1675616465009?e=1786579200&v=beta&t=yNY4qn_uaZqxKD9Un7XrgqDTHkhyh5vYY7y_clLYNN0">
+<style>
+  :root{
+    --bg:#0B0D10; --bg-alt:#101317; --card:#14171C; --card-hover:#191D23;
+    --border:#242830; --border-strong:#30353F; --text:#F5F6F7; --text-dim:#B4BCC7;
+    --muted:#7B8492; --green:#00D084; --green-dim:rgba(0,208,132,0.14);
+    --red:#FF5C5C; --red-dim:rgba(255,92,87,0.14);
+  }
+  [data-theme="light"]{
+    --bg:#F7F8F9; --bg-alt:#FFFFFF; --card:#FFFFFF; --card-hover:#F1F3F5;
+    --border:#E4E7EB; --border-strong:#D7DBE0; --text:#0B0D10; --text-dim:#3F4650;
+    --muted:#6B7280; --green:#00A876; --green-dim:rgba(0,168,118,0.10);
+    --red:#E14B3D; --red-dim:rgba(225,75,61,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-variant-numeric:tabular-nums;
+    transition:background .25s ease,color .25s ease;
+    padding-bottom:0;
+  }
+  body.has-sticky{ padding-bottom:88px; }
+  a{ text-decoration:none; }
+  button{ font-family:inherit; }
+
+  nav{
+    position:sticky; top:0; z-index:50; background:var(--bg-alt);
+    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 48px; gap:12px;
+  }
+  .nav-left{ display:flex; align-items:center; gap:28px; }
+  .logo{ font-weight:800; font-size:16px; letter-spacing:.02em; white-space:nowrap; }
+  .logo span{ color:var(--green); }
+  .nav-tabs{ display:flex; gap:22px; }
+  .nav-tabs span{ font-size:13px; font-weight:600; color:var(--muted); }
+  .nav-tabs span.active{ color:var(--text); }
+  .nav-right{ display:flex; align-items:center; gap:10px; }
+  .icon-btn{
+    width:34px; height:34px; border-radius:8px; border:1px solid var(--border);
+    background:var(--card); color:var(--text); font-size:15px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cta-btn{
+    background:var(--green); color:#04120C; border:none; border-radius:8px;
+    font-weight:700; font-size:13px; padding:10px 18px; cursor:pointer; letter-spacing:.01em;
+  }
+
+  .grid{
+    display:grid; grid-template-columns:minmax(0,1fr) 360px; gap:32px;
+    max-width:1400px; margin:0 auto; padding:32px 48px 64px; align-items:start;
+  }
+  main{ display:flex; flex-direction:column; gap:36px; min-width:0; }
+
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:12px;
+    transition:background .2s ease,border-color .2s ease;
+  }
+  .section-label{
+    font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase;
+    letter-spacing:.08em; margin-bottom:14px;
+  }
+
+  /* Header block */
+  .breadcrumb{ font-size:12px; color:var(--muted); font-weight:600; letter-spacing:.03em; margin-bottom:10px; }
+  .byline{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .byline img{
+    width:36px; height:36px; border-radius:50%; object-fit:cover;
+    border:2px solid var(--green); filter:grayscale(1) contrast(1.2) brightness(.92);
+  }
+  .byline-text{ font-size:12px; color:var(--muted); font-weight:600; }
+  .byline-text b{ color:var(--text-dim); }
+  h1{ font-size:34px; font-weight:800; margin:0 0 14px; line-height:1.15; }
+  .countdown-row{ display:flex; align-items:center; gap:8px; margin-bottom:20px; }
+  .live-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--green);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+  .countdown-text{ font-size:13px; color:var(--text-dim); font-weight:500; }
+  .prob-row{ display:flex; align-items:baseline; gap:14px; margin-bottom:28px; line-height:1; flex-wrap:wrap; }
+  .prob-num{ font-size:60px; font-weight:900; letter-spacing:-.02em; color:var(--green); }
+  .prob-yes{ font-size:26px; font-weight:700; margin-left:4px; }
+  .movement{ font-size:15px; font-weight:700; color:var(--green); }
+  .trade-row{ display:flex; gap:12px; }
+  .yes-btn,.no-btn{ border-radius:10px; padding:14px 26px; font-weight:800; font-size:15px; cursor:pointer; }
+  .yes-btn{ background:var(--green-dim); color:var(--green); border:1px solid var(--green); }
+  .no-btn{ background:var(--red-dim); color:var(--red); border:1px solid var(--red); }
+
+  /* Value props */
+  .value-row{ display:flex; gap:14px; overflow-x:auto; padding-bottom:6px; }
+  .value-card{
+    position:relative; min-width:220px; flex:0 0 auto; padding:18px;
+  }
+  .value-num{ font-size:24px; font-weight:800; margin-bottom:4px; }
+  .value-label{ font-size:13px; font-weight:600; color:var(--text-dim); margin-bottom:6px; }
+  .value-sub{ font-size:12px; color:var(--muted); line-height:1.4; padding-right:18px; }
+  .info-icon{
+    position:absolute; top:16px; right:16px; width:16px; height:16px; border-radius:50%;
+    border:1px solid var(--muted); color:var(--muted); font-size:10px; font-style:italic; font-weight:700;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .tip{
+    display:none; position:absolute; top:100%; left:0; margin-top:6px; width:220px; z-index:20;
+    background:var(--card-hover); border:1px solid var(--border-strong); border-radius:8px; padding:10px;
+    font-size:12px; color:var(--text-dim); line-height:1.5; box-shadow:0 8px 24px rgba(0,0,0,.28);
+  }
+  .value-card:hover .tip, .value-card.pinned .tip{ display:block; }
+
+  /* Ladder */
+  .ladder-wrap{ overflow:hidden; }
+  .ladder-row{
+    position:relative; padding:16px 20px; border-bottom:1px solid var(--border);
+    cursor:pointer; transition:background .15s ease;
+  }
+  .ladder-row:last-child{ border-bottom:none; }
+  .ladder-row:hover, .ladder-row.pinned{ background:var(--card-hover); }
+  .ladder-main{ display:flex; align-items:center; gap:16px; flex-wrap:nowrap; }
+  .ladder-name{ flex:1 1 auto; min-width:0; font-size:14px; font-weight:600; }
+  .ladder-pct-col{ display:flex; align-items:baseline; gap:6px; flex:0 0 auto; min-width:74px; justify-content:flex-end; }
+  .ladder-pct{ font-size:15px; font-weight:800; }
+  .ladder-pct.resolved{ color:var(--green); }
+  .ladder-move{ font-size:11px; font-weight:700; color:var(--green); }
+  .ladder-move.resolved{ color:var(--muted); }
+  .ladder-price-col{ display:flex; gap:8px; flex:0 0 auto; }
+  .yes-chip{ font-size:12px; font-weight:700; color:var(--green); background:var(--green-dim); border-radius:6px; padding:4px 8px; cursor:pointer; }
+  .no-chip{ font-size:12px; font-weight:700; color:var(--red); background:var(--red-dim); border-radius:6px; padding:4px 8px; cursor:pointer; }
+  .ladder-tip{
+    display:none; margin-top:10px; background:var(--card-hover); border:1px solid var(--border-strong);
+    border-radius:8px; padding:10px; font-size:12px; color:var(--text-dim); line-height:1.5;
+  }
+  .ladder-row.pinned .ladder-tip{ display:block; }
+  .ladder-info-icon{
+    flex:0 0 auto; width:18px; height:18px; border-radius:50%; border:1px solid var(--muted);
+    color:var(--muted); font-size:11px; font-style:italic; font-weight:700; display:flex;
+    align-items:center; justify-content:center; cursor:pointer; background:transparent;
+  }
+  .ladder-info-icon:hover{ border-color:var(--text-dim); color:var(--text-dim); }
+  .ladder-story-badge{
+    font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.04em;
+    border:1px solid var(--border-strong); border-radius:5px; padding:2px 6px; flex:0 0 auto;
+  }
+  .ladder-metric{ font-size:16px; font-weight:800; color:var(--text); flex:0 0 auto; white-space:nowrap; }
+  .ladder-metric-label{ font-size:11px; color:var(--muted); flex:0 0 auto; white-space:nowrap; }
+
+  /* Rules */
+  .rules-card{ padding:0; overflow:hidden; }
+  .rules-header{
+    width:100%; background:transparent; border:none; color:var(--text); cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; padding:18px 20px;
+    font-size:15px; font-weight:700;
+  }
+  .rules-teaser{ padding:0 20px 18px; font-size:13px; color:var(--text-dim); line-height:1.5; }
+  .rules-body{ display:none; padding:0 20px 20px; border-top:1px solid var(--border); padding-top:16px; flex-direction:column; gap:12px; }
+  .rules-body.open{ display:flex; }
+  .rules-body p{ font-size:13px; color:var(--text-dim); line-height:1.6; margin:0; }
+  .rules-body b{ color:var(--green); }
+  .link-row{ display:flex; gap:16px; flex-wrap:wrap; }
+  .link-row a{ font-size:13px; font-weight:700; color:var(--green); }
+  .disclosure{ font-size:11px; color:var(--muted); line-height:1.6; border-top:1px solid var(--border); padding-top:12px; margin-top:4px; }
+
+  /* Volume bar */
+  .volume-bar{ display:flex; align-items:center; justify-content:space-between; padding:14px 20px; flex-wrap:wrap; gap:10px; }
+  .volume-text{ font-size:13px; font-weight:600; color:var(--text-dim); }
+  .toggle-group{ display:flex; gap:6px; }
+  .toggle-group span{ font-size:11px; font-weight:700; color:var(--muted); border-radius:6px; padding:4px 8px; }
+  .toggle-group span.active{ color:var(--text); background:var(--card-hover); }
+
+  /* Growth cards */
+  .growth-header{ font-size:15px; font-weight:800; margin-bottom:4px; }
+  .growth-sub{ font-size:12px; color:var(--muted); margin-bottom:14px; }
+  .growth-list{ display:flex; flex-direction:column; gap:12px; }
+  .growth-pillar{ display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+  .growth-pillar:last-child{ margin-bottom:0; }
+  .growth-pillar-title{ font-size:13px; font-weight:800; color:var(--text); }
+  .growth-pillar-sub{ font-size:11px; color:var(--muted); margin-top:-6px; }
+  .growth-card{ padding:16px; display:flex; gap:12px; flex-direction:column; }
+  .growth-card-top{ display:flex; gap:12px; }
+  .growth-num{
+    flex:0 0 auto; width:24px; height:24px; border-radius:50%; border:1px solid var(--green);
+    color:var(--green); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+  }
+  .growth-body{ display:flex; flex-direction:column; gap:6px; min-width:0; flex:1 1 auto; }
+  .growth-title{ font-size:13px; font-weight:700; }
+  .growth-desc{ font-size:12px; color:var(--text-dim); line-height:1.5; }
+  .growth-meta{ display:flex; gap:6px; flex-wrap:wrap; margin-top:2px; }
+  .growth-tag{
+    font-size:10px; font-weight:700; color:var(--muted); letter-spacing:.03em; text-transform:uppercase;
+    border:1px solid var(--border); border-radius:5px; padding:2px 6px; width:fit-content;
+  }
+  .growth-tag.stage{ color:var(--green); border-color:var(--green); }
+  .growth-tag.metric{ color:var(--text-dim); }
+  .growth-demo-btn{
+    align-self:flex-start; margin-top:8px; background:transparent; border:1px solid var(--border-strong);
+    color:var(--text); font-size:11px; font-weight:700; border-radius:6px; padding:6px 10px; cursor:pointer;
+  }
+  .growth-demo-btn:hover{ background:var(--card-hover); }
+  .growth-demo{ display:none; margin-top:4px; padding:12px; background:var(--card-hover); border:1px solid var(--border-strong); border-radius:8px; font-size:12px; color:var(--text-dim); line-height:1.5; }
+  .growth-demo.open{ display:block; }
+  .demo-insight{ display:flex; flex-direction:column; gap:6px; }
+  .demo-insight-row{ display:flex; justify-content:space-between; gap:8px; }
+  .demo-insight-label{ color:var(--muted); }
+  .demo-insight-val{ color:var(--text); font-weight:700; }
+  .demo-toast{
+    position:fixed; bottom:24px; right:24px; background:var(--card); border:1px solid var(--border-strong);
+    border-radius:10px; padding:12px 16px; font-size:12px; color:var(--text); box-shadow:0 12px 32px rgba(0,0,0,.35);
+    z-index:150; display:flex; align-items:center; gap:10px; max-width:280px; opacity:0; transform:translateY(8px);
+    transition:opacity .2s ease, transform .2s ease; pointer-events:none;
+  }
+  .demo-toast.show{ opacity:1; transform:translateY(0); }
+  .demo-toast button{ background:var(--green); color:#04120C; border:none; border-radius:6px; padding:5px 9px; font-size:11px; font-weight:700; cursor:pointer; white-space:nowrap; }
+  .demo-sparkline{ display:flex; align-items:flex-end; gap:3px; height:36px; margin:8px 0; }
+  .demo-sparkline span{ flex:1 1 auto; background:var(--green); border-radius:2px 2px 0 0; opacity:.85; }
+  .demo-stake-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; }
+  .demo-stake-btn{
+    background:var(--green-dim); color:var(--green); border:1px solid var(--green); border-radius:8px;
+    padding:8px 12px; font-size:12px; font-weight:700; cursor:pointer;
+  }
+  .growth-wbr-link{ margin-top:6px; font-size:12px; font-weight:700; color:var(--green); display:inline-block; }
+
+  /* In-context demo highlighting */
+  .demo-glow{ outline:2px solid var(--green); outline-offset:4px; border-radius:12px; animation:demoPulse 1.6s ease-in-out infinite; }
+  @keyframes demoPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(0,208,132,.35);} 50%{ box-shadow:0 0 0 7px rgba(0,208,132,0);} }
+  .demo-inline-box{
+    margin-top:10px; background:var(--green-dim); border:1px dashed var(--green); border-radius:10px; padding:14px;
+    animation:demoFadeIn .2s ease;
+  }
+  @keyframes demoFadeIn{ from{ opacity:0; transform:translateY(-4px); } to{ opacity:1; transform:translateY(0); } }
+  .demo-inline-label{ font-size:10px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--green); margin-bottom:10px; }
+
+  /* Generic form controls used inside modals */
+  .modal-body{ padding:20px; overflow-y:auto; flex:1 1 auto; display:flex; flex-direction:column; gap:14px; }
+  .modal-body p{ margin:0; font-size:13px; color:var(--text-dim); line-height:1.5; }
+  .form-row{ display:flex; flex-direction:column; gap:6px; }
+  .form-row label{ font-size:12px; font-weight:600; color:var(--text-dim); }
+  .form-row input, .form-row select{
+    background:var(--bg); border:1px solid var(--border-strong); border-radius:8px; padding:10px 12px;
+    color:var(--text); font-size:13px; font-family:inherit;
+  }
+  .form-actions{ display:flex; gap:10px; margin-top:2px; }
+  .form-submit{ background:var(--green); color:#04120C; border:none; border-radius:8px; padding:11px 16px; font-weight:800; font-size:13px; cursor:pointer; }
+  .form-note{ font-size:11px; color:var(--muted); }
+
+  /* Share sheet */
+  .share-link-row{ display:flex; gap:8px; }
+  .share-link-row input{ flex:1 1 auto; background:var(--bg); border:1px solid var(--border-strong); border-radius:8px; padding:10px 12px; color:var(--text-dim); font-size:12px; }
+  .share-link-row button{ background:var(--green); color:#04120C; border:none; border-radius:8px; padding:0 14px; font-weight:800; font-size:12px; cursor:pointer; }
+  .share-row{ display:flex; gap:10px; flex-wrap:wrap; }
+  .share-btn{
+    display:flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--border-strong);
+    border-radius:8px; padding:10px 14px; color:var(--text); font-size:13px; font-weight:700; cursor:pointer; text-decoration:none;
+  }
+  .share-btn:hover{ background:var(--card-hover); }
+
+  /* Rail */
+  aside{ display:flex; flex-direction:column; gap:24px; position:sticky; top:90px; }
+  .trade-box{ padding:18px; display:flex; flex-direction:column; gap:10px; }
+  .trade-box-title{ font-size:13px; font-weight:700; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.05em; }
+  .schedule-btn{ background:var(--green); color:#04120C; border:none; border-radius:8px; padding:14px; font-weight:800; font-size:14px; cursor:pointer; text-align:center; }
+  .pass-btn{ background:var(--red-dim); color:var(--red); border:1px solid var(--red); border-radius:8px; padding:14px; font-weight:800; font-size:14px; cursor:pointer; }
+
+  .mobile-only{ display:none; }
+  .sticky-bar{
+    display:none; position:fixed; bottom:0; left:0; right:0; background:var(--bg-alt);
+    border-top:1px solid var(--border); gap:10px; padding:12px 16px; z-index:60;
+  }
+
+  /* Calendly modal */
+  .modal-overlay{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6);
+    z-index:200; align-items:center; justify-content:center; padding:24px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-box{
+    background:var(--bg-alt); border:1px solid var(--border-strong); border-radius:14px;
+    width:100%; max-width:760px; height:min(720px, 90vh); position:relative;
+    display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 24px 64px rgba(0,0,0,0.4);
+  }
+  .modal-header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; border-bottom:1px solid var(--border); flex:0 0 auto;
+    position:relative; z-index:20; background:var(--bg-alt);
+  }
+  .modal-title{ font-size:14px; font-weight:700; color:var(--text); }
+  .modal-close{
+    width:30px; height:30px; border-radius:8px; border:1px solid var(--border);
+    background:var(--card); color:var(--text); font-size:16px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; position:relative; z-index:21;
+  }
+  .modal-box iframe{ flex:1 1 auto; width:100%; border:none; }
+  @media (max-width: 600px){
+    .modal-overlay{ padding:0; }
+    .modal-box{ max-width:none; height:100dvh; border-radius:0; }
+    .modal-header{ padding-top:calc(14px + env(safe-area-inset-top)); }
+    .modal-close{ width:40px; height:40px; font-size:20px; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+  }
+
+  @media (max-width: 860px){
+    nav{ padding:12px 16px; }
+    .nav-tabs span:not(.active){ display:none; }
+    .grid{ grid-template-columns:1fr; padding:20px 16px 24px; gap:0; }
+    aside{ display:none; }
+    h1{ font-size:26px; }
+    .prob-num{ font-size:44px; }
+    .prob-yes{ font-size:20px; }
+    .ladder-row{ padding:14px; }
+    .ladder-main{ flex-wrap:wrap; gap:10px; }
+    .mobile-only{ display:block; }
+    .sticky-bar{ display:flex; }
+    body.has-sticky{ padding-bottom:88px; }
+    .schedule-btn,.pass-btn{ flex:1; padding:13px; }
+  }
+</style>
+</head>
+<body class="has-sticky" data-theme="dark">
+
+  <nav>
+    <div class="nav-left">
+      <span class="logo">KALSHI <span>×</span> ELLIOT</span>
+      <div class="nav-tabs">
+        <span class="active">Markets</span>
+        <span>Live</span>
+        <span>Portfolio</span>
+        <span>Social</span>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">&#9789;</button>
+      <button class="cta-btn" onclick="openCalendly()">Sign the offer</button>
+    </div>
+  </nav>
+
+  <div class="grid">
+    <main>
+
+      <div id="demoTargetHeader">
+        <div class="breadcrumb">Careers &rsaquo; Product &rsaquo; Leadership Hires</div>
+        <div class="byline">
+          <img src="https://media.licdn.com/dms/image/v2/D4E03AQFiOpu4iH8wqA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1675616465009?e=1786579200&v=beta&t=yNY4qn_uaZqxKD9Un7XrgqDTHkhyh5vYY7y_clLYNN0" alt="Elliot Dabah">
+          <span class="byline-text">Market created by <b>Elliot Dabah</b></span>
+        </div>
+        <h1>Will Kalshi hire Elliot Dabah as their next PM?</h1>
+        <div class="countdown-row">
+          <span class="live-dot"></span>
+          <span class="countdown-text" id="countdownText">Decision window closes in — days &middot; target start Aug 31, 2026</span>
+        </div>
+        <div class="prob-row">
+          <span class="prob-num">87% <span class="prob-yes">Yes</span></span>
+          <span class="movement">&#9650; 12</span>
+        </div>
+        <div class="trade-row" id="demoTargetStake">
+          <button class="yes-btn" onclick="openCalendly()">Yes &middot; 87&cent;</button>
+          <button class="no-btn" onclick="openCalendly()">No &middot; 13&cent;</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Why the market moved</div>
+        <div class="value-row">
+          <div class="card value-card">
+            <div class="value-num">1M &rarr; 10M</div>
+            <div class="value-label">platform users scaled</div>
+            <div class="value-sub">Clear &mdash; B2B2C identity platform</div>
+            <span class="info-icon">i</span>
+            <div class="tip">Took Clear's B2B2C onboarding flow from 0&rarr;1, scaling platform users from 1M to 10M within the first year of launch. Self-reported, verifiable on LinkedIn.</div>
+          </div>
+          <div class="card value-card">
+            <div class="value-num">$250M</div>
+            <div class="value-label">revenue through transactional optimization</div>
+            <div class="value-sub">Amazon &mdash; transactional monetization</div>
+            <span class="info-icon">i</span>
+            <div class="tip">Drove $250M in incremental revenue by building and launching new transactional monetization surfaces at Amazon. Self-reported, verifiable on LinkedIn.</div>
+          </div>
+          <div class="card value-card">
+            <div class="value-num">1M</div>
+            <div class="value-label">B2B customers activated</div>
+            <div class="value-sub">Uber for Business</div>
+            <span class="info-icon">i</span>
+            <div class="tip">Activated 1M B2B customers on Uber for Business, driving growth across a dedicated B2B engagement platform. Self-reported, verifiable on LinkedIn.</div>
+          </div>
+          <div class="card value-card">
+            <div class="value-num">+90bps</div>
+            <div class="value-label">CTR lift via personalization</div>
+            <div class="value-sub">Amazon &mdash; email personalization</div>
+            <span class="info-icon">i</span>
+            <div class="tip">Lifted click-through rate 90bps on Amazon emails by shipping AI-driven content personalization at scale. Self-reported, verifiable on LinkedIn.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Related outcomes</div>
+        <div class="card ladder-wrap" id="ladder"></div>
+        <div class="card" id="demoTargetInsightPanel" style="margin-top:10px; padding:14px;">
+          <div class="demo-inline-label" style="color:var(--muted);">Confidence signal</div>
+          <div class="demo-insight">
+            <div class="demo-insight-row"><span class="demo-insight-label">Base rate</span><span class="demo-insight-val">Recruiter screen &rarr; onsite within 10 business days at 70% of comparable high-growth fintechs</span></div>
+            <div class="demo-insight-row"><span class="demo-insight-label">Sourcing</span><span class="demo-insight-val">Public leveling / loop-time reports, aggregated</span></div>
+            <div class="demo-insight-row"><span class="demo-insight-label">Trend</span><span class="demo-insight-val">Kalshi's hiring pace has accelerated with recent headcount growth</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card rules-card" id="demoTargetRules">
+          <button class="rules-header" id="rulesToggle">
+            <span>Market Rules</span>
+            <span id="rulesChevron">+</span>
+          </button>
+          <div class="rules-teaser">"Resolves Yes if Elliot gets the offer." <i style="color:var(--muted);">Full legal rules one click below.</i></div>
+          <div class="rules-body" id="rulesBody">
+            <p>Resolves <b>YES</b> if the candidate has led growth initiatives at $1B+ revenue scale, built 0&rarr;1 platforms scaling from 1M to 10M users, and shipped AI-driven personalization with measurable, cited lift.</p>
+            <p>Verified via: Amazon (Principal PM, Outbound Marketing Technology), Clear (B2B2C identity platform), Uber (B2B engagement &amp; Pearl audience insights), Weight Watchers, and Est&eacute;e Lauder.</p>
+            <div class="link-row">
+              <a href="https://www.linkedin.com/in/elliotdabah/" target="_blank" rel="noopener">Full history on LinkedIn &rarr;</a>
+              <a href="#" onclick="openCalendly(); return false;">Book time &rarr;</a>
+            </div>
+            <div class="disclosure">This market is unofficial, self-authored, and created for illustrative purposes only. All prices, percentages, and volume figures are authored by Elliot Dabah and are not real Kalshi data.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card rules-card" id="demoTargetOdds" style="padding:0; overflow:hidden;">
+          <button class="rules-header" id="oddsToggle" style="font-size:13px;">
+            <span>How these odds are calculated</span>
+            <span id="oddsChevron">+</span>
+          </button>
+          <div class="rules-body" id="oddsBody">
+            <p>Base rate drawn from typical recruiter-screen&rarr;onsite&rarr;offer conversion at comparable high-growth fintechs, adjusted week to week for each loop stage actually clearing on schedule.</p>
+            <p>Each ladder row re-prices independently once its prior stage resolves &mdash; a slipped Katherine interview, for example, would soften Onsite and Offer without changing Hired in isolation.</p>
+            <div class="disclosure">Methodology is illustrative and authored by Elliot Dabah &mdash; not a real Kalshi pricing model.</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card" id="demoTargetTrend" style="padding:14px 20px;">
+          <div class="volume-bar" style="padding:0;">
+            <span class="volume-text">14 yrs experience &middot; 4 companies scaled &middot; 2 platforms built 0&rarr;1</span>
+            <div class="toggle-group">
+              <span>1D</span><span>1W</span><span>1M</span><span class="active">ALL</span>
+            </div>
+          </div>
+          <div class="demo-sparkline" style="margin-top:10px;" id="defaultSparkline"></div>
+        </div>
+      </div>
+
+      <div class="mobile-only" id="growthMobile"></div>
+
+    </main>
+
+    <aside id="growthRail">
+      <div class="card trade-box">
+        <div class="trade-box-title">Make your move</div>
+        <button class="schedule-btn" onclick="openCalendly()">Schedule the next round</button>
+        <button class="pass-btn" onclick="openCalendly()">Pass</button>
+      </div>
+      <div id="growthDesktop"></div>
+    </aside>
+  </div>
+
+  <div class="sticky-bar">
+    <button class="schedule-btn" onclick="openCalendly()">Schedule the next round</button>
+    <button class="pass-btn" onclick="openCalendly()">Pass</button>
+  </div>
+
+  <div class="modal-overlay" id="calendlyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">Schedule time with Elliot</span>
+        <button class="modal-close" onclick="closeCalendly()" aria-label="Close">&times;</button>
+      </div>
+      <iframe id="calendlyFrame" src="" title="Calendly scheduling"></iframe>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="recoveryModal">
+    <div class="modal-box" style="height:auto; max-height:90vh;">
+      <div class="modal-header">
+        <span class="modal-title">Looks like you didn't finish placing this bet</span>
+        <button class="modal-close" onclick="closeRecoveryModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This is the in-page half of recovery — the rest of the catch happens off-app, through email and push, for the sessions that leave without ever seeing this modal.</p>
+        <div class="form-row">
+          <label>Notify me if this market moves</label>
+          <select id="recoveryThreshold">
+            <option>5%+</option>
+            <option selected>10%+</option>
+            <option>15%+</option>
+            <option>20%+</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Or notify me at a specific Yes price (&cent;)</label>
+          <input type="number" id="recoveryPrice" value="90" min="1" max="99">
+        </div>
+        <div class="form-row">
+          <label>Email address (you're not logged in)</label>
+          <input type="email" id="recoveryEmail" placeholder="you@example.com">
+        </div>
+        <div class="form-actions">
+          <button class="form-submit" onclick="submitRecovery()">Enable notification (demo)</button>
+        </div>
+        <div class="form-note">Demo only — no real notification is sent, and this isn't real Kalshi functionality.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="shareModal">
+    <div class="modal-box" style="height:auto; max-height:90vh;">
+      <div class="modal-header">
+        <span class="modal-title">Share this bet</span>
+        <button class="modal-close" onclick="closeShareModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="share-link-row">
+          <input id="shareLinkInput" readonly>
+          <button onclick="copyShareLink()">Copy</button>
+        </div>
+        <div class="share-row" id="shareButtonRow"></div>
+        <div class="form-note">Demo link carries a <code>?ref=demo</code> tag — in production this would be a real, trackable referral code.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="inviteModal">
+    <div class="modal-box" style="height:auto; max-height:90vh;">
+      <div class="modal-header">
+        <span class="modal-title">Invite friends to Kalshi</span>
+        <button class="modal-close" onclick="closeInviteModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>The evergreen invite ask — separate from sharing this one specific bet.</p>
+        <div class="share-link-row">
+          <input id="inviteLinkInput" readonly>
+          <button onclick="copyInviteLink()">Copy</button>
+        </div>
+        <div class="form-row">
+          <label>Or invite by email</label>
+          <input type="email" id="inviteEmail" placeholder="friend@example.com">
+        </div>
+        <div class="form-actions">
+          <button class="form-submit" onclick="submitInvite()">Send invite (demo)</button>
+        </div>
+        <div class="form-note">Demo only — no real invite is sent, and this isn't real Kalshi functionality.</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Calendly modal (iframe popup instead of navigating away)
+  const CALENDLY_URL = 'https://calendly.com/elliotd01/60-minute-meeting';
+  const calendlyModal = document.getElementById('calendlyModal');
+  const calendlyFrame = document.getElementById('calendlyFrame');
+  let calendlyLoaded = false;
+  function openCalendly(){
+    if (!calendlyLoaded) { calendlyFrame.src = CALENDLY_URL; calendlyLoaded = true; } // lazy-load on first open
+    calendlyModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCalendly(){
+    calendlyModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  calendlyModal.addEventListener('click', (e) => {
+    if (e.target === calendlyModal) closeCalendly(); // click outside the box closes it
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCalendly();
+  });
+
+  // Theme toggle
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeToggle.innerHTML = isDark ? '&#9728;' : '&#9789;';
+  });
+
+  // Countdown
+  const target = new Date('2026-08-31T00:00:00');
+  function updateCountdown(){
+    const now = new Date();
+    const days = Math.max(0, Math.ceil((target - now) / 86400000));
+    document.getElementById('countdownText').textContent =
+      `Decision window closes in ${days} days · target start Aug 31, 2026`;
+  }
+  updateCountdown();
+
+  // Rules accordion
+  const rulesToggle = document.getElementById('rulesToggle');
+  const rulesBody = document.getElementById('rulesBody');
+  const rulesChevron = document.getElementById('rulesChevron');
+  rulesToggle.addEventListener('click', () => {
+    const open = rulesBody.classList.toggle('open');
+    rulesChevron.textContent = open ? '\u2212' : '+';
+  });
+
+  // Odds-methodology accordion (default-visible confidence signal, one click away)
+  const oddsToggle = document.getElementById('oddsToggle');
+  const oddsBody = document.getElementById('oddsBody');
+  const oddsChevron = document.getElementById('oddsChevron');
+  oddsToggle.addEventListener('click', () => {
+    const open = oddsBody.classList.toggle('open');
+    oddsChevron.textContent = open ? '\u2212' : '+';
+  });
+
+  // Default-visible sparkline (confidence signal — shown by default, not gated behind a demo click)
+  (function(){
+    const bars = [40,52,48,61,58,70,66,74,80,76,83,87];
+    document.getElementById('defaultSparkline').innerHTML =
+      bars.map(h => `<span style="height:${h}%"></span>`).join('');
+  })();
+
+  // Ladder data — hiring timeline only (career stories live in "Why the market moved" above, not here)
+  const LADDER = [
+    { kind:'timeline', name:'Recruiter screen w/ Ryan Judge completed', resolved:true, pct:100, move:0,
+      detail:'Resolved: recruiter screen with Ryan Judge took place Jul 9. Priced at 100¢. Illustrative only — not real market data.' },
+    { kind:'timeline', name:'Brian interview completed before Jul 28', resolved:false, pct:88, move:7,
+      detail:'Priced against scheduling pace to date and loop sequencing. Illustrative methodology, not real market data.' },
+    { kind:'timeline', name:'Katherine interview completed before Jul 30', resolved:false, pct:91, move:5,
+      detail:'Priced off typical loop cadence following a positive recruiter screen. Authored by Elliot, not real market data.' },
+    { kind:'timeline', name:'Onsite completed — week of Aug 3', resolved:false, pct:83, move:9,
+      detail:'Priced assuming prior loop stages clear on schedule. Illustrative methodology, not real market data.' },
+    { kind:'timeline', name:'Offer extended before Aug 10', resolved:false, pct:76, move:14,
+      detail:'Priced off typical time-to-offer once onsite completes. Illustrative methodology, not real market data.' },
+    { kind:'timeline', name:'Hired & start date locked before Aug 31', resolved:false, pct:81, move:11,
+      detail:'Backsolved from the Aug 31 target start date. Illustrative methodology, not real market data.' }
+  ];
+  const ladderEl = document.getElementById('ladder');
+  let insightTargetSet = false;
+  LADDER.forEach((row) => {
+    const div = document.createElement('div');
+    div.className = 'ladder-row';
+    if (!row.resolved && !insightTargetSet) {
+      div.id = 'demoTargetInsight'; // first open timeline row — the insight-panel demo target
+      insightTargetSet = true;
+    }
+    const yesPrice = row.resolved ? 100 : row.pct;
+    const noPrice = row.resolved ? 0 : 100 - row.pct;
+    div.innerHTML = `
+      <div class="ladder-main">
+        <div class="ladder-name">${row.name}</div>
+        <div class="ladder-pct-col">
+          <span class="ladder-pct ${row.resolved ? 'resolved' : ''}">${row.resolved ? 'RESOLVED' : row.pct + '%'}</span>
+          <span class="ladder-move ${row.resolved ? 'resolved' : ''}">${row.resolved ? 'YES' : '▲ ' + row.move}</span>
+        </div>
+        <div class="ladder-price-col">
+          <span class="yes-chip" data-trade>Yes ${yesPrice}¢</span>
+          <span class="no-chip" data-trade>No ${noPrice}¢</span>
+        </div>
+        <span class="ladder-info-icon" data-info>i</span>
+      </div>
+      <div class="ladder-tip">${row.detail}</div>
+    `;
+    div.querySelectorAll('[data-trade]').forEach(chip => {
+      chip.addEventListener('click', (e) => { e.stopPropagation(); openCalendly(); });
+    });
+    div.querySelector('[data-info]').addEventListener('click', (e) => {
+      e.stopPropagation();
+      div.classList.toggle('pinned');
+    });
+    ladderEl.appendChild(div);
+  });
+
+  // Growth ideas, organized as 4 goal-first pillars (rendered twice: desktop rail + mobile stack)
+  // kind:'highlight' -> the tactic is already visible by default on the page; "See demo" just glows it, no new content injected
+  // kind:'inline'     -> toggles a highlighted callout box directly on the real page element (genuinely new/hidden content)
+  // kind:'modal'      -> opens a real modal (recovery form / share sheet / invite) and highlights the related element while open
+  const PILLARS = [
+    {
+      name:'Conversion', sub:'confidence signals — shown by default on the page, not gated behind a demo click',
+      tactics:[
+        { code:'C1', title:'Contextual insight panel', metric:'New-user activation + category expansion rate',
+          desc:'Base rate, sourcing, and trend sit right under the ladder by default, not hidden behind a click — for anyone with zero history in a category.',
+          kind:'highlight', target:'demoTargetInsightPanel' },
+        { code:'C2', title:'Plain-English rules summary', metric:'First-bet conversion, new users',
+          desc:'One plain-English line leads above the fold instead of legal resolution criteria — full rules stay one click away for power users.',
+          kind:'highlight', target:'demoTargetRules' },
+        { code:'C3', title:'Historical trend sparkline', metric:'Average bet size ($) + repeat-visit rate',
+          desc:'A 12-week probability sparkline sits under the header by default — the hypothesis is that visible confidence increases stake size and pulls people back.',
+          kind:'highlight', target:'demoTargetTrend' },
+        { code:'C4', title:'Odds methodology transparency', metric:'Trust proxy \u2192 first-bet conversion',
+          desc:'A plain-English "how these odds are calculated" note sits one click away by default, not buried in fine print.',
+          kind:'highlight', target:'demoTargetOdds' }
+      ]
+    },
+    {
+      name:'Session Value', sub:'north star = $ per session, driven by stake size \u00d7 bets per session',
+      tactics:[
+        { code:'S1', title:'Recommendations / similar bets', metric:'Bets per session',
+          desc:'Related markets shown directly on the page, and again right after a bet is placed \u2014 two surfaces, same recommendation engine.',
+          kind:'inline', target:'demoTargetTrend', build:buildRecommendationsDemo },
+        { code:'S2', title:'Personalized stake presets', metric:'Bet completion rate + average bet size',
+          desc:'Presets informed by this user\u2019s actual wallet balance and the live odds \u2014 e.g. "$1 \u2192 $1.25," "$10 \u2192 $14" \u2014 replacing a blank text field.',
+          kind:'inline', target:'demoTargetStake', build:buildStakeDemo }
+      ]
+    },
+    {
+      name:'Recovery', sub:null,
+      tactics:[
+        { code:'R1', title:'Abandoned-bet recovery', metric:'Recovery rate vs. baseline abandonment rate',
+          desc:'A real "notify me" form for the in-page moment, backed by the off-app reach that catches most of the actual drop \u2014 email, push, and other multi-channel touchpoints, not just this modal.',
+          kind:'modal', target:'demoTargetStake', open:openRecoveryModal }
+      ]
+    },
+    {
+      name:'Virality / Referral', sub:null,
+      tactics:[
+        { code:'V1', title:'Share this bet', metric:'K-factor (share rate \u2192 referred signups)',
+          desc:'A real share sheet instead of a generic evergreen referral \u2014 copy link, text, Facebook, or email \u2014 tied to a specific live market in the moment someone\u2019s engaged with it.',
+          kind:'modal', target:'demoTargetHeader', open:openShareModal },
+        { code:'V2', title:'Invite friends to Kalshi', metric:'Referral signups + activation rate',
+          desc:'A general invite mechanic, separate from sharing one specific trade \u2014 the evergreen "bring your friends onto Kalshi" ask.',
+          kind:'modal', target:'demoTargetHeader', open:openInviteModal }
+      ]
+    }
+  ];
+
+  // ---- Inline demo content builders (each returns innerHTML for the in-page callout box) ----
+  function buildRecommendationsDemo(){
+    return `<div class="demo-inline-label">Demo — Recommendations / similar bets</div>
+      <p style="margin:0 0 8px; font-size:12px; color:var(--text-dim);">Shown here on the page, and again in a lightweight version right after a bet is placed:</p>
+      <div class="demo-stake-row">
+        <button class="demo-stake-btn" onclick="showToast('Opened: Will the Fed cut rates in September? (demo)')">Fed rate cut, Sept?</button>
+        <button class="demo-stake-btn" onclick="showToast('Opened: Will a new V17 boulder problem be sent this year? (demo)')">New V17 sent this yr?</button>
+        <button class="demo-stake-btn" onclick="showToast('Opened: Will the Yankees win the World Series? (demo)')">Yankees win WS?</button>
+      </div>`;
+  }
+  function buildStakeDemo(){
+    return `<div class="demo-inline-label">Demo — Personalized stake presets</div>
+      <p style="margin:0 0 8px; font-size:12px; color:var(--text-dim);">Sized off this user's wallet balance and the live 87¢ odds, instead of a blank text field:</p>
+      <div class="demo-stake-row">
+        <button class="demo-stake-btn" onclick="showToast('Selected $1 \u2192 $1.25 payout (demo)')">$1 &rarr; $1.25</button>
+        <button class="demo-stake-btn" onclick="showToast('Selected $2 \u2192 $5 payout (demo)')">$2 &rarr; $5</button>
+        <button class="demo-stake-btn" onclick="showToast('Selected $10 \u2192 $14 payout (demo)')">$10 &rarr; $14</button>
+      </div>`;
+  }
+
+  // ---- Highlight bookkeeping (multiple demos can point at the same target, e.g. the trade row) ----
+  const glowCounts = {};
+  function addGlow(id){
+    const el = document.getElementById(id);
+    if (!el) return;
+    glowCounts[id] = (glowCounts[id] || 0) + 1;
+    el.classList.add('demo-glow');
+  }
+  function removeGlow(id){
+    const el = document.getElementById(id);
+    if (!el) return;
+    glowCounts[id] = Math.max(0, (glowCounts[id] || 0) - 1);
+    if (glowCounts[id] === 0) el.classList.remove('demo-glow');
+  }
+
+  const injectedBoxes = {}; // ideaKey -> injected element, so "Hide demo" removes the right one
+  let activeHighlight = null; // { target, btn } — only one "Show me" highlight active at a time
+
+  function toggleHighlight(gc, btn){
+    const target = document.getElementById(gc.target);
+    if (!target) return;
+    const clickingActiveOne = activeHighlight && activeHighlight.target === gc.target && activeHighlight.btn === btn;
+    if (activeHighlight) {
+      removeGlow(activeHighlight.target);
+      activeHighlight.btn.textContent = 'Show me on the page';
+      activeHighlight = null;
+    }
+    if (clickingActiveOne) return; // was already the active one — just turn it off
+    addGlow(gc.target);
+    btn.textContent = 'Hide highlight';
+    activeHighlight = { target: gc.target, btn };
+    target.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+
+  function toggleInlineDemo(gc, ideaKey, btn){
+    const target = document.getElementById(gc.target);
+    if (!target) return;
+    const existing = injectedBoxes[ideaKey];
+    if (existing) {
+      existing.remove();
+      delete injectedBoxes[ideaKey];
+      removeGlow(gc.target);
+      btn.textContent = 'See demo';
+      return;
+    }
+    const box = document.createElement('div');
+    box.className = 'demo-inline-box';
+    box.innerHTML = gc.build();
+    target.insertAdjacentElement('afterend', box);
+    injectedBoxes[ideaKey] = box;
+    addGlow(gc.target);
+    btn.textContent = 'Hide demo';
+    target.scrollIntoView({ behavior:'smooth', block:'center' });
+  }
+
+  function renderGrowth(container){
+    const header = document.createElement('div');
+    header.className = 'growth-header';
+    header.textContent = "Growth ideas I'd ship on this exact page";
+    const sub = document.createElement('div');
+    sub.className = 'growth-sub';
+    sub.innerHTML = 'Grouped by the metric each one is meant to move, not just "engagement." &middot; <a class="growth-wbr-link" href="kalshi-wbr-dashboard.html" target="_blank" rel="noopener">See the WBR I\u2019d run on this &rarr;</a>';
+    container.appendChild(header);
+    container.appendChild(sub);
+
+    PILLARS.forEach((pillar, pIdx) => {
+      const block = document.createElement('div');
+      block.className = 'growth-pillar';
+      const title = document.createElement('div');
+      title.className = 'growth-pillar-title';
+      title.textContent = pillar.name;
+      block.appendChild(title);
+      if (pillar.sub) {
+        const psub = document.createElement('div');
+        psub.className = 'growth-pillar-sub';
+        psub.textContent = pillar.sub;
+        block.appendChild(psub);
+      }
+      const list = document.createElement('div');
+      list.className = 'growth-list';
+      pillar.tactics.forEach((gc, tIdx) => {
+        const ideaKey = `${container.id}-${pIdx}-${tIdx}`;
+        const card = document.createElement('div');
+        card.className = 'card growth-card';
+        const btnLabel = gc.kind === 'highlight' ? 'Show me on the page' : 'See demo';
+        card.innerHTML = `
+          <div class="growth-card-top">
+            <div class="growth-num">${gc.code}</div>
+            <div class="growth-body">
+              <div class="growth-title">${gc.title}</div>
+              <div class="growth-desc">${gc.desc}</div>
+              <div class="growth-meta">
+                <span class="growth-tag metric">moves: ${gc.metric}</span>
+                <span class="growth-tag">hypothesis, not tested</span>
+              </div>
+              <button class="growth-demo-btn" type="button">${btnLabel}</button>
+            </div>
+          </div>
+        `;
+        const btn = card.querySelector('.growth-demo-btn');
+        if (gc.kind === 'highlight') {
+          btn.addEventListener('click', () => toggleHighlight(gc, btn));
+        } else if (gc.kind === 'inline') {
+          btn.addEventListener('click', () => toggleInlineDemo(gc, ideaKey, btn));
+        } else {
+          btn.addEventListener('click', () => gc.open(gc.target));
+        }
+        list.appendChild(card);
+      });
+      block.appendChild(list);
+      container.appendChild(block);
+    });
+  }
+  renderGrowth(document.getElementById('growthDesktop'));
+  renderGrowth(document.getElementById('growthMobile'));
+
+  // ---- Shared toast (used for lightweight confirmations inside modals/inline demos) ----
+  let toastTimer;
+  function showToast(message){
+    let toast = document.getElementById('demoToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'demoToast';
+      toast.className = 'demo-toast';
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `<span>${message}</span>`;
+    requestAnimationFrame(() => toast.classList.add('show'));
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  // ---- Abandoned-bet recovery modal (opens directly, no redundant middle click) ----
+  const recoveryModal = document.getElementById('recoveryModal');
+  function openRecoveryModal(targetId){
+    addGlow(targetId);
+    recoveryModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeRecoveryModal(){
+    recoveryModal.classList.remove('open');
+    document.body.style.overflow = '';
+    removeGlow('demoTargetStake');
+  }
+  function submitRecovery(){
+    const threshold = document.getElementById('recoveryThreshold').value;
+    const price = document.getElementById('recoveryPrice').value;
+    const email = document.getElementById('recoveryEmail').value || 'you';
+    closeRecoveryModal();
+    showToast(`Notification enabled (demo) \u2014 we'd email ${email} if this moves ${threshold} or hits ${price}\u00a2.`);
+  }
+  recoveryModal.addEventListener('click', (e) => { if (e.target === recoveryModal) closeRecoveryModal(); });
+
+  // ---- Share-this-bet modal (real share sheet: copy link, SMS, Facebook, email) ----
+  const shareModal = document.getElementById('shareModal');
+  function openShareModal(targetId){
+    const url = location.href.split('?')[0] + '?ref=demo';
+    const text = 'Will Kalshi hire Elliot Dabah as their next PM? 87% Yes.';
+    document.getElementById('shareLinkInput').value = url;
+    document.getElementById('shareButtonRow').innerHTML = `
+      <a class="share-btn" href="sms:?body=${encodeURIComponent(text + ' ' + url)}">Text (SMS)</a>
+      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" target="_blank" rel="noopener">Facebook</a>
+      <a class="share-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">X</a>
+      <a class="share-btn" href="mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(url)}">Email</a>
+    `;
+    addGlow(targetId);
+    shareModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeShareModal(){
+    shareModal.classList.remove('open');
+    document.body.style.overflow = '';
+    removeGlow('demoTargetHeader');
+  }
+  function copyShareLink(){
+    const input = document.getElementById('shareLinkInput');
+    input.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(input.value).then(
+        () => showToast('Link copied \u2014 ready to share.'),
+        () => showToast('Copy blocked by the browser \u2014 link is selected, use Cmd/Ctrl+C.')
+      );
+    } else {
+      showToast('Link is selected \u2014 use Cmd/Ctrl+C to copy.');
+    }
+  }
+  shareModal.addEventListener('click', (e) => { if (e.target === shareModal) closeShareModal(); });
+
+  // ---- Invite Friends modal (general referral ask, distinct from single-trade sharing) ----
+  const inviteModal = document.getElementById('inviteModal');
+  function openInviteModal(targetId){
+    const url = location.href.split('?')[0] + '?ref=invite-demo';
+    document.getElementById('inviteLinkInput').value = url;
+    addGlow(targetId);
+    inviteModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeInviteModal(){
+    inviteModal.classList.remove('open');
+    document.body.style.overflow = '';
+    removeGlow('demoTargetHeader');
+  }
+  function copyInviteLink(){
+    const input = document.getElementById('inviteLinkInput');
+    input.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(input.value).then(
+        () => showToast('Invite link copied \u2014 ready to send.'),
+        () => showToast('Copy blocked by the browser \u2014 link is selected, use Cmd/Ctrl+C.')
+      );
+    } else {
+      showToast('Link is selected \u2014 use Cmd/Ctrl+C to copy.');
+    }
+  }
+  function submitInvite(){
+    const email = document.getElementById('inviteEmail').value || 'your friend';
+    closeInviteModal();
+    showToast(`Invite sent to ${email} (demo).`);
+  }
+  inviteModal.addEventListener('click', (e) => { if (e.target === inviteModal) closeInviteModal(); });
+</script>
+
+</body>
+</html>
