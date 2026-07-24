@@ -82,6 +82,13 @@
   .byline-text{ font-size:12px; color:var(--muted); font-weight:600; }
   .byline-text b{ color:var(--text-dim); }
   h1{ font-size:34px; font-weight:800; margin:0 0 14px; line-height:1.15; }
+  .h1-row{ display:flex; align-items:center; gap:10px; margin-bottom:0; }
+  .h1-row h1{ margin-bottom:14px; }
+  .linkedin-badge{
+    flex:0 0 auto; width:26px; height:26px; border-radius:6px; background:#0A66C2; color:#fff;
+    display:flex; align-items:center; justify-content:center; margin-top:-14px;
+  }
+  .linkedin-badge:hover{ opacity:.88; }
   .countdown-row{ display:flex; align-items:center; gap:8px; margin-bottom:20px; }
   .live-dot{
     width:8px; height:8px; border-radius:50%; background:var(--green);
@@ -348,10 +355,17 @@
       <div id="demoTargetHeader">
         <div class="breadcrumb">Careers &rsaquo; Product &rsaquo; Leadership Hires</div>
         <div class="byline">
-          <img src="https://media.licdn.com/dms/image/v2/D4E03AQFiOpu4iH8wqA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1675616465009?e=1786579200&v=beta&t=yNY4qn_uaZqxKD9Un7XrgqDTHkhyh5vYY7y_clLYNN0" alt="Elliot Dabah">
-          <span class="byline-text">Market created by <b>Elliot Dabah</b></span>
+          <a href="https://www.linkedin.com/in/elliotdabah/" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:10px;">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFiOpu4iH8wqA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1675616465009?e=1786579200&v=beta&t=yNY4qn_uaZqxKD9Un7XrgqDTHkhyh5vYY7y_clLYNN0" alt="Elliot Dabah">
+            <span class="byline-text">Market created by <b>Elliot Dabah</b></span>
+          </a>
         </div>
-        <h1>Will Kalshi hire Elliot Dabah as their next PM?</h1>
+        <div class="h1-row">
+          <h1>Will Kalshi hire Elliot Dabah as their next PM?</h1>
+          <a href="https://www.linkedin.com/in/elliotdabah/" target="_blank" rel="noopener" class="linkedin-badge" aria-label="Elliot Dabah on LinkedIn">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+        </div>
         <div class="countdown-row">
           <span class="live-dot"></span>
           <span class="countdown-text" id="countdownText">Decision window closes in — days &middot; target start Aug 31, 2026</span>
