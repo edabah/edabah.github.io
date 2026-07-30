@@ -104,6 +104,10 @@
   .yes-btn,.no-btn{ border-radius:10px; padding:14px 26px; font-weight:800; font-size:15px; cursor:pointer; }
   .yes-btn{ background:var(--green-dim); color:var(--green); border:1px solid var(--green); }
   .no-btn{ background:var(--red-dim); color:var(--red); border:1px solid var(--red); }
+  .social-proof{ font-size:11.5px; color:var(--muted); margin-top:8px; }
+  .social-proof-yes{ color:var(--green); font-weight:700; }
+  .social-proof-no{ color:var(--red); font-weight:700; }
+  .ladder-social-proof{ font-size:11px; color:var(--muted); margin-top:6px; }
 
   /* Value props */
   .value-row{ display:flex; gap:14px; overflow-x:auto; padding-bottom:6px; }
@@ -113,17 +117,23 @@
   .value-num{ font-size:24px; font-weight:800; margin-bottom:4px; }
   .value-label{ font-size:13px; font-weight:600; color:var(--text-dim); margin-bottom:6px; }
   .value-sub{ font-size:12px; color:var(--muted); line-height:1.4; padding-right:18px; }
+  .company-badge{
+    display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:800;
+    padding:4px 9px; border-radius:6px; margin-top:2px; width:fit-content;
+  }
+  .company-badge .dot{ width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
+  .company-badge.clear{ background:rgba(0,169,157,0.14); color:#00A99D; }
+  .company-badge.clear .dot{ background:#00A99D; }
+  .company-badge.amazon{ background:rgba(255,153,0,0.14); color:#B8790E; }
+  .company-badge.amazon .dot{ background:#FF9900; }
+  .company-badge.uber{ background:var(--card-hover); color:var(--text-dim); border:1px solid var(--border-strong); }
+  .company-badge.uber .dot{ background:var(--text-dim); }
   .info-icon{
     position:absolute; top:16px; right:16px; width:16px; height:16px; border-radius:50%;
     border:1px solid var(--muted); color:var(--muted); font-size:10px; font-style:italic; font-weight:700;
-    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; cursor:pointer; background:transparent; padding:0;
   }
-  .tip{
-    display:none; position:absolute; top:100%; left:0; margin-top:6px; width:220px; z-index:20;
-    background:var(--card-hover); border:1px solid var(--border-strong); border-radius:8px; padding:10px;
-    font-size:12px; color:var(--text-dim); line-height:1.5; box-shadow:0 8px 24px rgba(0,0,0,.28);
-  }
-  .value-card:hover .tip, .value-card.pinned .tip{ display:block; }
+  .info-icon:hover{ border-color:var(--text-dim); color:var(--text-dim); }
 
   /* Ladder */
   .ladder-wrap{ overflow:hidden; }
@@ -185,18 +195,36 @@
   .toggle-group span.active{ color:var(--text); background:var(--card-hover); }
 
   /* Growth cards */
+  :root{
+    --amber:#D99A2B; --amber-dim:rgba(217,154,43,0.14); --amber-border:rgba(217,154,43,0.45);
+  }
+  [data-theme="light"]{ --amber:#B8790E; --amber-dim:rgba(184,121,14,0.10); --amber-border:rgba(184,121,14,0.4); }
+
+  #growthDesktop, #growthMobile{
+    background:var(--amber-dim); border:1px dashed var(--amber-border); border-radius:12px;
+    padding:18px 18px 8px;
+  }
   .growth-header{ font-size:15px; font-weight:800; margin-bottom:4px; }
-  .growth-sub{ font-size:12px; color:var(--muted); margin-bottom:14px; }
+  .growth-sub{ font-size:12px; color:var(--muted); margin-bottom:12px; }
+  .growth-disclaimer{ font-size:11px; color:var(--muted); margin-bottom:16px; line-height:1.5; }
+  .worldcup-callout{
+    background:var(--amber-dim); color:var(--text); border:1px solid var(--amber-border); border-radius:10px; padding:14px 16px; margin-bottom:20px;
+    font-size:12.5px; line-height:1.55; font-weight:500;
+  }
+  .worldcup-callout b{ font-weight:800; color:var(--amber); }
   .growth-list{ display:flex; flex-direction:column; gap:12px; }
-  .growth-pillar{ display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
-  .growth-pillar:last-child{ margin-bottom:0; }
-  .growth-pillar-title{ font-size:13px; font-weight:800; color:var(--text); }
-  .growth-pillar-sub{ font-size:11px; color:var(--muted); margin-top:-6px; }
-  .growth-card{ padding:16px; display:flex; gap:12px; flex-direction:column; }
+  .theme-block{ margin-bottom:22px; }
+  .theme-block:last-child{ margin-bottom:6px; }
+  .theme-question{ font-size:13px; font-weight:800; color:var(--text); line-height:1.35; }
+  .theme-metric{ font-size:11px; color:var(--muted); margin-top:2px; }
+  .theme-sub{ margin-top:10px; }
+  .theme-sub-label{ font-size:11px; font-weight:700; color:var(--text-dim); margin:0 0 8px; }
+  .growth-footer-link{ font-size:12px; padding:6px 0 12px; }
+  .growth-card{ padding:16px; display:flex; gap:12px; flex-direction:column; background:var(--card); }
   .growth-card-top{ display:flex; gap:12px; }
   .growth-num{
-    flex:0 0 auto; width:24px; height:24px; border-radius:50%; border:1px solid var(--green);
-    color:var(--green); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
+    flex:0 0 auto; width:24px; height:24px; border-radius:50%; border:1px solid var(--amber);
+    color:var(--amber); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center;
   }
   .growth-body{ display:flex; flex-direction:column; gap:6px; min-width:0; flex:1 1 auto; }
   .growth-title{ font-size:13px; font-weight:700; }
@@ -206,19 +234,42 @@
     font-size:10px; font-weight:700; color:var(--muted); letter-spacing:.03em; text-transform:uppercase;
     border:1px solid var(--border); border-radius:5px; padding:2px 6px; width:fit-content;
   }
-  .growth-tag.stage{ color:var(--green); border-color:var(--green); }
-  .growth-tag.metric{ color:var(--text-dim); }
+  .growth-tag.metric{ color:var(--amber); border-color:var(--amber-border); }
   .growth-demo-btn{
-    align-self:flex-start; margin-top:8px; background:transparent; border:1px solid var(--border-strong);
-    color:var(--text); font-size:11px; font-weight:700; border-radius:6px; padding:6px 10px; cursor:pointer;
+    align-self:flex-start; margin-top:8px; background:transparent; border:1px solid var(--amber);
+    color:var(--amber); font-size:11px; font-weight:700; border-radius:6px; padding:6px 10px; cursor:pointer;
   }
-  .growth-demo-btn:hover{ background:var(--card-hover); }
+  .growth-demo-btn:hover{ background:var(--amber-dim); }
   .growth-demo{ display:none; margin-top:4px; padding:12px; background:var(--card-hover); border:1px solid var(--border-strong); border-radius:8px; font-size:12px; color:var(--text-dim); line-height:1.5; }
   .growth-demo.open{ display:block; }
   .demo-insight{ display:flex; flex-direction:column; gap:6px; }
   .demo-insight-row{ display:flex; justify-content:space-between; gap:8px; }
   .demo-insight-label{ color:var(--muted); }
   .demo-insight-val{ color:var(--text); font-weight:700; }
+  /* Recommendation / product cards — image, title, odds, one-tap bet */
+  .rec-card-row{ display:flex; flex-direction:column; gap:8px; }
+  .rec-card-row.large{ flex-direction:row; gap:10px; }
+  .rec-card-row.large .rec-card{
+    flex:1 1 0; flex-direction:column; align-items:stretch; text-align:center; gap:8px; padding:12px 10px;
+  }
+  .rec-card-row.large .rec-thumb{ width:100%; height:64px; border-radius:8px; font-size:30px; }
+  .rec-card-row.large .rec-title{ white-space:normal; font-size:12px; min-height:30px; }
+  .rec-card-row.large .rec-bet-btn{ width:100%; }
+  .rec-card{
+    display:flex; align-items:center; gap:10px; padding:8px; background:var(--card);
+    border:1px solid var(--border-strong); border-radius:8px;
+  }
+  .rec-thumb{
+    flex:0 0 auto; width:38px; height:38px; border-radius:8px; background:var(--card-hover);
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+  }
+  .rec-info{ flex:1 1 auto; min-width:0; }
+  .rec-title{ font-size:12px; font-weight:700; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .rec-odds{ font-size:11px; color:var(--muted); margin-top:1px; }
+  .rec-bet-btn{
+    flex:0 0 auto; background:var(--green); color:#06231C; font-size:11px; font-weight:800;
+    border:none; border-radius:6px; padding:7px 12px; cursor:pointer; white-space:nowrap;
+  }
   .demo-toast{
     position:fixed; bottom:24px; right:24px; background:var(--card); border:1px solid var(--border-strong);
     border-radius:10px; padding:12px 16px; font-size:12px; color:var(--text); box-shadow:0 12px 32px rgba(0,0,0,.35);
@@ -236,18 +287,139 @@
   }
   .growth-wbr-link{ margin-top:6px; font-size:12px; font-weight:700; color:var(--green); display:inline-block; }
 
+  /* Mobile mockups — email & push previews inside the outreach modal */
+  .phone-frame{
+    width:280px; margin:0 auto; background:var(--bg-alt); border:8px solid #111;
+    border-radius:34px; overflow:hidden; box-shadow:0 16px 40px rgba(0,0,0,.35); position:relative;
+  }
+  .phone-frame.push-frame{ width:340px; }
+  .phone-notch{
+    position:absolute; top:0; left:50%; transform:translateX(-50%); width:96px; height:18px;
+    background:#111; border-radius:0 0 14px 14px; z-index:5;
+  }
+  .email-mock{ padding-top:20px; }
+  .email-footer{
+    padding:12px 16px; border-top:1px solid var(--border); font-size:10px; color:var(--muted); text-align:center;
+  }
+  .email-footer a{ color:var(--muted); text-decoration:underline; }
+
+  /* Desktop email (Kalshi win-back campaign) */
+  .desktop-email{
+    max-width:560px; margin:0 auto; background:#fff; border-radius:14px; overflow:hidden;
+    box-shadow:0 16px 40px rgba(0,0,0,.22);
+  }
+  .de-chrome{ padding:16px 26px; display:flex; align-items:center; justify-content:space-between; background:#0d0d0d; }
+  .de-logo{ color:#fff; font-size:16px; font-weight:800; letter-spacing:-.02em; }
+  .de-viewbrowser{ color:#8a8a8a; font-size:11px; }
+  .de-hero{
+    position:relative; padding:36px 28px; overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0,217,100,.35), transparent 45%),
+      radial-gradient(circle at 85% 75%, rgba(0,217,100,.25), transparent 50%),
+      linear-gradient(135deg, #0d1f16 0%, #0a0a0a 100%);
+  }
+  .de-hero-headline{ color:#fff; font-size:22px; font-weight:900; line-height:1.2; letter-spacing:-.02em; max-width:340px; }
+  .de-hero-pill{
+    display:inline-block; margin-top:12px; background:#00D964; color:#04170B; font-weight:800;
+    font-size:13px; padding:7px 13px; border-radius:8px;
+  }
+  .de-body{ padding:26px 28px 6px; }
+  .de-body-title{ color:#111; font-size:19px; font-weight:800; line-height:1.3; margin-bottom:12px; }
+  .de-body-text{ color:#555; font-size:13.5px; line-height:1.6; margin-bottom:6px; }
+  .de-cards{ padding:18px 24px 6px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+  .de-card{
+    background:#fff; border:1px solid #e6e6e6; box-shadow:0 2px 10px rgba(0,0,0,.04); border-radius:12px;
+    padding:12px; display:flex; flex-direction:column; gap:8px;
+  }
+  .de-card-art{
+    height:64px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:26px;
+  }
+  .de-card-art.econ{ background:linear-gradient(135deg,#e9f6ee,#c9ecd6); }
+  .de-card-art.politics{ background:linear-gradient(135deg,#eef1f6,#d7dde8); }
+  .de-card-art.culture{ background:linear-gradient(135deg,#2b1f3d,#6b3f8f); }
+  .de-card-tag{ color:#00A653; font-size:9px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+  .de-card-q{ color:#111; font-size:12px; font-weight:700; line-height:1.3; min-height:32px; }
+  .de-card-odds{ display:flex; gap:5px; }
+  .de-card-yes{ flex:1; text-align:center; background:rgba(0,166,83,.1); border:1px solid rgba(0,166,83,.35); color:#00A653; font-weight:800; font-size:11.5px; padding:6px 3px; border-radius:7px; }
+  .de-card-no{ flex:1; text-align:center; background:#f4f4f4; border:1px solid #e6e6e6; color:#888; font-weight:700; font-size:11.5px; padding:6px 3px; border-radius:7px; }
+  .de-card-close{ color:#c07a00; font-size:10px; font-weight:700; }
+  .de-card-btn{
+    display:block; width:100%; text-align:center; background:#00D964; color:#04170B; font-weight:800;
+    font-size:11.5px; padding:9px; border-radius:8px; border:none; cursor:pointer;
+  }
+  .de-explainer{ margin:18px 24px 0; padding:14px 16px; background:rgba(0,217,100,.06); border:1px solid rgba(0,166,83,.2); border-radius:10px; }
+  .de-explainer-title{ color:#111; font-size:12.5px; font-weight:700; margin-bottom:3px; }
+  .de-explainer-text{ color:#555; font-size:12px; line-height:1.5; }
+  .de-cta-row{ text-align:center; padding:22px 24px 26px; }
+  .de-cta{ display:inline-block; background:#0d0d0d; color:#fff; font-weight:700; font-size:12px; padding:11px 22px; border-radius:9px; border:none; cursor:pointer; }
+  .de-footer{ background:#0d0d0d; padding:18px 26px 22px; color:#8a8a8a; font-size:10px; line-height:1.6; text-align:center; }
+  .de-footer a{ color:#aaa; }
+
+  .push-screen{ padding:40px 14px 60px; min-height:280px; }
+  .push-screen-compact{ padding:20px 14px; min-height:0; display:flex; align-items:center; }
+  .push-pair{ display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+  .push-variant{ display:flex; flex-direction:column; align-items:center; gap:10px; flex:0 0 auto; }
+  .push-variant-label{ font-size:11px; color:var(--muted); font-weight:600; }
+  .push-pair .phone-frame.push-frame{ width:280px; }
+  .push-screen-bg{
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.4) 45%, rgba(0,0,0,.88) 100%),
+      radial-gradient(ellipse at 50% 30%, #1d3a2c 0%, #0a0f0c 70%);
+  }
+  .push-time{ color:#fff; font-size:34px; font-weight:300; text-align:center; letter-spacing:.02em; }
+  .push-date{ color:rgba(255,255,255,.75); font-size:13px; font-weight:500; text-align:center; margin:4px 0 22px; }
+  .push-card{ background:rgba(20,22,20,0.94); border-radius:14px; padding:12px 14px; box-shadow:0 6px 20px rgba(0,0,0,.3); }
+  .push-card-expanded{ padding:14px 14px 16px; background:rgba(20,22,20,0.94); }
+  .push-card-top{ display:flex; align-items:center; gap:6px; margin-bottom:6px; }
+  .push-app-icon{
+    width:20px; height:20px; border-radius:6px; background:var(--green); color:#04120C; font-size:12px;
+    font-weight:900; display:flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .push-app-name{ font-size:12px; font-weight:700; letter-spacing:.05em; color:rgba(255,255,255,.9); text-transform:uppercase; flex:1 1 auto; }
+  .push-app-time{ font-size:12px; color:rgba(255,255,255,.5); }
+  .push-title{ font-size:14px; font-weight:800; color:#fff; margin-bottom:4px; }
+  .push-body{ font-size:12.5px; color:rgba(255,255,255,.85); line-height:1.4; }
+  .push-divider{ height:1px; background:rgba(255,255,255,.12); margin:10px -14px 8px; }
+  .push-rows{ display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+  .push-row{ display:flex; align-items:center; gap:10px; }
+  .push-row-art{
+    width:32px; height:32px; border-radius:8px; flex:0 0 auto; display:flex; align-items:center;
+    justify-content:center; font-size:15px;
+  }
+  .push-row-art.econ{ background:linear-gradient(135deg,#1e3a2b,#0f2418); }
+  .push-row-art.politics{ background:linear-gradient(135deg,#2a3040,#161a24); }
+  .push-row-art.culture{ background:linear-gradient(135deg,#3d2b5c,#1c1230); }
+  .push-row-info{ flex:1; min-width:0; }
+  .push-row-title{ color:#fff; font-size:12.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .push-row-sub{ color:rgba(255,255,255,.5); font-size:10.5px; }
+  .push-row-price{ background:rgba(0,217,100,.18); color:#00D964; font-weight:800; font-size:12px; padding:5px 9px; border-radius:8px; flex:0 0 auto; }
+  .push-actions{ display:flex; gap:8px; margin-top:4px; }
+  .push-trade-now{ flex:1; text-align:center; background:#00D964; color:#04170B; font-weight:800; font-size:13px; padding:10px; border-radius:9px; }
+  .push-dismiss{ width:80px; text-align:center; background:rgba(255,255,255,.12); color:#fff; font-weight:700; font-size:13px; padding:10px; border-radius:9px; }
+  .mockup-label{ font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin:16px 0 10px; text-align:center; }
+  .mockup-label:first-child{ margin-top:0; }
+
   /* In-context demo highlighting */
   .demo-glow{ outline:2px solid var(--green); outline-offset:4px; border-radius:12px; animation:demoPulse 1.6s ease-in-out infinite; }
   @keyframes demoPulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(0,208,132,.35);} 50%{ box-shadow:0 0 0 7px rgba(0,208,132,0);} }
   .demo-inline-box{
-    margin-top:10px; background:var(--green-dim); border:1px dashed var(--green); border-radius:10px; padding:14px;
+    margin-top:10px; background:var(--green-dim); border:2px solid var(--green); border-radius:10px; padding:14px;
     animation:demoFadeIn .2s ease;
   }
   @keyframes demoFadeIn{ from{ opacity:0; transform:translateY(-4px); } to{ opacity:1; transform:translateY(0); } }
   .demo-inline-label{ font-size:10px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--green); margin-bottom:10px; }
 
   /* Generic form controls used inside modals */
-  .modal-body{ padding:20px; overflow-y:auto; flex:1 1 auto; display:flex; flex-direction:column; gap:14px; }
+  .modal-body{
+    padding:20px; overflow-y:scroll; flex:1 1 auto; min-height:0; display:block;
+    scrollbar-width:auto; scrollbar-color:var(--muted) transparent;
+  }
+  .modal-body > *{ margin:0 0 14px; }
+  .modal-body > *:last-child{ margin-bottom:0; }
+  .modal-body::-webkit-scrollbar{ width:10px; }
+  .modal-body::-webkit-scrollbar-track{ background:transparent; }
+  .modal-body::-webkit-scrollbar-thumb{ background:var(--muted); border-radius:5px; border:2px solid var(--bg-alt); }
+  .modal-body::-webkit-scrollbar-thumb:hover{ background:var(--text-dim); }
   .modal-body p{ margin:0; font-size:13px; color:var(--text-dim); line-height:1.5; }
   .form-row{ display:flex; flex-direction:column; gap:6px; }
   .form-row label{ font-size:12px; font-weight:600; color:var(--text-dim); }
@@ -312,6 +484,7 @@
     .modal-box{ max-width:none; height:100dvh; border-radius:0; }
     .modal-header{ padding-top:calc(14px + env(safe-area-inset-top)); }
     .modal-close{ width:40px; height:40px; font-size:20px; box-shadow:0 2px 8px rgba(0,0,0,.25); }
+    .de-cards{ grid-template-columns:1fr; }
   }
 
   @media (max-width: 860px){
@@ -378,6 +551,7 @@
           <button class="yes-btn" onclick="openCalendly()">Yes &middot; 87&cent;</button>
           <button class="no-btn" onclick="openCalendly()">No &middot; 13&cent;</button>
         </div>
+        <div class="social-proof" id="demoTargetSocialProof"><span class="social-proof-yes">1,200 Yes</span> &middot; <span class="social-proof-no">179 No</span> traded in the past 24 hours</div>
       </div>
 
       <div>
@@ -385,46 +559,39 @@
         <div class="value-row">
           <div class="card value-card">
             <div class="value-num">1M &rarr; 10M</div>
-            <div class="value-label">platform users scaled</div>
-            <div class="value-sub">Clear &mdash; B2B2C identity platform</div>
-            <span class="info-icon">i</span>
-            <div class="tip">Took Clear's B2B2C onboarding flow from 0&rarr;1, scaling platform users from 1M to 10M within the first year of launch. Self-reported, verifiable on LinkedIn.</div>
+            <div class="value-label">User Growth</div>
+            <span class="company-badge clear"><span class="dot"></span>Clear</span>
+            <button class="info-icon" onclick="openValueModal('clear')" aria-label="More detail">i</button>
           </div>
           <div class="card value-card">
             <div class="value-num">$250M</div>
-            <div class="value-label">revenue through transactional optimization</div>
-            <div class="value-sub">Amazon &mdash; transactional monetization</div>
-            <span class="info-icon">i</span>
-            <div class="tip">Drove $250M in incremental revenue by building and launching new transactional monetization surfaces at Amazon. Self-reported, verifiable on LinkedIn.</div>
+            <div class="value-label">Incremental Revenue</div>
+            <span class="company-badge amazon"><span class="dot"></span>Amazon</span>
+            <button class="info-icon" onclick="openValueModal('amazonRevenue')" aria-label="More detail">i</button>
           </div>
           <div class="card value-card">
             <div class="value-num">1M</div>
-            <div class="value-label">B2B customers activated</div>
-            <div class="value-sub">Uber for Business</div>
-            <span class="info-icon">i</span>
-            <div class="tip">Activated 1M B2B customers on Uber for Business, driving growth across a dedicated B2B engagement platform. Self-reported, verifiable on LinkedIn.</div>
+            <div class="value-label">B2B Customers Activated</div>
+            <span class="company-badge uber"><span class="dot"></span>Uber</span>
+            <button class="info-icon" onclick="openValueModal('uber')" aria-label="More detail">i</button>
           </div>
           <div class="card value-card">
             <div class="value-num">+90bps</div>
-            <div class="value-label">CTR lift via personalization</div>
-            <div class="value-sub">Amazon &mdash; email personalization</div>
-            <span class="info-icon">i</span>
-            <div class="tip">Lifted click-through rate 90bps on Amazon emails by shipping AI-driven content personalization at scale. Self-reported, verifiable on LinkedIn.</div>
+            <div class="value-label">CTR Improvement</div>
+            <span class="company-badge amazon"><span class="dot"></span>Amazon</span>
+            <button class="info-icon" onclick="openValueModal('amazonCtr')" aria-label="More detail">i</button>
           </div>
         </div>
       </div>
 
       <div>
-        <div class="section-label">Related outcomes</div>
+        <div class="section-label">Additional Markets</div>
         <div class="card ladder-wrap" id="ladder"></div>
-        <div class="card" id="demoTargetInsightPanel" style="margin-top:10px; padding:14px;">
-          <div class="demo-inline-label" style="color:var(--muted);">Confidence signal</div>
-          <div class="demo-insight">
-            <div class="demo-insight-row"><span class="demo-insight-label">Base rate</span><span class="demo-insight-val">Recruiter screen &rarr; onsite within 10 business days at 70% of comparable high-growth fintechs</span></div>
-            <div class="demo-insight-row"><span class="demo-insight-label">Sourcing</span><span class="demo-insight-val">Public leveling / loop-time reports, aggregated</span></div>
-            <div class="demo-insight-row"><span class="demo-insight-label">Trend</span><span class="demo-insight-val">Kalshi's hiring pace has accelerated with recent headcount growth</span></div>
-          </div>
-        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Related Outcomes</div>
+        <div class="card ladder-wrap" id="relatedOutcomes"></div>
       </div>
 
       <div>
@@ -433,9 +600,9 @@
             <span>Market Rules</span>
             <span id="rulesChevron">+</span>
           </button>
-          <div class="rules-teaser">"Resolves Yes if Elliot gets the offer." <i style="color:var(--muted);">Full legal rules one click below.</i></div>
+          <div class="rules-teaser">"Resolves Yes if Elliot gets an official offer before 8/10, with a start date before 8/31." <i style="color:var(--muted);">Full legal rules one click below.</i></div>
           <div class="rules-body" id="rulesBody">
-            <p>Resolves <b>YES</b> if the candidate has led growth initiatives at $1B+ revenue scale, built 0&rarr;1 platforms scaling from 1M to 10M users, and shipped AI-driven personalization with measurable, cited lift.</p>
+            <p>Resolves <b>YES</b> if an official offer of employment is extended to Elliot Dabah before 8/10, with a start date before 8/31.</p>
             <p>Verified via: Amazon (Principal PM, Outbound Marketing Technology), Clear (B2B2C identity platform), Uber (B2B engagement &amp; Pearl audience insights), Weight Watchers, and Est&eacute;e Lauder.</p>
             <div class="link-row">
               <a href="https://www.linkedin.com/in/elliotdabah/" target="_blank" rel="noopener">Full history on LinkedIn &rarr;</a>
@@ -446,31 +613,7 @@
         </div>
       </div>
 
-      <div>
-        <div class="card rules-card" id="demoTargetOdds" style="padding:0; overflow:hidden;">
-          <button class="rules-header" id="oddsToggle" style="font-size:13px;">
-            <span>How these odds are calculated</span>
-            <span id="oddsChevron">+</span>
-          </button>
-          <div class="rules-body" id="oddsBody">
-            <p>Base rate drawn from typical recruiter-screen&rarr;onsite&rarr;offer conversion at comparable high-growth fintechs, adjusted week to week for each loop stage actually clearing on schedule.</p>
-            <p>Each ladder row re-prices independently once its prior stage resolves &mdash; a slipped Katherine interview, for example, would soften Onsite and Offer without changing Hired in isolation.</p>
-            <div class="disclosure">Methodology is illustrative and authored by Elliot Dabah &mdash; not a real Kalshi pricing model.</div>
-          </div>
-        </div>
-      </div>
 
-      <div>
-        <div class="card" id="demoTargetTrend" style="padding:14px 20px;">
-          <div class="volume-bar" style="padding:0;">
-            <span class="volume-text">14 yrs experience &middot; 4 companies scaled &middot; 2 platforms built 0&rarr;1</span>
-            <div class="toggle-group">
-              <span>1D</span><span>1W</span><span>1M</span><span class="active">ALL</span>
-            </div>
-          </div>
-          <div class="demo-sparkline" style="margin-top:10px;" id="defaultSparkline"></div>
-        </div>
-      </div>
 
       <div class="mobile-only" id="growthMobile"></div>
 
@@ -502,9 +645,9 @@
   </div>
 
   <div class="modal-overlay" id="recoveryModal">
-    <div class="modal-box" style="height:auto; max-height:90vh;">
+    <div class="modal-box" style="height:min(600px, 90vh);">
       <div class="modal-header">
-        <span class="modal-title">Looks like you didn't finish placing this bet</span>
+        <span class="modal-title">Looks like you didn't finish placing this trade</span>
         <button class="modal-close" onclick="closeRecoveryModal()" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
@@ -535,9 +678,9 @@
   </div>
 
   <div class="modal-overlay" id="shareModal">
-    <div class="modal-box" style="height:auto; max-height:90vh;">
+    <div class="modal-box" style="height:min(560px, 90vh);">
       <div class="modal-header">
-        <span class="modal-title">Share this bet</span>
+        <span class="modal-title">Share this trade</span>
         <button class="modal-close" onclick="closeShareModal()" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
@@ -552,13 +695,13 @@
   </div>
 
   <div class="modal-overlay" id="inviteModal">
-    <div class="modal-box" style="height:auto; max-height:90vh;">
+    <div class="modal-box" style="height:min(560px, 90vh);">
       <div class="modal-header">
         <span class="modal-title">Invite friends to Kalshi</span>
         <button class="modal-close" onclick="closeInviteModal()" aria-label="Close">&times;</button>
       </div>
       <div class="modal-body">
-        <p>The evergreen invite ask — separate from sharing this one specific bet.</p>
+        <p>The evergreen invite ask — separate from sharing this one specific trade.</p>
         <div class="share-link-row">
           <input id="inviteLinkInput" readonly>
           <button onclick="copyInviteLink()">Copy</button>
@@ -571,6 +714,126 @@
           <button class="form-submit" onclick="submitInvite()">Send invite (demo)</button>
         </div>
         <div class="form-note">Demo only — no real invite is sent, and this isn't real Kalshi functionality.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="valueModal">
+    <div class="modal-box" style="height:min(320px, 80vh); max-width:420px;">
+      <div class="modal-header">
+        <span class="modal-title" id="valueModalTitle"></span>
+        <button class="modal-close" onclick="closeValueModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="valueModalBody"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="outreachModal">
+    <div class="modal-box" style="height:min(820px, 90vh); max-width:660px;">
+      <div class="modal-header">
+        <span class="modal-title">Off-site outreach</span>
+        <button class="modal-close" onclick="closeOutreachModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Personalized off-app nudges, pulled from a customer's own trading history &mdash; not generic re-engagement blasts.</p>
+
+        <div class="mockup-label">Push notification</div>
+        <div class="push-pair">
+          <div class="push-variant">
+            <div class="push-variant-label">Lock screen &mdash; collapsed</div>
+            <div class="phone-frame push-frame">
+              <div class="phone-notch"></div>
+              <div class="push-screen push-screen-bg push-screen-compact">
+                <div class="push-card">
+                  <div class="push-card-top">
+                    <span class="push-app-icon">K</span>
+                    <span class="push-app-name">Kalshi</span>
+                    <span class="push-app-time">now</span>
+                  </div>
+                  <div class="push-title">Spain won. You called it. 🇪🇸</div>
+                  <div class="push-body">Ready for round two? 3 hot markets just opened &mdash; tap to see today's odds.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="push-variant">
+            <div class="push-variant-label">Long-press &mdash; expanded</div>
+            <div class="phone-frame push-frame">
+              <div class="phone-notch"></div>
+              <div class="push-screen push-screen-bg push-screen-compact">
+                <div class="push-card push-card-expanded">
+                  <div class="push-card-top">
+                    <span class="push-app-icon">K</span>
+                    <span class="push-app-name">Kalshi</span>
+                    <span class="push-app-time">now</span>
+                  </div>
+                  <div class="push-title">Spain won. You called it. 🇪🇸</div>
+                  <div class="push-body">Your YES on Spain closed at 91&cent;. Ready for round two? Here's what's hot right now:</div>
+                  <div class="push-divider"></div>
+                  <div class="push-rows" id="outreachPushRows"></div>
+                  <div class="push-actions">
+                    <div class="push-trade-now">Trade Now</div>
+                    <div class="push-dismiss">Dismiss</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup-label">Desktop email</div>
+        <div class="desktop-email">
+          <div class="de-chrome">
+            <span class="de-logo">kalshi</span>
+            <span class="de-viewbrowser">View in browser</span>
+          </div>
+          <div class="de-hero">
+            <div class="de-hero-headline">SPAIN WINS. YOUR TRADE PAID OFF.</div>
+            <div class="de-hero-pill">+91&cent; per share</div>
+          </div>
+          <div class="de-body">
+            <div class="de-body-title">Hi Elliot, your Spain call was a good one.</div>
+            <div class="de-body-text">Back in December, your <b>YES on Spain to win the World Cup</b> closed at 91&cent; on the dollar. The tournament's over, but the best markets are just getting started.</div>
+            <div class="de-body-text">Here are three live markets worth a look right now:</div>
+          </div>
+          <div class="de-cards" id="outreachDesktopCards"></div>
+          <div class="de-explainer">
+            <div class="de-explainer-title">New to trading beyond sports?</div>
+            <div class="de-explainer-text">Every market works the same way: buy Yes or No, and if you're right, each share pays out $1. Track live odds and cash out anytime before the market closes.</div>
+          </div>
+          <div class="de-cta-row"><button class="de-cta" onclick="showToast('Opened: Browse all markets (demo)')">Browse all markets</button></div>
+          <div class="de-footer">
+            You're receiving this because you have a Kalshi account. <a href="#">Manage preferences</a> or <a href="#">unsubscribe</a>.
+            <div style="margin-top:6px; opacity:.7;">Kalshi Inc., 548 Market St PMB 89322, San Francisco, CA 94104.</div>
+          </div>
+        </div>
+
+        <div class="form-note" style="text-align:center; margin-top:4px;">Demo only &mdash; illustrative campaign copy, not real Kalshi functionality. Card art is illustrative (CSS-crafted, not licensed photography) &mdash; happy to wire in real images if you supply or approve specific ones.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="publishModal">
+    <div class="modal-box" style="height:min(600px, 90vh); max-width:460px;">
+      <div class="modal-header">
+        <span class="modal-title">Publish to Kalshi Social</span>
+        <button class="modal-close" onclick="closePublishModal()" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Post this trade to Kalshi's own Social section &mdash; builds engagement and confidence with people already on the platform, rather than reaching outside it.</p>
+        <div class="rec-card" style="align-items:flex-start; flex-direction:column; gap:6px; padding:14px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQFiOpu4iH8wqA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1675616465009?e=1786579200&v=beta&t=yNY4qn_uaZqxKD9Un7XrgqDTHkhyh5vYY7y_clLYNN0" alt="" style="width:26px; height:26px; border-radius:50%; object-fit:cover;">
+            <span style="font-size:12px; font-weight:700; color:var(--text);">Elliot Dabah traded Yes &middot; 87&cent;</span>
+          </div>
+          <div style="font-size:12px; color:var(--text-dim);">Will Kalshi hire Elliot Dabah as their next PM?</div>
+        </div>
+        <div class="form-actions">
+          <button class="form-submit" onclick="submitPublish()">Publish (demo)</button>
+        </div>
+        <div class="form-note">Demo only &mdash; no real post is published, and this isn't real Kalshi functionality.</div>
       </div>
     </div>
   </div>
@@ -625,48 +888,53 @@
     rulesChevron.textContent = open ? '\u2212' : '+';
   });
 
-  // Odds-methodology accordion (default-visible confidence signal, one click away)
-  const oddsToggle = document.getElementById('oddsToggle');
-  const oddsBody = document.getElementById('oddsBody');
-  const oddsChevron = document.getElementById('oddsChevron');
-  oddsToggle.addEventListener('click', () => {
-    const open = oddsBody.classList.toggle('open');
-    oddsChevron.textContent = open ? '\u2212' : '+';
-  });
+  // Value-card detail modal (real popup with X, replaces the old hover-tip)
+  const VALUE_DETAILS = {
+    clear: { title:'Clear \u2014 User Growth', body:"Led the partner growth strategy and end-user experience that transformed Clear into a B2B2C identity platform, driving 10x user growth in the first year." },
+    amazonRevenue: { title:'Amazon \u2014 Incremental Revenue', body:'Monetized transactional messages with personalized recommendations, generating $250M in incremental revenue.' },
+    uber: { title:'Uber \u2014 B2B Customers Activated', body:'Led the growth of Uber for Business, expanding reach to 10M customers and driving adoption across 1M users who linked their business profile to their personal Uber account, enabling a higher first-business-trip rate.' },
+    amazonCtr: { title:'Amazon \u2014 CTR Improvement', body:'Shipped an AI-driven content-ranking agent that personalized message content at scale, lifting click-through rate 90bps.' }
+  };
+  const valueModal = document.getElementById('valueModal');
+  function openValueModal(key){
+    const d = VALUE_DETAILS[key];
+    if (!d) return;
+    document.getElementById('valueModalTitle').textContent = d.title;
+    document.getElementById('valueModalBody').textContent = d.body;
+    valueModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeValueModal(){
+    valueModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  valueModal.addEventListener('click', (e) => { if (e.target === valueModal) closeValueModal(); });
 
-  // Default-visible sparkline (confidence signal — shown by default, not gated behind a demo click)
-  (function(){
-    const bars = [40,52,48,61,58,70,66,74,80,76,83,87];
-    document.getElementById('defaultSparkline').innerHTML =
-      bars.map(h => `<span style="height:${h}%"></span>`).join('');
-  })();
-
-  // Ladder data — hiring timeline only (career stories live in "Why the market moved" above, not here)
+  // Ladder data — "Additional Markets": related markets tied to the hiring timeline (Kalshi's own related-markets pattern)
   const LADDER = [
     { kind:'timeline', name:'Recruiter screen w/ Ryan Judge completed', resolved:true, pct:100, move:0,
-      detail:'Resolved: recruiter screen with Ryan Judge took place Jul 9. Priced at 100¢. Illustrative only — not real market data.' },
-    { kind:'timeline', name:'Brian interview completed before Jul 28', resolved:false, pct:88, move:7,
-      detail:'Priced against scheduling pace to date and loop sequencing. Illustrative methodology, not real market data.' },
-    { kind:'timeline', name:'Katherine interview completed before Jul 30', resolved:false, pct:91, move:5,
-      detail:'Priced off typical loop cadence following a positive recruiter screen. Authored by Elliot, not real market data.' },
-    { kind:'timeline', name:'Onsite completed — week of Aug 3', resolved:false, pct:83, move:9,
-      detail:'Priced assuming prior loop stages clear on schedule. Illustrative methodology, not real market data.' },
-    { kind:'timeline', name:'Offer extended before Aug 10', resolved:false, pct:76, move:14,
-      detail:'Priced off typical time-to-offer once onsite completes. Illustrative methodology, not real market data.' },
-    { kind:'timeline', name:'Hired & start date locked before Aug 31', resolved:false, pct:81, move:11,
-      detail:'Backsolved from the Aug 31 target start date. Illustrative methodology, not real market data.' }
+      detail:'Resolved: recruiter screen with Ryan Judge took place Jul 9. Priced at 100¢. Illustrative only — not real market data.', chart:[20,35,55,72,88,100,100,100,100,100,100,100] },
+    { kind:'timeline', name:'Brian interview completed before 7/31', resolved:false, pct:88, move:7,
+      detail:'Priced against scheduling pace to date and loop sequencing. Illustrative methodology, not real market data.', chart:[40,52,61,70,74,79,81,83,85,86,87,88] },
+    { kind:'timeline', name:'Katherine interview completed before 8/5', resolved:false, pct:91, move:5,
+      detail:'Priced off typical loop cadence following a positive recruiter screen. Authored by Elliot, not real market data.', chart:[55,62,68,74,79,83,86,88,89,90,90,91] },
+    { kind:'timeline', name:'Onsite completed — week of 8/10', resolved:false, pct:83, move:9,
+      detail:'Priced assuming prior loop stages clear on schedule. Illustrative methodology, not real market data.', chart:[35,42,50,58,64,69,73,76,79,81,82,83] },
+    { kind:'timeline', name:'Offer extended by 8/17', resolved:false, pct:76, move:14,
+      detail:'Priced off typical time-to-offer once onsite completes. Illustrative methodology, not real market data.', chart:[25,32,38,45,52,58,63,67,70,72,74,76] },
+    { kind:'timeline', name:'Hired & start date locked before 8/31', resolved:false, pct:81, move:11,
+      detail:'Backsolved from the Aug 31 target start date. Illustrative methodology, not real market data.', chart:[30,38,45,52,58,64,69,73,76,78,80,81] }
   ];
-  const ladderEl = document.getElementById('ladder');
-  let insightTargetSet = false;
-  LADDER.forEach((row) => {
+  function renderMarketRow(container, row, idOnFirst){
     const div = document.createElement('div');
     div.className = 'ladder-row';
-    if (!row.resolved && !insightTargetSet) {
-      div.id = 'demoTargetInsight'; // first open timeline row — the insight-panel demo target
-      insightTargetSet = true;
-    }
+    if (idOnFirst) div.id = idOnFirst;
     const yesPrice = row.resolved ? 100 : row.pct;
     const noPrice = row.resolved ? 0 : 100 - row.pct;
+    const totalVotes = 150 + Math.round(yesPrice * 3.2);
+    const yesVotes = Math.round(totalVotes * yesPrice / 100);
+    const noVotes = totalVotes - yesVotes;
+    const chartHtml = row.chart ? `<div class="demo-sparkline" style="margin-top:10px;">${row.chart.map(h => `<span style="height:${h}%"></span>`).join('')}</div><div style="font-size:11px; color:var(--muted);">Odds over the last 12 weeks</div>` : '';
     div.innerHTML = `
       <div class="ladder-main">
         <div class="ladder-name">${row.name}</div>
@@ -680,7 +948,11 @@
         </div>
         <span class="ladder-info-icon" data-info>i</span>
       </div>
-      <div class="ladder-tip">${row.detail}</div>
+      <div class="ladder-social-proof"><span class="social-proof-yes">${yesVotes.toLocaleString()} Yes</span> &middot; <span class="social-proof-no">${noVotes.toLocaleString()} No</span> traded in the past 24 hours</div>
+      <div class="ladder-tip">
+        <div>${row.detail}</div>
+        ${chartHtml}
+      </div>
     `;
     div.querySelectorAll('[data-trade]').forEach(chip => {
       chip.addEventListener('click', (e) => { e.stopPropagation(); openCalendly(); });
@@ -689,75 +961,143 @@
       e.stopPropagation();
       div.classList.toggle('pinned');
     });
-    ladderEl.appendChild(div);
+    container.appendChild(div);
+  }
+  const ladderEl = document.getElementById('ladder');
+  LADDER.forEach((row) => {
+    renderMarketRow(ladderEl, row, null);
   });
 
-  // Growth ideas, organized as 4 goal-first pillars (rendered twice: desktop rail + mobile stack)
-  // kind:'highlight' -> the tactic is already visible by default on the page; "See demo" just glows it, no new content injected
-  // kind:'inline'     -> toggles a highlighted callout box directly on the real page element (genuinely new/hidden content)
-  // kind:'modal'      -> opens a real modal (recovery form / share sheet / invite) and highlights the related element while open
-  const PILLARS = [
+  // Related Outcomes — resolved, historical stats with a track record (separate concept from Additional Markets:
+  // these already happened, and exist to build confidence rather than to be traded on)
+  const RELATED_OUTCOMES = [
+    { kind:'timeline', name:'Average recruiter response time last week < 3 business days', resolved:true, pct:100, move:0,
+      detail:'Resolved YES — Ryan Judge\u2019s team replied within 3 business days on average last week.', chart:[18,26,34,45,58,68,77,84,89,93,96,99] },
+    { kind:'timeline', name:'Time between recruiter screen and hiring-manager interview < 10 business days', resolved:true, pct:100, move:0,
+      detail:'Resolved YES — this loop moved from recruiter screen to hiring-manager interview in 8 business days.', chart:[24,33,41,50,59,67,74,80,85,89,93,96] },
+    { kind:'timeline', name:'Interview loop stayed on original schedule, no reschedules', resolved:true, pct:0, move:0,
+      detail:'Resolved NO — one interview slipped by 3 days mid-loop, though it didn\u2019t affect the overall timeline.', chart:[81,74,68,60,52,45,38,32,27,24,22,21] }
+  ];
+  const relatedOutcomesEl = document.getElementById('relatedOutcomes');
+  RELATED_OUTCOMES.forEach((row) => {
+    renderMarketRow(relatedOutcomesEl, row, null);
+  });
+
+  // Growth ideas, framed as 4 questions Elliot would focus on as a PM at Kalshi, each with 2 sub-approaches
+  // kind:'highlight' -> already visible by default on the page; "See demo" just glows it, no new content injected
+  // kind:'inline'     -> toggles a highlighted callout box directly on the real page element
+  // kind:'modal'      -> opens a real modal and highlights the related element while open
+  // kind:'none'       -> descriptive only, no interactive demo
+  const THEMES = [
     {
-      name:'Conversion', sub:'confidence signals — shown by default on the page, not gated behind a demo click',
-      tactics:[
-        { code:'C1', title:'Contextual insight panel', metric:'New-user activation + category expansion rate',
-          desc:'Base rate, sourcing, and trend sit right under the ladder by default, not hidden behind a click — for anyone with zero history in a category.',
-          kind:'highlight', target:'demoTargetInsightPanel' },
-        { code:'C2', title:'Plain-English rules summary', metric:'First-bet conversion, new users',
-          desc:'One plain-English line leads above the fold instead of legal resolution criteria — full rules stay one click away for power users.',
-          kind:'highlight', target:'demoTargetRules' },
-        { code:'C3', title:'Historical trend sparkline', metric:'Average bet size ($) + repeat-visit rate',
-          desc:'A 12-week probability sparkline sits under the header by default — the hypothesis is that visible confidence increases stake size and pulls people back.',
-          kind:'highlight', target:'demoTargetTrend' },
-        { code:'C4', title:'Odds methodology transparency', metric:'Trust proxy \u2192 first-bet conversion',
-          desc:'A plain-English "how these odds are calculated" note sits one click away by default, not buried in fine print.',
-          kind:'highlight', target:'demoTargetOdds' }
+      question:'How do we increase retention and Monthly Active Users?',
+      metric:'measured by: MAU',
+      subs:[
+        { label:'Off-site outreach', tactics:[
+          { code:'1.1', title:'Personalized email &amp; push re-engagement', metric:'MAU',
+            desc:'Bring inactive customers, and the World Cup signup wave specifically, back with a nudge built off their own trading history \u2014 not a generic blast.',
+            kind:'modal', target:'demoTargetHeader', open:openOutreachModal }
+        ]},
+        { label:'Increase supply + personalize follow-ups', tactics:[
+          { code:'1.2', title:'Personalized market recommendations', metric:'MAU, trades per customer, first trade in new category',
+            desc:'Recommendations pulled from a customer\u2019s own trading history, surfacing markets in categories they\u2019ve already shown interest in \u2014 giving them a reason to keep coming back.',
+            kind:'inline', target:'demoTargetHeader', build:buildRecommendationsDemo }
+        ]}
       ]
     },
     {
-      name:'Session Value', sub:'north star = $ per session, driven by stake size \u00d7 bets per session',
-      tactics:[
-        { code:'S1', title:'Recommendations / similar bets', metric:'Bets per session',
-          desc:'Related markets shown directly on the page, and again right after a bet is placed \u2014 two surfaces, same recommendation engine.',
-          kind:'inline', target:'demoTargetTrend', build:buildRecommendationsDemo },
-        { code:'S2', title:'Personalized stake presets', metric:'Bet completion rate + average bet size',
-          desc:'Presets informed by this user\u2019s actual wallet balance and the live odds \u2014 e.g. "$1 \u2192 $1.25," "$10 \u2192 $14" \u2014 replacing a blank text field.',
-          kind:'inline', target:'demoTargetStake', build:buildStakeDemo }
+      question:'How do we increase the value of a customer session?',
+      metric:'measured by: $ spent per session',
+      subs:[
+        { label:'Number of trades', tactics:[
+          { code:'2.1', title:'Cross-trade recommendations', metric:'$ per session, trades per customer, first trade in new category',
+            desc:'Related markets recommended directly on the page, and again right after a trade is placed \u2014 one tap to trade the next one.',
+            kind:'inline', target:'demoTargetStake', build:buildRecommendationsDemo }
+        ]},
+        { label:'Trade size', tactics:[
+          { code:'2.2', title:'Confidence-boosting stake presets', metric:'$ per session',
+            desc:'Show customers the live odds alongside stake presets sized off their actual wallet balance \u2014 e.g. "$1 \u2192 $1.25," "$10 \u2192 $14" \u2014 instead of a blank text field.',
+            kind:'inline', target:'demoTargetStake', build:buildStakeDemo }
+        ]}
       ]
     },
     {
-      name:'Recovery', sub:null,
-      tactics:[
-        { code:'R1', title:'Abandoned-bet recovery', metric:'Recovery rate vs. baseline abandonment rate',
-          desc:'A real "notify me" form for the in-page moment, backed by the off-app reach that catches most of the actual drop \u2014 email, push, and other multi-channel touchpoints, not just this modal.',
-          kind:'modal', target:'demoTargetStake', open:openRecoveryModal }
+      question:'How do we improve conversion?',
+      metric:'measured by: % of sessions that result in a trade placed',
+      subs:[
+        { label:'New vs. repeat personalization', tactics:[
+          { code:'3.1', title:'Personalized experience by customer type', metric:'sessions \u2192 trade placed',
+            desc:'A different first impression for a brand-new visitor than for someone on their tenth visit.',
+            kind:'inline', target:'demoTargetHeader', build:buildPersonalizationDemo }
+        ]},
+        { label:'Confidence via track record', tactics:[
+          { code:'3.2', title:'Historical outcomes', metric:'sessions \u2192 trade placed',
+            desc:'Surfacing resolved, historical outcomes (see "Related Outcomes" above) so a customer can see how similar trades have played out, before placing this one.',
+            kind:'highlight', target:'relatedOutcomes' }
+        ]},
+        { label:'Social proof', tactics:[
+          { code:'3.3', title:'"X traded Yes / No" callout', metric:'sessions \u2192 trade placed, trade size',
+            desc:'A live Yes/No trade count next to every trade on the page, header and each market row \u2014 seeing others act on both sides builds real confidence, not just one-sided hype.',
+            kind:'highlight', target:'demoTargetSocialProof' }
+        ]}
       ]
     },
     {
-      name:'Virality / Referral', sub:null,
-      tactics:[
-        { code:'V1', title:'Share this bet', metric:'K-factor (share rate \u2192 referred signups)',
-          desc:'A real share sheet instead of a generic evergreen referral \u2014 copy link, text, Facebook, or email \u2014 tied to a specific live market in the moment someone\u2019s engaged with it.',
-          kind:'modal', target:'demoTargetHeader', open:openShareModal },
-        { code:'V2', title:'Invite friends to Kalshi', metric:'Referral signups + activation rate',
-          desc:'A general invite mechanic, separate from sharing one specific trade \u2014 the evergreen "bring your friends onto Kalshi" ask.',
-          kind:'modal', target:'demoTargetHeader', open:openInviteModal }
+      question:'How do we increase virality and social outreach?',
+      metric:'measured by: referred signups that place a trade',
+      subs:[
+        { label:'Off-platform sharing', tactics:[
+          { code:'4.1', title:'Share this trade', metric:'new signups',
+            desc:'A share sheet tied to a specific live market, sent outside Kalshi \u2014 the highest-leverage lever for reaching people who aren\u2019t customers yet.',
+            kind:'modal', target:'demoTargetHeader', open:openShareModal }
+        ]},
+        { label:'On-platform sharing', tactics:[
+          { code:'4.2', title:'Publish to Kalshi Social', metric:'engagement, session frequency',
+            desc:'Post this trade to Kalshi\u2019s own Social section \u2014 builds engagement and confidence with people already on the platform, rather than reaching outside it.',
+            kind:'modal', target:'demoTargetHeader', open:openPublishModal }
+        ]},
+        { label:'Invite / refer friends', tactics:[
+          { code:'4.3', title:'Invite friends to Kalshi', metric:'referral signups',
+            desc:'The general, evergreen "bring your friends onto Kalshi" ask, separate from sharing one specific trade.',
+            kind:'modal', target:'demoTargetHeader', open:openInviteModal }
+        ]}
       ]
     }
   ];
 
   // ---- Inline demo content builders (each returns innerHTML for the in-page callout box) ----
+  function buildRecCards(items, large){
+    return `<div class="rec-card-row${large ? ' large' : ''}">${items.map(it => `
+      <div class="rec-card">
+        <div class="rec-thumb">${it.icon}</div>
+        <div class="rec-info">
+          <div class="rec-title">${it.title}</div>
+          <div class="rec-odds">Yes ${it.odds}&cent;</div>
+        </div>
+        <button class="rec-bet-btn" onclick="showToast('Traded Yes ${it.odds}\u00a2 on this market (demo)')">Trade Yes ${it.odds}&cent;</button>
+      </div>`).join('')}</div>`;
+  }
+  // Single shared recommendation set — same engine, whether shown as an on-page cross-sell
+  // or as the personalized nudge in off-site outreach. One item per category for variety.
+  const RECOMMENDED_BETS = [
+    { icon:'\u26be', title:'Will the Yankees win the World Series?', odds:78 },
+    { icon:'\ud83c\udfdb\ufe0f', title:'Will the Fed cut rates in September?', odds:71 },
+    { icon:'\ud83c\udfe2', title:'Will Kalshi\u2019s valuation exceed $30B this year?', odds:82 }
+  ];
   function buildRecommendationsDemo(){
-    return `<div class="demo-inline-label">Demo — Recommendations / similar bets</div>
-      <p style="margin:0 0 8px; font-size:12px; color:var(--text-dim);">Shown here on the page, and again in a lightweight version right after a bet is placed:</p>
-      <div class="demo-stake-row">
-        <button class="demo-stake-btn" onclick="showToast('Opened: Will the Fed cut rates in September? (demo)')">Fed rate cut, Sept?</button>
-        <button class="demo-stake-btn" onclick="showToast('Opened: Will a new V17 boulder problem be sent this year? (demo)')">New V17 sent this yr?</button>
-        <button class="demo-stake-btn" onclick="showToast('Opened: Will the Yankees win the World Series? (demo)')">Yankees win WS?</button>
+    return `<div class="demo-inline-label">Demo — Personalized market recommendations</div>
+      <p style="margin:0 0 8px; font-size:12px; color:var(--text-dim);">Ranked by this customer's own trading history:</p>
+      ${buildRecCards(RECOMMENDED_BETS, true)}`;
+  }
+  function buildPersonalizationDemo(){
+    return `<div class="demo-inline-label">Demo — New vs. repeat customer experience</div>
+      <div style="display:flex; flex-direction:column; gap:8px; font-size:12px; color:var(--text-dim); line-height:1.5;">
+        <div><b style="color:var(--text);">New customer sees:</b> "New here? Start with a small trade, see how odds work before you go big."</div>
+        <div><b style="color:var(--text);">Repeat customer sees:</b> "Welcome back, 3 markets moved since your last visit."</div>
       </div>`;
   }
   function buildStakeDemo(){
-    return `<div class="demo-inline-label">Demo — Personalized stake presets</div>
+    return `<div class="demo-inline-label">Demo — Confidence-boosting stake presets</div>
       <p style="margin:0 0 8px; font-size:12px; color:var(--text-dim);">Sized off this user's wallet balance and the live 87¢ odds, instead of a blank text field:</p>
       <div class="demo-stake-row">
         <button class="demo-stake-btn" onclick="showToast('Selected $1 \u2192 $1.25 payout (demo)')">$1 &rarr; $1.25</button>
@@ -781,103 +1121,134 @@
     if (glowCounts[id] === 0) el.classList.remove('demo-glow');
   }
 
-  const injectedBoxes = {}; // ideaKey -> injected element, so "Hide demo" removes the right one
-  let activeHighlight = null; // { target, btn } — only one "Show me" highlight active at a time
+  const injectedBoxes = {}; // ideaKey -> injected element
+  let activeDemo = null; // { type:'highlight'|'inline', target, btn, ideaKey } — only one demo open at a time, of any kind
+
+  function closeActiveDemo(){
+    if (!activeDemo) return;
+    if (activeDemo.type === 'highlight') {
+      removeGlow(activeDemo.target);
+      activeDemo.btn.textContent = 'Show me on the page';
+    } else {
+      const box = injectedBoxes[activeDemo.ideaKey];
+      if (box) { box.remove(); delete injectedBoxes[activeDemo.ideaKey]; }
+      activeDemo.btn.textContent = 'See it in action';
+    }
+    activeDemo = null;
+  }
 
   function toggleHighlight(gc, btn){
     const target = document.getElementById(gc.target);
     if (!target) return;
-    const clickingActiveOne = activeHighlight && activeHighlight.target === gc.target && activeHighlight.btn === btn;
-    if (activeHighlight) {
-      removeGlow(activeHighlight.target);
-      activeHighlight.btn.textContent = 'Show me on the page';
-      activeHighlight = null;
-    }
+    const clickingActiveOne = activeDemo && activeDemo.btn === btn;
+    closeActiveDemo();
     if (clickingActiveOne) return; // was already the active one — just turn it off
     addGlow(gc.target);
     btn.textContent = 'Hide highlight';
-    activeHighlight = { target: gc.target, btn };
+    activeDemo = { type:'highlight', target: gc.target, btn };
     target.scrollIntoView({ behavior:'smooth', block:'center' });
   }
 
   function toggleInlineDemo(gc, ideaKey, btn){
     const target = document.getElementById(gc.target);
     if (!target) return;
-    const existing = injectedBoxes[ideaKey];
-    if (existing) {
-      existing.remove();
-      delete injectedBoxes[ideaKey];
-      removeGlow(gc.target);
-      btn.textContent = 'See demo';
-      return;
-    }
+    const clickingActiveOne = activeDemo && activeDemo.btn === btn;
+    closeActiveDemo();
+    if (clickingActiveOne) return; // was already the active one — just turn it off
     const box = document.createElement('div');
     box.className = 'demo-inline-box';
     box.innerHTML = gc.build();
     target.insertAdjacentElement('afterend', box);
     injectedBoxes[ideaKey] = box;
-    addGlow(gc.target);
+    // Note: deliberately no addGlow here — the demo box itself carries the emphasis
+    // (solid border), so the real page element behind it (e.g. the trade buttons) isn't highlighted.
     btn.textContent = 'Hide demo';
-    target.scrollIntoView({ behavior:'smooth', block:'center' });
+    activeDemo = { type:'inline', target: gc.target, btn, ideaKey };
+    box.scrollIntoView({ behavior:'smooth', block:'center' });
   }
 
   function renderGrowth(container){
     const header = document.createElement('div');
     header.className = 'growth-header';
-    header.textContent = "Growth ideas I'd ship on this exact page";
+    header.textContent = "How Elliot Would Optimize Kalshi's Growth";
     const sub = document.createElement('div');
     sub.className = 'growth-sub';
-    sub.innerHTML = 'Grouped by the metric each one is meant to move, not just "engagement." &middot; <a class="growth-wbr-link" href="kalshi-wbr-dashboard.html" target="_blank" rel="noopener">See the WBR I\u2019d run on this &rarr;</a>';
+    sub.textContent = "A PM's point of view on where to focus the next few months.";
+    const disclaimer = document.createElement('div');
+    disclaimer.className = 'growth-disclaimer';
+    disclaimer.textContent = 'Disclaimer: all hypotheses are subject to experimentation to validate viability.';
+    const callout = document.createElement('div');
+    callout.className = 'worldcup-callout';
+    callout.innerHTML = 'World Cup drove record signups. The next few months aren\u2019t about acquiring more customers, they\u2019re about increasing <b>retention and Monthly Active Users</b> on the base we just got.';
     container.appendChild(header);
     container.appendChild(sub);
+    container.appendChild(disclaimer);
+    container.appendChild(callout);
 
-    PILLARS.forEach((pillar, pIdx) => {
+    THEMES.forEach((theme, thIdx) => {
       const block = document.createElement('div');
-      block.className = 'growth-pillar';
-      const title = document.createElement('div');
-      title.className = 'growth-pillar-title';
-      title.textContent = pillar.name;
-      block.appendChild(title);
-      if (pillar.sub) {
-        const psub = document.createElement('div');
-        psub.className = 'growth-pillar-sub';
-        psub.textContent = pillar.sub;
-        block.appendChild(psub);
-      }
-      const list = document.createElement('div');
-      list.className = 'growth-list';
-      pillar.tactics.forEach((gc, tIdx) => {
-        const ideaKey = `${container.id}-${pIdx}-${tIdx}`;
-        const card = document.createElement('div');
-        card.className = 'card growth-card';
-        const btnLabel = gc.kind === 'highlight' ? 'Show me on the page' : 'See demo';
-        card.innerHTML = `
-          <div class="growth-card-top">
-            <div class="growth-num">${gc.code}</div>
-            <div class="growth-body">
-              <div class="growth-title">${gc.title}</div>
-              <div class="growth-desc">${gc.desc}</div>
-              <div class="growth-meta">
-                <span class="growth-tag metric">moves: ${gc.metric}</span>
-                <span class="growth-tag">hypothesis, not tested</span>
+      block.className = 'theme-block';
+      const q = document.createElement('div');
+      q.className = 'theme-question';
+      q.textContent = `${thIdx + 1}. ${theme.question}`;
+      block.appendChild(q);
+      const m = document.createElement('div');
+      m.className = 'theme-metric';
+      m.textContent = theme.metric;
+      block.appendChild(m);
+
+      theme.subs.forEach((sub, sIdx) => {
+        const subWrap = document.createElement('div');
+        subWrap.className = 'theme-sub';
+        const subLabel = document.createElement('div');
+        subLabel.className = 'theme-sub-label';
+        subLabel.textContent = sub.label;
+        subWrap.appendChild(subLabel);
+
+        const list = document.createElement('div');
+        list.className = 'growth-list';
+        sub.tactics.forEach((gc, tIdx) => {
+          const ideaKey = `${container.id}-${thIdx}-${sIdx}-${tIdx}`;
+          const card = document.createElement('div');
+          card.className = 'card growth-card';
+          const btnLabel = gc.kind === 'highlight' ? 'Show me on the page' : 'See it in action';
+          const btnHtml = gc.kind === 'none' ? '' : `<button class="growth-demo-btn" type="button">${btnLabel}</button>`;
+          const metricPills = gc.metric.split(',').map(m => `<span class="growth-tag metric">${m.trim()}</span>`).join('');
+          card.innerHTML = `
+            <div class="growth-card-top">
+              <div class="growth-num">${gc.code}</div>
+              <div class="growth-body">
+                <div class="growth-title">${gc.title}</div>
+                <div class="growth-desc">${gc.desc}</div>
+                <div class="growth-meta">
+                  ${metricPills}
+                </div>
+                ${btnHtml}
               </div>
-              <button class="growth-demo-btn" type="button">${btnLabel}</button>
             </div>
-          </div>
-        `;
-        const btn = card.querySelector('.growth-demo-btn');
-        if (gc.kind === 'highlight') {
-          btn.addEventListener('click', () => toggleHighlight(gc, btn));
-        } else if (gc.kind === 'inline') {
-          btn.addEventListener('click', () => toggleInlineDemo(gc, ideaKey, btn));
-        } else {
-          btn.addEventListener('click', () => gc.open(gc.target));
-        }
-        list.appendChild(card);
+          `;
+          const btn = card.querySelector('.growth-demo-btn');
+          if (btn) {
+            if (gc.kind === 'highlight') {
+              btn.addEventListener('click', () => toggleHighlight(gc, btn));
+            } else if (gc.kind === 'inline') {
+              btn.addEventListener('click', () => toggleInlineDemo(gc, ideaKey, btn));
+            } else if (gc.kind === 'modal') {
+              btn.addEventListener('click', () => gc.open(gc.target));
+            }
+          }
+          list.appendChild(card);
+        });
+        subWrap.appendChild(list);
+        block.appendChild(subWrap);
       });
-      block.appendChild(list);
       container.appendChild(block);
     });
+
+    const footer = document.createElement('div');
+    footer.className = 'growth-footer-link';
+    footer.innerHTML = '<a class="growth-wbr-link" href="kalshi-wbr-dashboard.html" target="_blank" rel="noopener">See the WBR I\u2019d run on this &rarr;</a>';
+    container.appendChild(footer);
   }
   renderGrowth(document.getElementById('growthDesktop'));
   renderGrowth(document.getElementById('growthMobile'));
@@ -901,6 +1272,7 @@
   // ---- Abandoned-bet recovery modal (opens directly, no redundant middle click) ----
   const recoveryModal = document.getElementById('recoveryModal');
   function openRecoveryModal(targetId){
+    closeActiveDemo();
     addGlow(targetId);
     recoveryModal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -922,14 +1294,14 @@
   // ---- Share-this-bet modal (real share sheet: copy link, SMS, Facebook, email) ----
   const shareModal = document.getElementById('shareModal');
   function openShareModal(targetId){
+    closeActiveDemo();
     const url = location.href.split('?')[0] + '?ref=demo';
-    const text = 'Will Kalshi hire Elliot Dabah as their next PM? 87% Yes.';
     document.getElementById('shareLinkInput').value = url;
     document.getElementById('shareButtonRow').innerHTML = `
-      <a class="share-btn" href="sms:?body=${encodeURIComponent(text + ' ' + url)}">Text (SMS)</a>
-      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}" target="_blank" rel="noopener">Facebook</a>
-      <a class="share-btn" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">X</a>
-      <a class="share-btn" href="mailto:?subject=${encodeURIComponent(text)}&body=${encodeURIComponent(url)}">Email</a>
+      <button class="share-btn" onclick="showToast('Shared via Text (demo)')">Text (SMS)</button>
+      <button class="share-btn" onclick="showToast('Shared to Facebook (demo)')">Facebook</button>
+      <button class="share-btn" onclick="showToast('Shared to X (demo)')">X</button>
+      <button class="share-btn" onclick="showToast('Shared via Email (demo)')">Email</button>
     `;
     addGlow(targetId);
     shareModal.classList.add('open');
@@ -957,6 +1329,7 @@
   // ---- Invite Friends modal (general referral ask, distinct from single-trade sharing) ----
   const inviteModal = document.getElementById('inviteModal');
   function openInviteModal(targetId){
+    closeActiveDemo();
     const url = location.href.split('?')[0] + '?ref=invite-demo';
     document.getElementById('inviteLinkInput').value = url;
     addGlow(targetId);
@@ -986,6 +1359,68 @@
     showToast(`Invite sent to ${email} (demo).`);
   }
   inviteModal.addEventListener('click', (e) => { if (e.target === inviteModal) closeInviteModal(); });
+
+  // ---- Off-site outreach modal (personalized email + push preview) ----
+  const outreachModal = document.getElementById('outreachModal');
+  const OUTREACH_MARKETS = [
+    { art:'econ', icon:'\ud83c\udfe6', tag:'Economics', q:'Fed cuts interest rates at the September meeting?', yes:68, no:32, close:'Closes in 6 days', urgent:true },
+    { art:'politics', icon:'\ud83c\udfdb\ufe0f', tag:'Politics', q:'Republicans keep control of the House in 2026?', yes:61, no:39, close:'Closes in 3 months', urgent:false },
+    { art:'culture', icon:'\ud83c\udfa4', tag:'Culture', q:'Taylor Swift releases a new album in 2026?', yes:44, no:56, close:'Closes in 14 days', urgent:true }
+  ];
+  function openOutreachModal(targetId){
+    closeActiveDemo();
+    document.getElementById('outreachDesktopCards').innerHTML = OUTREACH_MARKETS.map(m => `
+      <div class="de-card">
+        <div class="de-card-art ${m.art}">${m.icon}</div>
+        <div class="de-card-tag">${m.tag}</div>
+        <div class="de-card-q">${m.q}</div>
+        <div class="de-card-odds">
+          <div class="de-card-yes">Yes ${m.yes}&cent;</div>
+          <div class="de-card-no">No ${m.no}&cent;</div>
+        </div>
+        <div class="de-card-close">${m.urgent ? '\u23f3 ' : ''}${m.close}</div>
+        <button class="de-card-btn" onclick="showToast('Traded Yes ${m.yes}\u00a2 on this market (demo)')">Trade Yes &rarr;</button>
+      </div>
+    `).join('');
+    document.getElementById('outreachPushRows').innerHTML = OUTREACH_MARKETS.map(m => `
+      <div class="push-row">
+        <div class="push-row-art ${m.art}">${m.icon}</div>
+        <div class="push-row-info">
+          <div class="push-row-title">${m.q}</div>
+          <div class="push-row-sub">${m.close.replace('Closes in ', '')} left</div>
+        </div>
+        <div class="push-row-price">${m.yes}&cent;</div>
+      </div>
+    `).join('');
+    addGlow(targetId);
+    outreachModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeOutreachModal(){
+    outreachModal.classList.remove('open');
+    document.body.style.overflow = '';
+    removeGlow('demoTargetHeader');
+  }
+  outreachModal.addEventListener('click', (e) => { if (e.target === outreachModal) closeOutreachModal(); });
+
+  // ---- Publish-to-Kalshi-Social modal (on-platform sharing, distinct from off-platform share) ----
+  const publishModal = document.getElementById('publishModal');
+  function openPublishModal(targetId){
+    closeActiveDemo();
+    addGlow(targetId);
+    publishModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePublishModal(){
+    publishModal.classList.remove('open');
+    document.body.style.overflow = '';
+    removeGlow('demoTargetHeader');
+  }
+  function submitPublish(){
+    closePublishModal();
+    showToast('Published to Kalshi Social (demo).');
+  }
+  publishModal.addEventListener('click', (e) => { if (e.target === publishModal) closePublishModal(); });
 </script>
 
 </body>
