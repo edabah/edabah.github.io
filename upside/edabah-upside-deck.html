@@ -1,0 +1,1243 @@
+<title>Upside Fuel→Grocery Strategy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --surface: #f5f2ec;
+  --card: #fdfcf8;
+  --ink: #1a1816;
+  --ink2: #4a473f;
+  --muted: #7a766c;
+  --border: #e2dfd6;
+  --accent: #1a7a6d;
+  --accent-lt: #e8f4f2;
+  --amber: #c57b2e;
+  --amber-lt: #fdf3e6;
+  --amber-bd: #e8c08a;
+  --hl: #f0ece4;
+  --shadow: rgba(26,24,22,0.06);
+  --up-blue: #2563eb;
+  --up-green: #16a34a;
+  --up-purple: #7c3aed;
+  --dark-bg: #0e0d0b;
+  --dark-card: #1a1916;
+  --dark-border: #2e2d28;
+  --dark-ink: #f0ede6;
+  --dark-ink2: #b0ada4;
+  --dark-muted: #6a665e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --surface: #141310; --card: #1e1d19; --ink: #f0ede6; --ink2: #c4c0b6;
+    --muted: #8a867c; --border: #2e2d28; --accent: #3cb5a4; --accent-lt: #1a2e2b;
+    --amber: #e09540; --amber-lt: #2e2518; --amber-bd: #6a5530; --hl: #242320;
+    --shadow: rgba(0,0,0,0.3);
+  }
+}
+:root[data-theme="dark"] {
+  --surface: #141310; --card: #1e1d19; --ink: #f0ede6; --ink2: #c4c0b6;
+  --muted: #8a867c; --border: #2e2d28; --accent: #3cb5a4; --accent-lt: #1a2e2b;
+  --amber: #e09540; --amber-lt: #2e2518; --amber-bd: #6a5530; --hl: #242320;
+  --shadow: rgba(0,0,0,0.3);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--surface);color:var(--ink);font-family:'Work Sans',system-ui,sans-serif;font-size:16px;line-height:1.55;overflow:hidden;height:100vh;width:100vw;}
+h1,h2,h3{font-family:'Newsreader',Georgia,serif;color:var(--ink);}
+h1{font-size:46px;line-height:1.12;font-weight:700;letter-spacing:-.5px;text-wrap:balance;}
+h2{font-size:32px;line-height:1.2;font-weight:700;letter-spacing:-.3px;text-wrap:balance;}
+h3{font-size:21px;line-height:1.3;font-weight:700;}
+p{max-width:68ch;}
+
+/* Slide system */
+.deck{position:relative;width:100%;height:100%;}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;padding:48px 64px 72px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.slide.active{display:flex;}
+.si{max-width:1000px;width:100%;margin:0 auto;flex:1;display:flex;flex-direction:column;justify-content:center;}
+.si.top{justify-content:flex-start;padding-top:8px;}
+
+/* Dark slides */
+.dark-sl{background:var(--dark-bg);color:var(--dark-ink);}
+.dark-sl h1,.dark-sl h2,.dark-sl h3{color:var(--dark-ink);}
+.dark-sl .sn{color:#3cb5a4;}
+.dark-sl .sub{color:var(--dark-ink2);}
+.dark-sl .ta{background:#3cb5a4;}
+.dark-sl .rl{color:var(--dark-muted);}
+.dark-sl .card{background:var(--dark-card);border-color:var(--dark-border);color:var(--dark-ink2);}
+.dark-sl .card h3,.dark-sl .card strong{color:var(--dark-ink);}
+.dark-sl .cl{color:var(--dark-muted);}
+
+/* Section num */
+.sn{font-family:'Work Sans',system-ui,sans-serif;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;display:block;}
+.sub{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:19px;color:var(--ink2);margin-top:8px;line-height:1.4;}
+.ta{display:block;width:48px;height:3px;background:var(--accent);margin-bottom:20px;border-radius:2px;}
+.rl{font-size:15px;color:var(--muted);margin-top:24px;font-weight:500;line-height:2;}
+.cl{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px;}
+.card h3{font-size:17px;margin-bottom:6px;}
+.card p{font-size:14px;color:var(--ink2);}
+.cg{display:grid;gap:14px;margin-top:16px;}
+.c3{grid-template-columns:repeat(3,1fr);}
+.c2{grid-template-columns:repeat(2,1fr);}
+.c4{grid-template-columns:repeat(4,1fr);}
+
+/* Caveat */
+.caveat{background:var(--amber-lt);border-left:3px solid var(--amber);padding:14px 18px;font-size:14px;line-height:1.5;color:var(--ink2);margin:14px 0;border-radius:0 4px 4px 0;}
+.caveat strong{color:var(--amber);font-weight:600;}
+.dark-sl .caveat{background:#2e2518;border-color:#e09540;color:var(--dark-ink2);}
+.dark-sl .caveat strong{color:#e09540;}
+
+/* Pull quote */
+.pq{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:21px;line-height:1.45;color:var(--ink);border-left:3px solid var(--accent);padding:10px 0 10px 24px;margin:18px 0;max-width:60ch;}
+.dark-sl .pq{color:var(--dark-ink);border-color:#3cb5a4;}
+
+/* Data labels */
+.dl{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:1px 5px;border-radius:2px;margin-left:4px;vertical-align:middle;}
+.dl.pub{background:#e8f0fd;color:#3a6eb5;}
+.dl.gvn{background:var(--accent-lt);color:var(--accent);}
+.dl.asm{background:var(--amber-lt);color:var(--amber);}
+.dl.der{background:var(--hl);color:var(--ink2);}
+
+/* Tables */
+.dt{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;font-variant-numeric:tabular-nums;}
+.dt th{text-align:left;font-weight:600;font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:2px solid var(--border);white-space:nowrap;}
+.dt td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--ink2);vertical-align:top;}
+.dt tr:last-child td{border-bottom:none;}
+.rice-bar{display:inline-block;height:6px;border-radius:3px;background:var(--accent);vertical-align:middle;margin-left:6px;}
+.pp{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:3px;letter-spacing:.3px;}
+.pp.p0{background:var(--accent-lt);color:var(--accent);font-weight:700;}
+.pp.p1{background:var(--hl);color:var(--ink2);}
+.pp.p2{background:var(--hl);color:var(--muted);}
+.gh{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 6px;border-radius:3px;display:inline-block;}
+.gh.g1{background:var(--accent-lt);color:var(--accent);}
+.gh.g2{background:var(--amber-lt);color:var(--amber);}
+.gh.g3{background:var(--hl);color:var(--muted);}
+
+/* Toggle */
+.trow{display:flex;gap:0;margin:12px 0;border:1px solid var(--border);border-radius:5px;overflow:hidden;width:fit-content;}
+.tbtn{padding:8px 16px;font-size:13px;font-weight:600;background:var(--card);color:var(--muted);border:none;cursor:pointer;border-right:1px solid var(--border);font-family:'Work Sans',system-ui,sans-serif;}
+.tbtn:last-child{border-right:none;}
+.tbtn.active{background:var(--accent);color:#fff;}
+.dark-sl .trow{border-color:var(--dark-border);}
+.dark-sl .tbtn{background:var(--dark-card);color:var(--dark-muted);border-color:var(--dark-border);}
+.dark-sl .tbtn.active{background:#3cb5a4;color:#0e0d0b;}
+
+/* Pill filters */
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0;}
+.pill{padding:6px 14px;font-size:13px;font-weight:500;border-radius:20px;border:1px solid var(--border);background:var(--card);color:var(--ink2);cursor:pointer;font-family:'Work Sans',system-ui,sans-serif;}
+.pill.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.dark-sl .pill{background:var(--dark-card);border-color:var(--dark-border);color:var(--dark-ink2);}
+.dark-sl .pill.active{background:#3cb5a4;color:#0e0d0b;border-color:#3cb5a4;}
+
+/* Metric tiles */
+.mc{display:grid;gap:12px;margin:12px 0;}
+.mc.r4{grid-template-columns:repeat(4,1fr);}
+.mc.r3{grid-template-columns:repeat(3,1fr);}
+.mc.r2{grid-template-columns:repeat(2,1fr);}
+.mtile{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px;text-align:left;}
+.mtile .ml{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.mtile .mv{font-family:'Work Sans',system-ui,sans-serif;font-size:30px;font-weight:700;color:var(--ink);margin:4px 0;}
+.mtile .ms{font-size:12px;color:var(--muted);}
+.mtile .md{font-size:13px;font-weight:600;margin-top:2px;}
+.md.up{color:var(--up-green);}
+.md.down{color:#d03b3b;}
+.dark-sl .mtile{background:var(--dark-card);border-color:var(--dark-border);}
+.dark-sl .mtile .mv{color:var(--dark-ink);}
+.dark-sl .mtile .ml,.dark-sl .mtile .ms{color:var(--dark-muted);}
+
+/* Accordion */
+.acc-item{border:1px solid var(--border);border-radius:6px;margin-bottom:8px;overflow:hidden;}
+.acc-head{padding:16px 20px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:var(--card);font-weight:600;font-size:16px;}
+.acc-head:hover{background:var(--hl);}
+.acc-arrow{transition:transform .2s;font-size:14px;color:var(--muted);}
+.acc-item.open .acc-arrow{transform:rotate(90deg);}
+.acc-body{display:none;padding:0 20px 16px;background:var(--card);font-size:14px;color:var(--ink2);}
+.acc-item.open .acc-body{display:block;}
+.acc-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent-lt);color:var(--accent);font-size:13px;font-weight:700;margin-right:12px;flex-shrink:0;}
+
+/* Solution panels */
+.sol-grid{display:grid;grid-template-columns:280px 1fr;gap:0;margin-top:14px;border:1px solid var(--border);border-radius:6px;overflow:hidden;min-height:380px;}
+.sol-nav{background:var(--card);border-right:1px solid var(--border);overflow-y:auto;}
+.sol-group{padding:10px 0;}
+.sol-group-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:6px 16px;color:var(--muted);}
+.sol-item{padding:10px 16px;cursor:pointer;font-size:13.5px;color:var(--ink2);border-left:3px solid transparent;display:flex;align-items:center;gap:8px;}
+.sol-item:hover{background:var(--hl);}
+.sol-item.active{background:var(--accent-lt);border-left-color:var(--accent);color:var(--ink);font-weight:600;}
+.sol-item .sol-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.sol-item .sol-dot.d1{background:var(--accent);}
+.sol-item .sol-dot.d2{background:var(--amber);}
+.sol-item .sol-dot.d3{background:var(--muted);}
+.sol-detail{padding:24px;overflow-y:auto;}
+.sol-detail h3{margin-bottom:8px;}
+.sol-detail p{font-size:14px;color:var(--ink2);margin-bottom:12px;}
+
+/* Upside-style mockup */
+.phone-frame{width:240px;height:480px;background:#000;border-radius:24px;padding:12px;margin:12px auto;overflow:hidden;position:relative;font-family:system-ui,-apple-system,sans-serif;flex-shrink:0;}
+.phone-screen{background:#fff;border-radius:16px;width:100%;height:100%;overflow-y:auto;position:relative;}
+.phone-screen.dark{background:#000;color:#fff;}
+.phone-header{padding:8px 12px;display:flex;align-items:center;gap:8px;font-size:10px;font-weight:600;}
+.phone-tabs{display:flex;gap:0;border-bottom:1px solid #e5e5e5;padding:0 12px;}
+.phone-tab{padding:8px 10px;font-size:10px;font-weight:600;color:#999;border-bottom:2px solid transparent;}
+.phone-tab.active{color:#2563eb;border-bottom-color:#2563eb;}
+.phone-offer{padding:12px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:10px;}
+.phone-offer-logo{width:32px;height:32px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.phone-offer-info{flex:1;min-width:0;}
+.phone-offer-name{font-size:11px;font-weight:700;color:#1a1a1a;}
+.phone-offer-dist{font-size:9px;color:#999;}
+.phone-offer-cashback{font-size:10px;font-weight:700;color:#16a34a;}
+.phone-offer-price{font-size:9px;color:#999;}
+.phone-offer-price s{color:#ccc;}
+.phone-claim{padding:6px 14px;border-radius:16px;background:#2563eb;color:#fff;font-size:10px;font-weight:700;border:none;flex-shrink:0;}
+.phone-claim.bundle{background:linear-gradient(135deg,#7c3aed,#2563eb);}
+.phone-bottom-nav{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-around;padding:6px 0;border-top:1px solid #f0f0f0;background:#fff;font-size:8px;color:#999;}
+.phone-bottom-nav .active{color:#2563eb;}
+.phone-search{margin:8px 12px;padding:8px 12px;border-radius:20px;border:1px solid #e5e5e5;font-size:10px;color:#999;display:flex;align-items:center;gap:6px;}
+.phone-filters{display:flex;gap:4px;padding:6px 12px;overflow-x:auto;}
+.phone-filter{padding:4px 8px;border-radius:12px;border:1px solid #e5e5e5;font-size:9px;color:#666;white-space:nowrap;}
+
+/* Sizing visual */
+.sz-row{display:grid;grid-template-columns:100px 1fr 140px;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+.sz-row:last-child{border-bottom:none;}
+.sz-pct{font-family:'Work Sans',system-ui,sans-serif;font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;}
+.sz-bar{height:8px;background:var(--hl);border-radius:4px;overflow:hidden;}
+.sz-fill{height:100%;background:var(--accent);border-radius:4px;}
+.sz-val{font-family:'Work Sans',system-ui,sans-serif;font-size:18px;font-weight:700;color:var(--accent);text-align:right;font-variant-numeric:tabular-nums;}
+
+/* Matrix */
+.mx{display:grid;grid-template-columns:auto 1fr 1fr;grid-template-rows:auto 1fr 1fr;gap:2px;margin:16px 0;max-width:640px;}
+.mx-h{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);display:flex;align-items:center;justify-content:center;padding:8px;}
+.mx-c{background:var(--card);border:1px solid var(--border);padding:14px;font-size:13px;color:var(--ink2);border-radius:4px;}
+.mx-c.hi{border-color:var(--accent);background:var(--accent-lt);}
+
+/* Success cards */
+.sc{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:14px 16px;}
+.sc-name{font-weight:600;font-size:15px;color:var(--ink);}
+.sc-target{font-family:'Work Sans',system-ui,sans-serif;font-size:24px;font-weight:700;color:var(--accent);margin:2px 0;}
+.sc-time{font-size:12px;color:var(--muted);}
+.sc-note{font-size:12px;color:var(--muted);margin-top:4px;}
+.dark-sl .sc{background:var(--dark-card);border-color:var(--dark-border);}
+.dark-sl .sc-name{color:var(--dark-ink);}
+.dark-sl .sc-target{color:#3cb5a4;}
+.dark-sl .sc-time,.dark-sl .sc-note{color:var(--dark-muted);}
+
+/* Def box */
+.def{background:var(--hl);border-radius:5px;padding:14px 18px;margin-top:12px;}
+.def dt{font-weight:700;font-size:14px;color:var(--ink);margin-top:8px;}
+.def dt:first-child{margin-top:0;}
+.def dd{font-size:14px;color:var(--ink2);margin:2px 0 0;}
+
+/* Nav */
+.nav{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;background:var(--card);border-top:1px solid var(--border);z-index:100;font-size:13px;gap:12px;}
+.nav-left,.nav-right{display:flex;align-items:center;gap:8px;min-width:0;flex:1;}
+.nav-right{justify-content:flex-end;}
+.nav-center{flex-shrink:0;}
+.nav-label{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;cursor:pointer;}
+.nav-label:hover{color:var(--ink);}
+.nb{width:36px;height:36px;border-radius:5px;border:1px solid var(--border);background:var(--card);color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;font-family:'Work Sans',system-ui,sans-serif;flex-shrink:0;}
+.nb:hover{background:var(--hl);}
+.nb:disabled{opacity:.3;cursor:default;}
+.nb:disabled:hover{background:var(--card);}
+.nav-sel{font-size:13px;padding:6px 8px;border:1px solid var(--border);border-radius:5px;background:var(--card);color:var(--ink);font-family:'Work Sans',system-ui,sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;}
+
+/* Customer interactive */
+.cust-tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+.cust-tile{background:var(--card);border:2px solid var(--border);border-radius:8px;padding:24px;cursor:pointer;transition:border-color .15s,background .15s;text-align:center;}
+.cust-tile:hover{border-color:var(--accent);background:var(--accent-lt);}
+.cust-tile.active{border-color:var(--accent);background:var(--accent-lt);}
+.cust-tile .ct-icon{font-size:36px;margin-bottom:10px;}
+.cust-tile .ct-title{font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:700;}
+.cust-tile .ct-sub{font-size:14px;color:var(--ink2);margin-top:4px;}
+.cust-detail{margin-top:16px;display:none;}
+.cust-detail.show{display:block;}
+
+/* Theme toggle for dashboard slides */
+.theme-toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;padding:4px 10px;border:1px solid var(--border);border-radius:4px;background:var(--card);font-family:'Work Sans',system-ui,sans-serif;}
+.dark-sl .theme-toggle{border-color:var(--dark-border);background:var(--dark-card);color:var(--dark-muted);}
+
+/* Responsive */
+@media(max-width:800px){
+  .slide{padding:28px 20px 68px;}
+  h1{font-size:32px;}h2{font-size:26px;}
+  .c3,.c4{grid-template-columns:1fr;}
+  .c2{grid-template-columns:1fr;}
+  .mc.r4,.mc.r3{grid-template-columns:repeat(2,1fr);}
+  .sol-grid{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
+  .cust-tiles{grid-template-columns:1fr;}
+  .phone-frame{width:200px;height:400px;}
+}
+.tw{overflow-x:auto;margin:12px 0;}
+.flex{display:flex;gap:16px;align-items:flex-start;}
+.f1{flex:1;min-width:0;}
+.mt12{margin-top:12px;}
+.mt16{margin-top:16px;}
+.mt20{margin-top:20px;}
+.ts{font-size:14px;color:var(--ink2);}
+.txs{font-size:12px;color:var(--muted);}
+.nowrap{white-space:nowrap;}
+.grayed{opacity:.45;}
+.note{font-size:12px;color:var(--muted);font-style:italic;}
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:3px;}
+.badge.hyp{background:var(--amber-lt);color:var(--amber);border:1px solid var(--amber-bd);}
+.star{color:var(--accent);font-size:11px;margin-right:4px;}
+
+/* Drill-down cards (dashboard) */
+.drill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px;}
+.drill{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px;cursor:pointer;transition:border-color .15s;}
+.drill:hover{border-color:var(--accent);}
+.drill-head{display:flex;justify-content:space-between;align-items:flex-start;}
+.drill-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.drill-big{font-size:22px;font-weight:700;color:var(--ink);margin:2px 0;font-family:'Work Sans',system-ui,sans-serif;font-variant-numeric:tabular-nums;}
+.drill-sub{font-size:11px;color:var(--muted);}
+.drill-visual{margin:8px 0 0;}
+.prop-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--border);gap:1px;}
+.prop-seg{height:100%;border-radius:1px;}
+.prop-legend{display:flex;gap:10px;margin-top:5px;font-size:10px;color:var(--muted);}
+.prop-legend span::before{content:'';display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px;vertical-align:middle;}
+.drill-arrow{font-size:11px;color:var(--muted);transition:transform .2s;margin-top:4px;}
+.drill.open .drill-arrow{transform:rotate(90deg);}
+.drill-expand{display:none;padding-top:10px;border-top:1px solid var(--border);margin-top:10px;font-size:13px;color:var(--ink2);}
+.drill.open .drill-expand{display:block;}
+.dark-sl .drill{background:var(--dark-card);border-color:var(--dark-border);}
+.dark-sl .drill:hover{border-color:#3cb5a4;}
+.dark-sl .drill-title{color:var(--dark-muted);}
+.dark-sl .drill-big{color:var(--dark-ink);}
+.dark-sl .drill-sub{color:var(--dark-muted);}
+.dark-sl .drill-arrow{color:var(--dark-muted);}
+.dark-sl .drill-expand{border-color:var(--dark-border);color:var(--dark-ink2);}
+.dark-sl .prop-bar{background:var(--dark-border);}
+.dark-sl .prop-legend{color:var(--dark-muted);}
+.mini-bars{display:flex;flex-direction:column;gap:4px;margin-top:6px;}
+.mini-bar-row{display:flex;align-items:center;gap:6px;font-size:11px;}
+.mini-bar-label{width:54px;text-align:right;color:var(--muted);flex-shrink:0;}
+.dark-sl .mini-bar-label{color:var(--dark-muted);}
+.mini-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.dark-sl .mini-bar{background:var(--dark-border);}
+.mini-bar-fill{height:100%;border-radius:3px;}
+.mini-bar-val{width:48px;font-weight:600;font-variant-numeric:tabular-nums;font-size:11px;}
+
+/* 3-column solutions */
+.sol-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;}
+.sol-col{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.sol-col-head{padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--border);}
+.sol-col-item{padding:10px 14px;font-size:13px;color:var(--ink2);cursor:pointer;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;transition:background .1s;}
+.sol-col-item:last-child{border-bottom:none;}
+.sol-col-item:hover{background:var(--hl);}
+.sol-col-item.active{background:var(--accent-lt);color:var(--ink);font-weight:600;}
+.sol-top{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px;margin-bottom:12px;display:none;min-height:calc(100vh - 320px);max-height:calc(100vh - 320px);overflow-y:auto;}
+.sol-top.show{display:block;}
+.sol-top h3{font-size:18px;margin-bottom:4px;}
+.sol-top>p{font-size:14px;color:var(--ink2);margin-bottom:10px;}
+.var-tabs{display:flex;gap:0;border:1px solid var(--border);border-radius:4px;overflow:hidden;margin:8px 0;width:fit-content;}
+.var-tab{padding:6px 12px;font-size:11px;font-weight:600;background:var(--card);color:var(--muted);cursor:pointer;border-right:1px solid var(--border);font-family:'Work Sans',system-ui,sans-serif;}
+.var-tab:last-child{border-right:none;}
+.var-tab.active{background:var(--accent);color:#fff;}
+.var-panel{display:none;}
+.var-panel.show{display:block;}
+.mockup-row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;}
+
+/* Sizing row with users */
+.sz-row-4{display:grid;grid-template-columns:70px 110px 1fr 110px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.sz-row-4:last-child{border-bottom:none;}
+.sz-users{font-size:14px;color:var(--ink2);font-variant-numeric:tabular-nums;}
+
+@media(max-width:800px){
+  .drill-grid{grid-template-columns:1fr;}
+  .sol-cols{grid-template-columns:1fr;}
+  .mockup-row{flex-direction:column;align-items:center;}
+  .sz-row-4{grid-template-columns:60px 90px 1fr 90px;}
+}
+</style>
+
+<div class="deck" id="deck">
+
+<!-- S1: Title -->
+<div class="slide active dark-sl" data-slide="1">
+<div class="si">
+  <span class="sn">01 · Cover</span>
+  <span class="ta"></span>
+  <h1 style="font-size:50px;max-width:720px;">Fuel → Grocery:<br>Turning Upside's Biggest Retention Lever Into a Repeatable Playbook</h1>
+  <p class="sub" style="margin-top:20px;">A cross-vertical adoption strategy to grow multi-vertical users and unlock Upside's highest-leverage retention lever</p>
+  <div class="rl" style="margin-top:36px;">
+    Principal PM, Personalized Growth Engine — Skills Assessment<br>
+    Elliot Dabah · September 2026
+  </div>
+</div>
+</div>
+
+<!-- S2: Mission & Goals -->
+<div class="slide" data-slide="2">
+<div class="si top">
+  <span class="sn">02 · Mission &amp; Goals</span>
+  <h2>Grow the share of users active in more than one vertical</h2>
+  <p class="ts mt12">The mandate: increase the share of users active in more than one vertical. Grocery adopters show ~2× 12-month retention and ~3× first-year value vs. fuel-only — making cross-vertical conversion the single highest-leverage growth path.</p>
+  <div class="mc r3 mt16">
+    <div class="mtile">
+      <div class="ml">Total MAU</div>
+      <div class="mv">7.0M</div>
+      <div class="ms">Active = made a redemption</div>
+      <div class="txs">20% of 35M reachable base <span class="dl asm">Assumption</span></div>
+    </div>
+    <div class="mtile">
+      <div class="ml">Fuel-Only MAU</div>
+      <div class="mv">6.3M</div>
+      <div class="ms">90% of active base</div>
+      <div class="txs">The conversion opportunity</div>
+    </div>
+    <div class="mtile" style="border-color:var(--accent);background:var(--accent-lt);">
+      <div class="ml" style="color:var(--accent);">Fuel + Grocery MAU</div>
+      <div class="mv" style="color:var(--accent);">700K</div>
+      <div class="ms">10% of active base</div>
+      <div class="txs" style="color:var(--accent);">Goal: grow this number and its share of total MAU</div>
+    </div>
+  </div>
+  <p class="ts mt16">This deck focuses on converting the 6.3M fuel-only users into multi-vertical adopters — not net-new acquisition.</p>
+</div>
+</div>
+
+<!-- S3: Customers (Interactive) -->
+<div class="slide" data-slide="3">
+<div class="si top">
+  <span class="sn">03 · Customers</span>
+  <h2>Two sides of the marketplace</h2>
+  <p class="ts mt12">Click to explore each customer type and their sub-segments.</p>
+  <div class="cust-tiles" id="cust-tiles">
+    <div class="cust-tile" data-cust="consumer" onclick="showCust('consumer')">
+      <div class="ct-icon">👤</div>
+      <div class="ct-title">Consumer</div>
+      <div class="ct-sub">3 behavioral personas, segmented from observable app data</div>
+    </div>
+    <div class="cust-tile" data-cust="merchant" onclick="showCust('merchant')">
+      <div class="ct-icon">🏪</div>
+      <div class="ct-title">Merchant</div>
+      <div class="ct-sub">Goal: incremental profit through 2 levers</div>
+    </div>
+  </div>
+
+  <!-- Consumer detail -->
+  <div class="cust-detail" id="cust-consumer">
+    <p class="ts" style="margin-bottom:12px;">Personas derived from observable behavioral data — vertical usage patterns and app engagement signals. <span class="badge hyp">Hypotheses — validation is part of the roadmap</span></p>
+    <div class="cg c3">
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:6px;">⛽</div>
+        <h3 style="font-size:16px;">The Quick Converter</h3>
+        <p style="font-size:13px;">Opens app only at the pump, redeems, leaves. Strong fuel conversion but low engagement surface.</p>
+        <div class="txs mt12"><strong>Conversion outlook:</strong> Hardest to move — habit-locked, minimal browse behavior to personalize against.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:6px;">🔍</div>
+        <h3 style="font-size:16px;">The Occasional Browser</h3>
+        <p style="font-size:13px;">Lower fuel frequency but browses multiple categories when active. Under-activated — likely an awareness gap, not motivation.</p>
+        <div class="txs mt12"><strong>Conversion outlook:</strong> Strong grocery target with right incentives and personalization.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:6px;">🧭</div>
+        <h3 style="font-size:16px;">The Active Explorer</h3>
+        <p style="font-size:13px;">Frequent opens, browses beyond fuel. Needs no awareness push — needs the right incentive to complete a transaction in either vertical.</p>
+        <div class="txs mt12"><strong>Conversion outlook:</strong> Best near-term target — highest engagement, lowest friction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Merchant detail -->
+  <div class="cust-detail" id="cust-merchant">
+    <p class="ts" style="margin-bottom:12px;">Merchants want incremental profit — proven-additive traffic, not just any foot traffic. Two levers:</p>
+    <div class="cg c2">
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:6px;">🆕</div>
+        <h3 style="font-size:16px;">New Customers &amp; Visits</h3>
+        <p style="font-size:13px;">Customers who wouldn't have shopped at that merchant at all now do — <em>new-visit incrementality</em>.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:6px;">🔄</div>
+        <h3 style="font-size:16px;">Frequency &amp; Volume</h3>
+        <p style="font-size:13px;">Existing customers increase visit frequency or spend — increasing <em>LTV</em> (cumulative value over the full relationship, adjusted for churn).</p>
+      </div>
+    </div>
+    <div class="def mt12">
+      <dl>
+        <dt>Incrementality</dt>
+        <dd>Profit/revenue a merchant wouldn't have earned without Upside. Measured per-merchant, independently.</dd>
+        <dt>LTV (Lifetime Value)</dt>
+        <dd>Cumulative value a customer generates over the full relationship, adjusted for retention/churn — not a single transaction.</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S4: Problem Statement (Accordion) -->
+<div class="slide" data-slide="4">
+<div class="si top">
+  <span class="sn">04 · Problem Statement</span>
+  <h2>Why fuel-only users aren't adopting grocery</h2>
+  <p class="ts mt12">Three root-cause areas. All are valid — but the Data &amp; Personalization gap is the foundational bet because without understanding customers, we can't solve the other two effectively. <em style="font-size:13px;color:var(--muted);">(Click to expand each.)</em></p>
+
+  <div style="margin-top:16px;" id="acc-problems">
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;"><span class="acc-num">1</span> Awareness &amp; Education Gap</div>
+        <span class="acc-arrow">▶</span>
+      </div>
+      <div class="acc-body">
+        <p>Don't know grocery cash back exists on Upside; don't understand the savings even if aware.</p>
+        <p class="mt12"><strong>Why it matters:</strong> Cheap to solve with banners and campaigns — but awareness alone doesn't change behavior without personal relevance. Low-hanging fruit with diminishing returns.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)">
+        <div style="display:flex;align-items:center;"><span class="acc-num">2</span> Switching Resistance</div>
+        <span class="acc-arrow">▶</span>
+      </div>
+      <div class="acc-body">
+        <p>Habit/loyalty to current grocer, unfamiliar merchant names reduce trust, offer not compelling enough, bigger/riskier spend to redirect than gas, merchant coverage gap, added cognitive overhead.</p>
+        <p class="mt12"><strong>Why it matters:</strong> Real barrier, but hard to isolate or address without knowing which specific resistance each customer faces — which requires data.</p>
+      </div>
+    </div>
+    <div class="acc-item" style="border-color:var(--accent);">
+      <div class="acc-head" onclick="toggleAcc(this)" style="background:var(--accent-lt);">
+        <div style="display:flex;align-items:center;">
+          <span class="acc-num" style="background:var(--accent);color:#fff;">3</span>
+          Data &amp; Personalization Gap
+          <span class="badge hyp" style="margin-left:8px;">Foundational Bet</span>
+        </div>
+        <span class="acc-arrow">▶</span>
+      </div>
+      <div class="acc-body" style="background:var(--accent-lt);">
+        <p>Limited insight into what a customer actually likes — frequency, product preference, delivery vs. in-store, who they buy for, seasonality. Blocks fixing Switching Resistance in a targeted way.</p>
+        <p class="mt12"><strong>Why this is the foundational bet:</strong> We're not understanding customers well enough to serve them. Generic awareness is cheap to solve, but without personalization data, awareness messages aren't worth acting on. Data &amp; personalization is a leading cause for both awareness ineffectiveness and switching resistance.</p>
+        <div class="pq mt12">"The real gap is that we don't know enough about a given customer to make the awareness message worth acting on — which merchant to name, what incentive to offer, whether they'd even shop groceries there at all."</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S5: Potential Dashboards -->
+<div class="slide dark-sl" data-slide="5">
+<div class="si top">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+    <div>
+      <span class="sn">05 · Potential Dashboards</span>
+      <h2>Potential dashboards</h2>
+      <p class="ts" style="color:var(--dark-ink2);margin-top:4px;">The views I'd build first — click any card to drill into detail.</p>
+    </div>
+    <div class="theme-toggle" onclick="toggleDashTheme(this)" title="Toggle light/dark">☀ Light mode</div>
+  </div>
+
+  <!-- Filters -->
+  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:10px;">
+    <div>
+      <div class="cl">Date Range</div>
+      <select class="nav-sel" style="font-size:12px;">
+        <option>Last 30 days</option><option>Last 7 days</option><option>Last quarter</option><option>Last 12 months</option>
+      </select>
+    </div>
+    <div>
+      <div class="cl">Vertical</div>
+      <div class="pill-row" id="dash-pills">
+        <span class="pill active" data-v="all" onclick="dashFilter(this)">All</span>
+        <span class="pill" data-v="fuel" onclick="dashFilter(this)">Fuel Only</span>
+        <span class="pill" data-v="grocery" onclick="dashFilter(this)">Grocery Only</span>
+        <span class="pill" data-v="both" onclick="dashFilter(this)">Both</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPI Row -->
+  <div class="mc r4 mt12" id="dash-kpis"></div>
+
+  <!-- Drill-down cards -->
+  <div class="drill-grid" id="drill-area">
+    <div class="drill" onclick="toggleDrill(this)">
+      <div class="drill-head">
+        <div>
+          <div class="drill-title">MAU Breakdown</div>
+          <div class="drill-big">700K <span style="font-size:13px;font-weight:400;color:var(--dark-muted);">grocery MAU</span></div>
+        </div>
+        <span class="drill-arrow">▶</span>
+      </div>
+      <div class="drill-visual">
+        <div class="prop-bar">
+          <div class="prop-seg" style="width:90%;background:#3987e5;"></div>
+          <div class="prop-seg" style="width:8%;background:#3cb5a4;"></div>
+          <div class="prop-seg" style="width:2%;background:#e09540;"></div>
+        </div>
+        <div class="prop-legend"><span style="--c:#3987e5;">Fuel 90%</span><span style="--c:#3cb5a4;">Both 8%</span><span style="--c:#e09540;">Groc 2%</span></div>
+      </div>
+      <div class="drill-expand">
+        <table class="dt" style="font-size:12px;"><thead><tr><th>Segment</th><th style="text-align:right;">MAU</th><th style="text-align:right;">% Active</th><th style="text-align:right;">% Total</th></tr></thead>
+        <tbody>
+          <tr><td>Fuel Only</td><td style="text-align:right;font-weight:700;">6.3M</td><td style="text-align:right;">90.0%</td><td style="text-align:right;">18.0%</td></tr>
+          <tr><td>Both Verticals</td><td style="text-align:right;font-weight:700;">560K</td><td style="text-align:right;">8.0%</td><td style="text-align:right;">1.6%</td></tr>
+          <tr><td>Grocery Only</td><td style="text-align:right;font-weight:700;">140K</td><td style="text-align:right;">2.0%</td><td style="text-align:right;">0.4%</td></tr>
+          <tr style="border-top:2px solid var(--dark-border);"><td><strong>Total Grocery</strong></td><td style="text-align:right;font-weight:700;color:#3cb5a4;">700K</td><td style="text-align:right;color:#3cb5a4;">10.0%</td><td style="text-align:right;">—</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="drill" onclick="toggleDrill(this)">
+      <div class="drill-head">
+        <div>
+          <div class="drill-title">Transactions</div>
+          <div class="drill-big">1.8% <span style="font-size:13px;font-weight:400;color:var(--dark-muted);">grocery conv.</span></div>
+        </div>
+        <span class="drill-arrow">▶</span>
+      </div>
+      <div class="drill-visual">
+        <div class="mini-bars">
+          <div class="mini-bar-row"><span class="mini-bar-label">Fuel</span><div class="mini-bar"><div class="mini-bar-fill" style="width:93%;background:#3987e5;"></div></div><span class="mini-bar-val">20.2M</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-label">Grocery</span><div class="mini-bar"><div class="mini-bar-fill" style="width:7%;background:#3cb5a4;"></div></div><span class="mini-bar-val">1.5M</span></div>
+        </div>
+      </div>
+      <div class="drill-expand">
+        <table class="dt" style="font-size:12px;"><thead><tr><th>Metric</th><th style="text-align:right;">Value</th></tr></thead>
+        <tbody>
+          <tr><td>Fuel Txns/mo</td><td style="text-align:right;font-weight:700;">~20.2M</td></tr>
+          <tr><td>Grocery Txns/mo</td><td style="text-align:right;font-weight:700;">~1.5M</td></tr>
+          <tr><td>Avg Fuel Transaction</td><td style="text-align:right;">$48</td></tr>
+          <tr><td>Avg Grocery Basket</td><td style="text-align:right;">$67</td></tr>
+          <tr><td>Page Views / MAU / mo</td><td style="text-align:right;">8.2</td></tr>
+          <tr><td>Grocery Conversion Rate</td><td style="text-align:right;font-weight:700;color:#e09540;">1.8%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="drill" onclick="toggleDrill(this)">
+      <div class="drill-head">
+        <div>
+          <div class="drill-title">Cash Back & Savings</div>
+          <div class="drill-big">$5.36 <span style="font-size:13px;font-weight:400;color:var(--dark-muted);">avg grocery/txn</span></div>
+        </div>
+        <span class="drill-arrow">▶</span>
+      </div>
+      <div class="drill-visual">
+        <div class="mini-bars">
+          <div class="mini-bar-row"><span class="mini-bar-label">Fuel</span><div class="mini-bar"><div class="mini-bar-fill" style="width:27%;background:#3987e5;"></div></div><span class="mini-bar-val">$1.44</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-label">Grocery</span><div class="mini-bar"><div class="mini-bar-fill" style="width:100%;background:#3cb5a4;"></div></div><span class="mini-bar-val">$5.36</span></div>
+        </div>
+      </div>
+      <div class="drill-expand">
+        <table class="dt" style="font-size:12px;"><thead><tr><th>Metric</th><th style="text-align:right;">Value</th></tr></thead>
+        <tbody>
+          <tr><td>Fuel: Avg Cash Back</td><td style="text-align:right;font-weight:700;color:#3cb5a4;">12¢/gal</td></tr>
+          <tr><td>Fuel: Avg Savings/Txn</td><td style="text-align:right;">$1.44</td></tr>
+          <tr><td>Grocery: Avg Cash Back</td><td style="text-align:right;font-weight:700;color:#3cb5a4;">8%</td></tr>
+          <tr><td>Grocery: Avg Savings/Txn</td><td style="text-align:right;">$5.36</td></tr>
+          <tr><td>Total Cash Back (monthly)</td><td style="text-align:right;font-weight:700;">$37.2M</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="drill" onclick="toggleDrill(this)">
+      <div class="drill-head">
+        <div>
+          <div class="drill-title">Top Merchants</div>
+          <div class="drill-big" style="font-size:16px;">QuickChek, Sunoco, BP…</div>
+        </div>
+        <span class="drill-arrow">▶</span>
+      </div>
+      <div class="drill-visual">
+        <div class="mini-bars">
+          <div class="mini-bar-row"><span class="mini-bar-label">QChek</span><div class="mini-bar"><div class="mini-bar-fill" style="width:100%;background:#3987e5;"></div></div><span class="mini-bar-val">842K</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-label">Sunoco</span><div class="mini-bar"><div class="mini-bar-fill" style="width:73%;background:#3987e5;"></div></div><span class="mini-bar-val">614K</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-label">Kroger</span><div class="mini-bar"><div class="mini-bar-fill" style="width:11%;background:#3cb5a4;"></div></div><span class="mini-bar-val">89K</span></div>
+        </div>
+      </div>
+      <div class="drill-expand">
+        <table class="dt" style="font-size:12px;"><thead><tr><th>Merchant</th><th style="text-align:right;">Txns/mo</th><th style="text-align:right;">Cash Back</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td>QuickChek</td><td style="text-align:right;font-weight:700;">842K</td><td style="text-align:right;">15¢/gal</td><td>Fuel</td></tr>
+          <tr><td>Sunoco</td><td style="text-align:right;font-weight:700;">614K</td><td style="text-align:right;">12¢/gal</td><td>Fuel</td></tr>
+          <tr><td>BP</td><td style="text-align:right;font-weight:700;">523K</td><td style="text-align:right;">10¢/gal</td><td>Fuel</td></tr>
+          <tr><td>7-Eleven</td><td style="text-align:right;font-weight:700;">298K</td><td style="text-align:right;">8¢/gal</td><td>Fuel</td></tr>
+          <tr><td>Kroger</td><td style="text-align:right;font-weight:700;color:#3cb5a4;">89K</td><td style="text-align:right;color:#3cb5a4;">12% back</td><td style="color:#3cb5a4;">Grocery</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <div class="caveat mt12">
+    <strong>Illustrative data:</strong> Numbers derived from the sizing model (7M MAU, $44.2M revenue, ~90% fuel-only). Dashboard architecture and slicing framework is the deliverable — population with real numbers is the first sprint task.
+  </div>
+</div>
+</div>
+
+<!-- S6: Sizing the Value -->
+<div class="slide" data-slide="6">
+<div class="si top">
+  <span class="sn">06 · Sizing the Value</span>
+  <h2>What conversion is worth</h2>
+
+  <div class="caveat" style="margin-top:10px;">
+    <strong>Disclaimer:</strong> These are illustrative numbers without access to Upside's real data. The math uses one public revenue estimate as an anchor and states every other input as an explicit assumption — this shows the sizing methodology, not a precise forecast.
+  </div>
+
+  <p class="ts mt16" style="font-weight:600;">This slide focuses on converting existing users to adopt grocery — not on increasing total Upside users.</p>
+
+  <div class="cg c3 mt16">
+    <div class="card" style="text-align:center;">
+      <div class="cl">Blended Avg (All Users)</div>
+      <div style="font-size:28px;font-weight:700;margin:6px 0;">7.0M MAU</div>
+      <div class="txs">$44.2M total CP</div>
+      <div style="margin-top:8px;font-size:14px;">~$6.31/yr per user <span class="dl der">Derived</span></div>
+      <div style="font-size:13px;color:var(--muted);">Baseline for 3× comparison</div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;font-size:32px;color:var(--accent);">→</div>
+    <div class="card" style="text-align:center;border-color:var(--accent);background:var(--accent-lt);">
+      <div class="cl" style="color:var(--accent);">Multi-Vertical Users</div>
+      <div style="font-size:28px;font-weight:700;margin:6px 0;color:var(--accent);">700K today</div>
+      <div class="txs">10% of active base</div>
+      <div style="margin-top:8px;font-size:14px;">~$18.93/yr per user <span class="dl gvn">Given ~3×</span></div>
+      <div style="font-size:13px;color:var(--accent);">3 × $6.31 = $18.93 — exact</div>
+    </div>
+  </div>
+  <div class="ts mt12" style="text-align:center;font-weight:600;">Incremental value per converted user: $18.93 − $6.31 = <span style="color:var(--accent);font-size:18px;">$12.62/year</span> <span class="dl der">Derived</span></div>
+
+  <div class="cl mt20">If we convert X% of fuel-only users to multi-vertical:</div>
+  <div style="display:grid;grid-template-columns:70px 110px 1fr 110px;gap:8px 12px;align-items:center;font-size:12px;color:var(--muted);padding:0 0 6px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;">
+    <span>Convert</span><span>Users</span><span></span><span style="text-align:right;">Incremental CP</span>
+  </div>
+  <div class="sz-row-4"><div class="sz-pct" style="font-size:24px;">+1%</div><div class="sz-users">63,000</div><div class="sz-bar"><div class="sz-fill" style="width:4%;"></div></div><div class="sz-val" style="font-size:16px;">~$795K</div></div>
+  <div class="sz-row-4"><div class="sz-pct" style="font-size:24px;">+5%</div><div class="sz-users">315,000</div><div class="sz-bar"><div class="sz-fill" style="width:20%;"></div></div><div class="sz-val" style="font-size:16px;">~$4.0M</div></div>
+  <div class="sz-row-4"><div class="sz-pct" style="font-size:24px;">+10%</div><div class="sz-users">630,000</div><div class="sz-bar"><div class="sz-fill" style="width:40%;"></div></div><div class="sz-val" style="font-size:16px;">~$8.0M</div></div>
+  <div class="sz-row-4" style="background:var(--accent-lt);border-radius:4px;padding:10px 12px;"><div class="sz-pct" style="font-size:24px;">+25%</div><div class="sz-users" style="font-weight:600;">1.575M</div><div class="sz-bar"><div class="sz-fill" style="width:100%;"></div></div><div class="sz-val" style="font-size:16px;">~$19.9M</div></div>
+  <div class="txs mt12">Even modest conversion lifts drive significant incremental CP. Combined with LTV multiplier effects (2× 12-month retention for multi-vertical users), value compounds over time.</div>
+</div>
+</div>
+
+<!-- S7: Solutions (Interactive) -->
+<div class="slide" data-slide="7">
+<div class="si top">
+  <span class="sn">07 · Possible Solutions</span>
+  <h2>Three parallel tracks</h2>
+  <p class="ts">Click any item to see details and concept mockups above.</p>
+
+  <!-- Detail panel (top, shown on click) -->
+  <div class="sol-top" id="sol-top"></div>
+
+  <!-- 3 columns -->
+  <div class="sol-cols" id="sol-cols">
+    <div class="sol-col">
+      <div class="sol-col-head" style="color:var(--accent);border-bottom-color:var(--accent);">G1 · Data &amp; Personalization</div>
+      <div class="sol-col-item active" data-sol="sig" onclick="showSol2(this)"><span class="sol-dot d1"></span>Behavioral Signal Graph</div>
+      <div class="sol-col-item" data-sol="quiz" onclick="showSol2(this)"><span class="sol-dot d1"></span>Quiz / Preference Survey</div>
+      <div class="sol-col-item" data-sol="claim" onclick="showSol2(this)"><span class="sol-dot d1"></span>Claim-to-Wallet</div>
+      <div class="sol-col-item" data-sol="plaid" onclick="showSol2(this)"><span class="sol-dot d1"></span>Plaid / Bank Integration</div>
+      <div class="sol-col-item" data-sol="receipt" onclick="showSol2(this)"><span class="sol-dot d1"></span>Receipt Upload</div>
+    </div>
+    <div class="sol-col">
+      <div class="sol-col-head" style="color:var(--amber);border-bottom-color:var(--amber);">G2 · Incentive &amp; Offer Design</div>
+      <div class="sol-col-item" data-sol="stack" onclick="showSol2(this)"><span class="sol-dot d2"></span>Stack &amp; Save Bundling</div>
+      <div class="sol-col-item" data-sol="dynamic" onclick="showSol2(this)"><span class="sol-dot d2"></span>Dynamic Offer Engine</div>
+      <div class="sol-col-item" data-sol="urgency" onclick="showSol2(this)"><span class="sol-dot d2"></span>Time-Based Urgency</div>
+    </div>
+    <div class="sol-col">
+      <div class="sol-col-head" style="color:var(--muted);">G3 · Awareness / Education</div>
+      <div class="sol-col-item" data-sol="aware" onclick="showSol2(this)"><span class="sol-dot d3"></span>Awareness Campaigns</div>
+      <div class="sol-col-item" data-sol="geo" onclick="showSol2(this)"><span class="sol-dot d3"></span>Geo-Triggered Nudges</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S8: Risks -->
+<div class="slide" data-slide="8">
+<div class="si top">
+  <span class="sn">08 · Risks</span>
+  <h2>Key risks and de-escalation criteria</h2>
+
+  <div class="cg c2 mt16">
+    <div class="card" style="border-left:3px solid var(--amber);">
+      <h3 style="font-size:17px;">Loyalty vs. Incrementality Paradox</h3>
+      <p class="mt12" style="font-size:14px;">Upside's model rewards consumer switching (chase the best deal this week), but merchants may expect durable, loyal customers. "Cash back" implicitly signals loyalty, but the marketplace drives switching behavior.</p>
+      <div class="mt12" style="font-size:14px;"><strong>Resolution:</strong> Incrementality is measured per-merchant, independently — each merchant only pays for provably incremental visits. This is a network-growth strategy, not a loyalty promise.</div>
+      <div class="mt12" style="font-size:13px;color:var(--muted);"><strong>De-escalation:</strong> If merchant churn or complaint rate rises >5% WoW, pause new grocery merchant onboarding and diagnose expectation gap. Merchant retention/satisfaction guardrail in Success Metrics.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--amber);">
+      <h3 style="font-size:17px;">Fuel Cannibalization</h3>
+      <p class="mt12" style="font-size:14px;">Diverting attention and incentive budget to grocery could reduce fuel engagement — the core revenue driver today.</p>
+      <div class="mt12" style="font-size:14px;"><strong>Resolution:</strong> Stack &amp; Save bundling is designed to reinforce fuel (higher fuel cash-back when paired with grocery), not compete with it.</div>
+      <div class="mt12" style="font-size:13px;color:var(--muted);"><strong>De-escalation:</strong> If fuel MAU declines >2% in test cohort, pause grocery incentive campaigns for that segment and review. Explicit guardrail in Success Metrics.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S9: RICE Prioritization -->
+<div class="slide" data-slide="9">
+<div class="si top">
+  <span class="sn">09 · Prioritization</span>
+  <h2>RICE-scored roadmap</h2>
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+    <p class="txs">Sorted by RICE score (primary), then by phase. Items within a group share the same resource pool. <strong>Awareness Campaign</strong> runs on marketing's parallel track.</p>
+    <div class="trow" id="rice-toggle">
+      <button class="tbtn active" onclick="riceView('summary')">Summary</button>
+      <button class="tbtn" onclick="riceView('detail')">Detailed RICE</button>
+    </div>
+  </div>
+
+  <div class="tw" id="rice-summary">
+    <table class="dt" style="margin-top:8px;">
+      <thead><tr>
+        <th style="width:30px;">#</th><th>Item</th><th style="width:46px;">Grp</th>
+        <th style="width:50px;">R</th><th style="width:50px;">I</th><th style="width:50px;">C</th><th style="width:50px;">E</th>
+        <th style="width:100px;">RICE</th><th>Build/Buy/Integrate</th><th style="width:52px;">Phase</th>
+      </tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700;">1</td><td><strong>Behavioral signal graph</strong></td><td><span class="gh g1">G1</span></td><td>5</td><td>3</td><td>4</td><td>1</td><td><strong>60</strong><span class="rice-bar" style="width:60px;"></span></td><td style="font-size:12px;">Candidate — evaluate CDP vendors vs. build</td><td><span class="pp p0">P0</span></td></tr>
+        <tr><td style="font-weight:700;">2</td><td><strong>Stack &amp; Save bundling</strong></td><td><span class="gh g2">G2</span></td><td>5</td><td>5</td><td>4</td><td>2</td><td><strong>50</strong><span class="rice-bar" style="width:50px;"></span></td><td style="font-size:12px;">Build — foundational to offer-serving</td><td><span class="pp p0">P0</span></td></tr>
+        <tr><td style="font-weight:700;">3</td><td><strong>Time-based urgency</strong></td><td><span class="gh g2">G2</span></td><td>4</td><td>2</td><td>3</td><td>1</td><td><strong>24</strong><span class="rice-bar" style="width:24px;"></span></td><td style="font-size:12px;">Build (minor)</td><td><span class="pp p1">P1</span></td></tr>
+        <tr class="grayed"><td style="font-weight:700;">4</td><td><strong>Claim-to-wallet</strong> <sup style="color:var(--amber);font-size:10px;">*</sup></td><td><span class="gh g1">G1</span></td><td>4</td><td>4</td><td>4</td><td>3</td><td><strong>21.3</strong><span class="rice-bar" style="width:21px;"></span></td><td style="font-size:12px;">Build — core UX, Upside-specific</td><td><span class="pp p1">P1</span></td></tr>
+        <tr><td style="font-weight:700;">5</td><td><strong>Quiz / Preference Survey</strong></td><td><span class="gh g1">G1</span></td><td>4</td><td>3</td><td>3</td><td>2</td><td><strong>18</strong><span class="rice-bar" style="width:18px;"></span></td><td style="font-size:12px;">Build (minor) — validator for Claim-to-wallet</td><td><span class="pp p0">P0</span></td></tr>
+        <tr><td style="font-weight:700;">6</td><td><strong>Awareness Campaign</strong></td><td><span class="gh g3">G3</span></td><td>5</td><td>3</td><td>3</td><td>3</td><td><strong>15</strong><span class="rice-bar" style="width:15px;"></span></td><td style="font-size:12px;">Buy/Integrate — already on Braze (parallel track)</td><td><span class="pp p0">P0</span></td></tr>
+        <tr><td style="font-weight:700;">7</td><td><strong>Dynamic Offer Engine</strong></td><td><span class="gh g2">G2</span></td><td>4</td><td>5</td><td>2</td><td>4</td><td><strong>10→20+</strong><span class="rice-bar" style="width:20px;background:var(--amber);"></span></td><td style="font-size:12px;">Candidate — gated on P0 data maturity</td><td><span class="pp p2">P2</span></td></tr>
+        <tr><td style="font-weight:700;">8</td><td><strong>Geo-triggered nudges</strong></td><td><span class="gh g3">G3</span></td><td>3</td><td>3</td><td>3</td><td>3</td><td><strong>9</strong><span class="rice-bar" style="width:9px;"></span></td><td style="font-size:12px;">Integrate — 3rd party SDK (pending privacy review)</td><td><span class="pp p1">P1</span></td></tr>
+        <tr><td style="font-weight:700;">9</td><td><strong>Plaid / bank integration</strong></td><td><span class="gh g1">G1</span></td><td>3</td><td>5</td><td>2</td><td>4</td><td><strong>7.5</strong><span class="rice-bar" style="width:8px;"></span></td><td style="font-size:12px;">Integrate — Plaid is the integration</td><td><span class="pp p2">P2</span></td></tr>
+        <tr><td style="font-weight:700;">10</td><td><strong>Receipt upload</strong></td><td><span class="gh g1">G1</span></td><td>2</td><td>3</td><td>2</td><td>3</td><td><strong>4</strong><span class="rice-bar" style="width:4px;"></span></td><td style="font-size:12px;">Buy/Integrate — OCR is commodity</td><td><span class="pp p2">P2</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note mt12">* Claim-to-wallet is grayed — it scales the Quiz concept once validated. Quiz (P0) ships first as the cheap validator; Claim-to-wallet (P1) is the scaled version if the concept proves out.</div>
+    <div class="note mt12"><strong>RICE:</strong> R = Reach (1-5), I = Impact (1-5), C = Confidence (1-5), E = Effort (1-5, higher = harder). Score = (R × I × C) / E. <strong>Phases:</strong> P0 = immediate, P1 = after P0 validates, P2 = after P0/P1 data maturity.</div>
+    <div class="note">Dynamic Offer Engine RICE rises from 10 → 20+ once Group 1 data ships (Confidence 2→4). This is a core argument for why Group 1 comes first.</div>
+  </div>
+
+  <div class="tw" id="rice-detail" hidden>
+    <h3 style="font-size:16px;margin-top:8px;">Group 1 — Data &amp; Personalization Engine</h3>
+    <table class="dt"><thead><tr><th>Item</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE</th></tr></thead>
+    <tbody>
+      <tr><td>Behavioral signal graph</td><td>5</td><td>3</td><td>4</td><td>1</td><td><strong>60</strong></td></tr>
+      <tr class="grayed"><td>Claim-to-wallet *</td><td>4</td><td>4</td><td>4</td><td>3</td><td><strong>21.3</strong></td></tr>
+      <tr><td>Quiz / Preference Survey</td><td>4</td><td>3</td><td>3</td><td>2</td><td><strong>18</strong></td></tr>
+      <tr><td>Plaid / bank integration</td><td>3</td><td>5</td><td>2</td><td>4</td><td><strong>7.5</strong></td></tr>
+      <tr><td>Receipt upload</td><td>2</td><td>3</td><td>2</td><td>3</td><td><strong>4</strong></td></tr>
+    </tbody></table>
+    <h3 style="font-size:16px;margin-top:16px;">Group 2 — Incentive &amp; Offer Design</h3>
+    <table class="dt"><thead><tr><th>Item</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE</th></tr></thead>
+    <tbody>
+      <tr><td>Stack &amp; Save bundling</td><td>5</td><td>5</td><td>4</td><td>2</td><td><strong>50</strong></td></tr>
+      <tr><td>Time-based urgency</td><td>4</td><td>2</td><td>3</td><td>1</td><td><strong>24</strong></td></tr>
+      <tr><td>Dynamic Offer Engine</td><td>4</td><td>5</td><td>2→4</td><td>4→3</td><td><strong>10→26.7</strong></td></tr>
+    </tbody></table>
+    <h3 style="font-size:16px;margin-top:16px;">Group 3 — Awareness / Education</h3>
+    <table class="dt"><thead><tr><th>Item</th><th>Reach</th><th>Impact</th><th>Confidence</th><th>Effort</th><th>RICE</th></tr></thead>
+    <tbody>
+      <tr><td>Awareness Campaign (merged)</td><td>5</td><td>3</td><td>3</td><td>3</td><td><strong>15</strong></td></tr>
+      <tr><td>Geo-triggered nudges</td><td>3</td><td>3</td><td>3</td><td>3</td><td><strong>9</strong></td></tr>
+    </tbody></table>
+    <div class="note mt12">* Claim-to-wallet is grayed — scales Quiz if concept validates. Quiz (P0) → Claim-to-wallet (P1).</div>
+  </div>
+</div>
+</div>
+
+<!-- S10: Build vs Buy -->
+<div class="slide" data-slide="10">
+<div class="si top">
+  <span class="sn">10 · Build vs. Buy</span>
+  <h2>Evaluation framework</h2>
+  <p class="ts mt12">Decisions based on: how custom or bespoke is this to Upside's core offering, is it a standard industry practice, and what combination of effort, complexity, cost, speed-to-market, and strategic impact makes it worth building in-house vs. integrating.</p>
+
+  <div class="mx mt16" style="max-width:700px;">
+    <div></div><div class="mx-h">Lower Effort</div><div class="mx-h">Higher Effort</div>
+    <div class="mx-h" style="writing-mode:vertical-lr;transform:rotate(180deg);">More Strategic</div>
+    <div class="mx-c hi">
+      <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:var(--accent);">Build — Quick Wins</div>
+      <div style="font-size:13px;line-height:1.5;">Stack &amp; Save bundling<br>Quiz / Preference Survey<br>Time-based urgency</div>
+    </div>
+    <div class="mx-c hi">
+      <div style="font-weight:700;font-size:14px;margin-bottom:6px;color:var(--accent);">Build or Evaluate CDP — Core Bets</div>
+      <div style="font-size:13px;line-height:1.5;">Behavioral signal graph (evaluate CDP)<br>Claim-to-wallet (core Upside UX)<br>Dynamic Offer Engine</div>
+    </div>
+    <div class="mx-h" style="writing-mode:vertical-lr;transform:rotate(180deg);">Less Strategic</div>
+    <div class="mx-c">
+      <div style="font-weight:700;font-size:14px;margin-bottom:6px;">Integrate — Commodity</div>
+      <div style="font-size:13px;line-height:1.5;">Awareness Campaign (Braze)<br>Receipt upload (OCR vendor)</div>
+    </div>
+    <div class="mx-c">
+      <div style="font-weight:700;font-size:14px;margin-bottom:6px;">Integrate — Specialist Vendor</div>
+      <div style="font-size:13px;line-height:1.5;">Plaid / bank integration<br>Geo-filtering (SDK)</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S11: RACI + Authority -->
+<div class="slide" data-slide="11">
+<div class="si top">
+  <span class="sn">11 · RACI &amp; Alignment</span>
+  <h2>Responsibility matrix</h2>
+  <div class="tw mt12">
+    <table class="dt">
+      <thead><tr><th>Function</th><th>Role</th><th>Responsibility</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Product + Data Science</strong></td><td style="color:var(--accent);font-weight:600;">Responsible</td><td>Defines experiments, iterates on targeting logic, owns behavioral signal graph and offer-testing</td></tr>
+        <tr><td><strong>PM (this role)</strong></td><td style="color:var(--accent);font-weight:600;">Accountable</td><td>Owns overall outcome and sequencing — no direct reports, drives cross-functional alignment</td></tr>
+        <tr><td><strong>Engineering</strong></td><td style="font-weight:600;">Responsible / Consulted</td><td>Builds integrations and infrastructure; consulted on feasibility and build-vs-buy</td></tr>
+        <tr><td><strong>Marketing</strong></td><td>Responsible (campaigns) / Consulted</td><td>Owns copy, content, channel execution; partners on offer/merchant sourcing logic</td></tr>
+        <tr><td><strong>Legal/Privacy</strong></td><td>Consulted</td><td>Reviews location-data collection (geo-filtering), Plaid integration terms</td></tr>
+        <tr><td><strong>CPO/Leadership</strong></td><td>Informed</td><td>Progress updates and major pivots</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="pq mt16">"Without formal authority, the tools I actually have are sequencing (prove it cheap before asking for the expensive version) and framing (show the other team's own metrics benefit, not just mine)."</div>
+  <p class="ts mt12">Every ask to another team is backed by the sizing math (~$795K per 1% conversion lift) and structured as a small, bounded pilot with explicit kill criteria — not an open-ended commitment.</p>
+</div>
+</div>
+
+<!-- S12: Success Metrics -->
+<div class="slide dark-sl" data-slide="12">
+<div class="si top">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;">
+    <div>
+      <span class="sn">12 · Success Metrics</span>
+      <h2>How we measure this</h2>
+    </div>
+    <div class="theme-toggle" onclick="toggleDashTheme(this)">☀ Light mode</div>
+  </div>
+
+  <!-- North Star -->
+  <div class="mtile mt16" style="border:2px solid #3cb5a4;text-align:center;">
+    <div class="ml"><span class="star">★</span> North Star</div>
+    <div class="mv" style="color:#3cb5a4;">Grocery MAU</div>
+    <div class="ms">Track as a flat number and as a % of total MAU. Goal: grow on an ongoing basis.</div>
+  </div>
+
+  <div class="flex mt16" style="gap:20px;align-items:stretch;">
+    <div class="f1">
+      <div class="cl" style="color:#3cb5a4;font-size:12px;margin-bottom:8px;">Consumer-Side</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="sc">
+          <div class="sc-name">Grocery MAU Growth</div>
+          <div class="sc-target">700K → track increase</div>
+          <div class="sc-time">Ongoing, reported monthly</div>
+          <div class="sc-note">As # and as % of total MAU (currently 10%)</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">Customer LTV</div>
+          <div class="sc-target">≥2× fuel-only baseline</div>
+          <div class="sc-time">Within 12 months (conservative vs. ~3× given)</div>
+          <div class="sc-note">Track as $ amount for multi-vertical adopters</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">First Grocery Order Rate</div>
+          <div class="sc-target">Lift in bps, period over period</div>
+          <div class="sc-time">Within 90 days of Phase 0 launch</div>
+          <div class="sc-note">Measured as rate of fuel-only users placing first grocery order that period</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">Signal Validity</div>
+          <div class="sc-target">≥5 new data points · 50% coverage</div>
+          <div class="sc-time">By end of Phase 0 (Week 4)</div>
+          <div class="sc-note">Measured as # of new data points collected per user. At 3-month mark, update success criteria to measure impact on personalization and conversion from personalized campaigns. Marketing + Product input on priority fields.</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">Guardrail — Fuel MAU</div>
+          <div class="sc-target">Decline ≤2%</div>
+          <div class="sc-time">During pilot window</div>
+        </div>
+      </div>
+    </div>
+    <div class="f1">
+      <div class="cl" style="color:#e09540;font-size:12px;margin-bottom:8px;">Merchant-Side</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div class="sc">
+          <div class="sc-name">Incremental Revenue</div>
+          <div class="sc-target">≥X bps increase, period over period</div>
+          <div class="sc-time">Within 90 days</div>
+          <div class="sc-note">≥70% of grocery redemptions classified as genuinely incremental (new-visit or increased-frequency)</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">First-Time Customer Rate</div>
+          <div class="sc-target">≥80% zero prior history</div>
+          <div class="sc-time">Per merchant</div>
+          <div class="sc-note">Guards against discounting existing loyal customers</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">Repeat Customer Rate (Delta)</div>
+          <div class="sc-target">Positive delta, period over period</div>
+          <div class="sc-time">Measured at 60 and 90 days post-first-order</div>
+          <div class="sc-note">Tracks whether new grocery customers return — the durability signal</div>
+        </div>
+        <div class="sc">
+          <div class="sc-name">Guardrail — CAC / Cash-Back Spend</div>
+          <div class="sc-target">Track as avg $ and as % of revenue</div>
+          <div class="sc-time">Ongoing</div>
+          <div class="sc-note">How much we give in cash back per converted customer. More important as % of revenue than absolute number.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- S13: Closing -->
+<div class="slide dark-sl" data-slide="13">
+<div class="si">
+  <span class="sn">13 · Thank You</span>
+  <span class="ta"></span>
+  <h1 style="font-size:38px;">Thank you</h1>
+  <p class="sub" style="margin-top:14px;">Fuel → Grocery — Turning Upside's Biggest Retention Lever Into a Repeatable Playbook</p>
+  <div class="rl" style="margin-top:28px;">
+    Elliot Dabah<br>
+    Principal PM, Personalized Growth Engine — Skills Assessment<br>
+    September 2026
+  </div>
+  <div style="margin-top:28px;padding-top:16px;border-top:1px solid var(--dark-border);font-size:13px;color:var(--dark-muted);">
+    Appendix materials available for live discussion: CAC framing for incentive design · Moonshot ideas (tiered loyalty, coalition points, membership, marketplace/auction, embedded enrollment) · Diagnostic 2×2 (awareness/offer-quality × active/dormant users) · Detailed RICE scoring by group
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <div class="nav-left">
+    <button class="nb" id="prev-btn" disabled>←</button>
+    <span class="nav-label" id="prev-label" onclick="go(cur-1)"></span>
+  </div>
+  <div class="nav-center">
+    <select class="nav-sel" id="slide-sel" onchange="go(+this.value)"></select>
+  </div>
+  <div class="nav-right">
+    <span class="nav-label" id="next-label" onclick="go(cur+1)" style="text-align:right;"></span>
+    <button class="nb" id="next-btn">→</button>
+  </div>
+</div>
+
+<script>
+var slides=document.querySelectorAll('.slide'),total=slides.length,cur=0;
+var titles=['Title','Mission & Goals','Customers','Problem Statement','Potential Dashboards','Sizing the Value','Solutions','Risks','Prioritization (RICE)','Build vs. Buy','RACI & Alignment','Success Metrics','Thank You'];
+
+function go(n){
+  slides[cur].classList.remove('active');
+  cur=Math.max(0,Math.min(n,total-1));
+  slides[cur].classList.add('active');
+  slides[cur].scrollTop=0;
+  document.getElementById('prev-btn').disabled=cur===0;
+  document.getElementById('next-btn').disabled=cur===total-1;
+  document.getElementById('prev-label').textContent=cur>0?titles[cur-1]:'';
+  document.getElementById('next-label').textContent=cur<total-1?titles[cur+1]:'';
+  document.getElementById('slide-sel').value=cur;
+}
+
+// Build dropdown
+var sel=document.getElementById('slide-sel');
+for(var i=0;i<total;i++){var o=document.createElement('option');o.value=i;o.textContent=String(i+1).padStart(2,'0')+'. '+titles[i];sel.appendChild(o);}
+
+document.getElementById('prev-btn').addEventListener('click',function(){go(cur-1);});
+document.getElementById('next-btn').addEventListener('click',function(){go(cur+1);});
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='SELECT'||e.target.tagName==='INPUT')return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();go(cur+1);}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(cur-1);}
+});
+
+// Customer interactive
+function showCust(type){
+  document.querySelectorAll('.cust-tile').forEach(function(t){t.classList.toggle('active',t.dataset.cust===type);});
+  document.querySelectorAll('.cust-detail').forEach(function(d){d.classList.remove('show');});
+  var el=document.getElementById('cust-'+type);
+  if(el)el.classList.add('show');
+}
+
+// Accordion
+function toggleAcc(head){
+  var item=head.parentElement;
+  item.classList.toggle('open');
+}
+
+// Dashboard
+var dashData={
+  all:{mau:'7.0M',mauSub:'20% of 35M total users',
+    ns:'~$12.8B/yr',nsSub:'~$1,829/user/yr',
+    cb:'~$446M/yr',cbSub:'~$63.7/user/yr · $37.1M/mo',
+    cp:'$44.2M/yr',cpSub:'$6.31/user/yr'},
+  fuel:{mau:'6.3M',mauSub:'90% of active base · 18% of total users',
+    ns:'~$10.7B/yr',nsSub:'~$1,698/user/yr',
+    cb:'~$320M/yr',cbSub:'~$50.8/user/yr · $26.7M/mo',
+    cp:'$30.9M/yr',cpSub:'$4.91/user/yr'},
+  grocery:{mau:'140K',mauSub:'2% of active · 0.4% of total users',
+    ns:'~$240M/yr',nsSub:'~$1,714/user/yr',
+    cb:'~$19M/yr',cbSub:'~$137/user/yr · $1.6M/mo',
+    cp:'$2.7M/yr',cpSub:'$19.29/user/yr'},
+  both:{mau:'560K',mauSub:'8% of active · 1.6% of total users',
+    ns:'~$1.9B/yr',nsSub:'~$3,411/user/yr',
+    cb:'~$105M/yr',cbSub:'~$188/user/yr · $8.8M/mo',
+    cp:'$10.6M/yr',cpSub:'$18.93/user/yr'}
+};
+function renderDash(v){
+  var d=dashData[v];
+  document.getElementById('dash-kpis').innerHTML=
+    '<div class="mtile"><div class="ml">MAU</div><div class="mv">'+d.mau+'</div><div class="ms">'+d.mauSub+'</div></div>'+
+    '<div class="mtile"><div class="ml">Net Spend <span class="dl asm">Assumption</span></div><div class="mv">'+d.ns+'</div><div class="ms">'+d.nsSub+'</div></div>'+
+    '<div class="mtile"><div class="ml">Cash Back <span class="dl asm">Assumption</span></div><div class="mv">'+d.cb+'</div><div class="ms">'+d.cbSub+'</div></div>'+
+    '<div class="mtile"><div class="ml">Contribution Profit <span class="dl der">Derived</span></div><div class="mv">'+d.cp+'</div><div class="ms">'+d.cpSub+'</div></div>';
+}
+function dashFilter(pill){
+  document.querySelectorAll('#dash-pills .pill').forEach(function(p){p.classList.remove('active');});
+  pill.classList.add('active');
+  renderDash(pill.dataset.v);
+}
+renderDash('all');
+
+function toggleDrill(el){el.closest('.drill').classList.toggle('open');}
+
+// Solution panel (3-col with top detail)
+var sols={
+  sig:{title:'Behavioral Signal Graph',group:'G1',desc:'Mine existing fuel-transaction data to build per-customer insight profiles. Fuel purchase patterns serve as zero-cost proxies for grocery-conversion propensity.',
+    detail:'<p><strong>How it works:</strong> Analyze existing data per customer — purchase frequency, avg spend, preferred stations, distance traveled, price sensitivity. Assign behavioral "persona" tags.</p>'+
+    '<div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0;">'+
+    '<div style="background:#111;border-radius:8px;padding:12px;font-size:12px;color:#ccc;font-family:monospace;flex:1;min-width:200px;"><div style="color:#3cb5a4;font-weight:700;margin-bottom:4px;">Individual: Sarah M.</div>3×/mo · $52 avg · 5mi radius · price-sensitive<br><span style="color:#e09540;">→ Local Price Hunter</span><br>Grocery: <span style="color:#3cb5a4;">HIGH</span></div>'+
+    '<div style="background:#111;border-radius:8px;padding:12px;font-size:12px;color:#ccc;font-family:monospace;flex:1;min-width:200px;"><div style="color:#3cb5a4;font-weight:700;margin-bottom:4px;">Individual: David K.</div>4×/mo · 1 fill 50+mi away · commuter pattern<br><span style="color:#e09540;">→ Traveler/Commuter</span><br>Grocery: <span style="color:#e09540;">MEDIUM</span></div>'+
+    '</div>'+
+    '<p style="font-size:13px;font-weight:600;margin-top:10px;">Aggregate — Propensity Distribution (illustrative):</p>'+
+    '<div style="display:flex;gap:10px;margin:8px 0;">'+
+    '<div style="flex:1;text-align:center;padding:10px;background:#0a2a1a;border-radius:6px;"><div style="font-size:20px;font-weight:700;color:#3cb5a4;">~15%</div><div style="font-size:10px;color:#999;">HIGH</div><div style="font-size:9px;color:#666;">~945K users</div></div>'+
+    '<div style="flex:1;text-align:center;padding:10px;background:#1a1a0a;border-radius:6px;"><div style="font-size:20px;font-weight:700;color:#e09540;">~35%</div><div style="font-size:10px;color:#999;">MEDIUM</div><div style="font-size:9px;color:#666;">~2.2M users</div></div>'+
+    '<div style="flex:1;text-align:center;padding:10px;background:#1a1a1a;border-radius:6px;"><div style="font-size:20px;font-weight:700;color:#666;">~50%</div><div style="font-size:10px;color:#999;">LOW</div><div style="font-size:9px;color:#666;">~3.15M users</div></div>'+
+    '</div>'+
+    '<div style="display:flex;height:8px;border-radius:4px;overflow:hidden;"><div style="width:15%;background:#3cb5a4;"></div><div style="width:35%;background:#e09540;"></div><div style="width:50%;background:#444;"></div></div>'+
+    '<p class="note" style="margin-top:8px;">Propensity %s are illustrative — validation is a P0 deliverable. Start from existing data, layer in Quiz + Claim-to-wallet signals over time.</p>'},
+  quiz:{title:'Quiz / Preference Survey',group:'G1',desc:'Ask customers directly what deals they want. Cheap explicit-intent validator that feeds the signal graph. Key question: where do we surface it without hurting conversion?',
+    hasVars:true,varLabels:['In-Feed Card','Onboarding Gate','Brand Picker'],
+    vars:[
+      '<p style="font-size:12px;color:var(--ink2);margin-bottom:8px;"><strong>Version A — Inline card during normal browsing.</strong> Least obtrusive. Appears between offers. Risk: low completion because it\'s easy to scroll past.</p>'+
+      '<div class="phone-frame" style="height:440px;"><div class="phone-screen" style="background:#fff;"><div class="phone-tabs"><span class="phone-tab active">All</span><span class="phone-tab">Gas</span><span class="phone-tab">Grocery</span></div>'+
+      '<div class="phone-offer"><div class="phone-offer-logo">Q</div><div class="phone-offer-info"><div class="phone-offer-name">QuickChek</div><div class="phone-offer-dist">2.3 mi</div><div class="phone-offer-cashback">15¢/gal back</div></div><button class="phone-claim">Claim</button></div>'+
+      '<div style="margin:6px 10px;padding:14px;background:#f0f7ff;border-radius:10px;border:1px solid #d0e3ff;"><div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:6px;">Quick poll — help us personalize</div><div style="font-size:11px;margin-bottom:8px;">What deals interest you most?</div><div style="display:flex;flex-wrap:wrap;gap:4px;"><span style="padding:4px 10px;border-radius:12px;border:1px solid #d0e3ff;font-size:10px;background:#fff;">⛽ Gas</span><span style="padding:4px 10px;border-radius:12px;border:2px solid #2563eb;font-size:10px;background:#e8f0fd;color:#2563eb;">🛒 Grocery</span><span style="padding:4px 10px;border-radius:12px;border:1px solid #d0e3ff;font-size:10px;background:#fff;">🍽 Restaurants</span><span style="padding:4px 10px;border-radius:12px;border:1px solid #d0e3ff;font-size:10px;background:#fff;">☕ Coffee</span></div></div>'+
+      '<div class="phone-offer"><div class="phone-offer-logo" style="background:#e8f5e9;">🛒</div><div class="phone-offer-info"><div class="phone-offer-name">Kroger</div><div class="phone-offer-dist">1.8 mi</div><div class="phone-offer-cashback">12% cash back</div></div><button class="phone-claim">Claim</button></div>'+
+      '<div class="phone-bottom-nav"><span class="active">🏠 Home</span><span>📋 Activity</span><span>💰 Earn</span><span>👤 Account</span></div></div></div>',
+
+      '<p style="font-size:12px;color:var(--ink2);margin-bottom:8px;"><strong>Version B — Onboarding gate (unskippable step).</strong> Highest completion, but needs A/B testing to ensure it doesn\'t hurt activation. Shows after first claim or at signup.</p>'+
+      '<div class="phone-frame" style="height:440px;"><div class="phone-screen dark" style="padding:20px;text-align:center;">'+
+      '<div style="display:flex;justify-content:center;gap:4px;margin-bottom:20px;"><span style="width:20px;height:3px;background:#333;border-radius:2px;"></span><span style="width:20px;height:3px;background:#333;border-radius:2px;"></span><span style="width:20px;height:3px;background:#2563eb;border-radius:2px;"></span><span style="width:20px;height:3px;background:#333;border-radius:2px;"></span></div>'+
+      '<div style="font-size:16px;font-weight:700;margin-bottom:6px;">Personalize your deals</div>'+
+      '<div style="font-size:11px;color:#999;margin-bottom:16px;">Select all that apply — we\'ll show you the best offers first.</div>'+
+      '<div style="display:flex;flex-direction:column;gap:8px;text-align:left;">'+
+      '<div style="padding:12px;border:1px solid #333;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">⛽</span> Gas stations</div>'+
+      '<div style="padding:12px;border:2px solid #2563eb;border-radius:10px;font-size:12px;background:#0a1a3a;display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">🛒</span> Grocery stores <span style="margin-left:auto;color:#2563eb;">✓</span></div>'+
+      '<div style="padding:12px;border:2px solid #2563eb;border-radius:10px;font-size:12px;background:#0a1a3a;display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">🍽</span> Restaurants <span style="margin-left:auto;color:#2563eb;">✓</span></div>'+
+      '<div style="padding:12px;border:1px solid #333;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px;"><span style="font-size:16px;">☕</span> Coffee &amp; convenience</div>'+
+      '</div>'+
+      '<div style="margin-top:16px;padding:12px;background:#2563eb;color:#fff;border-radius:24px;font-size:13px;font-weight:700;">Continue</div>'+
+      '<div style="margin-top:8px;font-size:10px;color:#444;">Step 3 of 4</div>'+
+      '</div></div>',
+
+      '<p style="font-size:12px;color:var(--ink2);margin-bottom:8px;"><strong>Version C — Specific brands/stores.</strong> Deeper signal: not just "grocery" but which stores. Feeds directly into personalized offer targeting. Shows after category selection.</p>'+
+      '<div class="phone-frame" style="height:440px;"><div class="phone-screen dark" style="padding:20px;">'+
+      '<div style="font-size:14px;font-weight:700;margin-bottom:4px;">Which grocery stores do you shop at?</div>'+
+      '<div style="font-size:10px;color:#999;margin-bottom:14px;">Select all that apply — we\'ll prioritize deals from these stores.</div>'+
+      '<div style="display:flex;flex-direction:column;gap:6px;">'+
+      '<div style="padding:10px 12px;border:2px solid #2563eb;border-radius:10px;font-size:12px;background:#0a1a3a;display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:#e8f5e9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">K</div>Kroger<span style="margin-left:auto;color:#2563eb;">✓</span></div>'+
+      '<div style="padding:10px 12px;border:2px solid #2563eb;border-radius:10px;font-size:12px;background:#0a1a3a;display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:#fff3e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">A</div>ALDI<span style="margin-left:auto;color:#2563eb;">✓</span></div>'+
+      '<div style="padding:10px 12px;border:1px solid #333;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">W</div>Whole Foods</div>'+
+      '<div style="padding:10px 12px;border:1px solid #333;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">T</div>Trader Joe\'s</div>'+
+      '<div style="padding:10px 12px;border:1px solid #333;border-radius:10px;font-size:12px;display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">S</div>ShopRite</div>'+
+      '</div>'+
+      '<div style="margin-top:14px;padding:10px;background:#2563eb;color:#fff;border-radius:24px;font-size:13px;font-weight:700;text-align:center;">Save preferences</div>'+
+      '</div></div>'
+    ]},
+  claim:{title:'Claim-to-Wallet (Save for Later)',group:'G1',desc:'Shift from "Claim now" to "Save to your card." Users browse and bookmark grocery deals — we remind them later. Collects intent signals and builds a personal deal wallet. Different from current claiming: save ≠ commit.',
+    hasVars:true,varLabels:['Save + Expiry','Gas → Grocery Carousel','My Saved Deals'],
+    vars:[
+      '<p style="font-size:12px;color:var(--ink2);margin-bottom:8px;"><strong>Version A — "+" save icon with expiration dates.</strong> Key change: replace Claim button with a "+" save icon. Users save deals to their wallet without committing. Expiry creates soft urgency.</p>'+
+      '<div class="phone-frame" style="height:440px;"><div class="phone-screen" style="background:#fff;">'+
+      '<div class="phone-search">🔍 Search nearby deals</div>'+
+      '<div class="phone-tabs"><span class="phone-tab">All</span><span class="phone-tab">Gas</span><span class="phone-tab active" style="color:#16a34a;border-bottom-color:#16a34a;">Grocery</span><span class="phone-tab">Restaurant</span></div>'+
+      '<div class="phone-offer"><div class="phone-offer-logo" style="background:#e8f5e9;">🛒</div><div class="phone-offer-info"><div class="phone-offer-name">Kroger <span style="font-size:8px;color:#999;font-weight:400;">· 1.8 mi</span></div><div class="phone-offer-cashback">12% cash back</div><div style="font-size:8px;color:#e09540;font-weight:600;">Expires in 3 days</div></div><div style="width:32px;height:32px;border-radius:50%;border:2px solid #2563eb;display:flex;align-items:center;justify-content:center;font-size:18px;color:#2563eb;cursor:pointer;flex-shrink:0;">+</div></div>'+
+      '<div class="phone-offer"><div class="phone-offer-logo" style="background:#fff3e0;">🛒</div><div class="phone-offer-info"><div class="phone-offer-name">ALDI <span style="font-size:8px;color:#999;font-weight:400;">· 2.4 mi</span></div><div class="phone-offer-cashback">8% cash back</div><div style="font-size:8px;color:#999;">Expires in 5 days</div></div><div style="width:32px;height:32px;border-radius:50%;border:2px solid #2563eb;display:flex;align-items:center;justify-content:center;font-size:18px;color:#2563eb;cursor:pointer;flex-shrink:0;">+</div></div>'+
+      '<div class="phone-offer" style="background:#f0fdf4;border-radius:6px;margin:4px 6px;"><div class="phone-offer-logo" style="background:#dcfce7;">✓</div><div class="phone-offer-info"><div class="phone-offer-name" style="color:#16a34a;">Saved to your card</div><div style="font-size:9px;color:#666;">ShopRite · 10% back · Expires Sep 15</div></div><div style="font-size:9px;color:#16a34a;font-weight:700;">SAVED</div></div>'+
+      '<div class="phone-bottom-nav"><span class="active">🏠 Home</span><span>📋 Activity</span><span>💰 Earn</span><span>👤 Account</span></div></div></div>',
+
+      '<p style="font-size:12px;color:var(--ink2);margin-bottom:8px;"><strong>Version B — Grocery carousel while viewing gas.</strong> Cross-sell at the moment of highest engagement (just claimed gas). Horizontal scroll of grocery deals below the gas offer. Low friction — scroll and tap "+" to save.</p>'+
+      '<div class="phone-frame" style="height:440px;"><div class="phone-screen" style="background:#fff;">'+
+      '<div class="phone-tabs"><span class="phone-tab active">All</span><span class="phone-tab">Gas</span><span class="phone-tab">Grocery</span></div>'+
+      '<div class="phone-offer" style="background:#f0fdf4;border-radius:6px;margin:4px 6px;"><div class="phone-offer-logo" style="background:#dcfce7;">✓</div><div class="phone-offer-info"><div class="phone-offer-name" style="color:#16a34a;">QuickChek — Claimed!</div><div style="font-size:9px;color:#666;">15¢/gal back · Saved $1.80</div></div></div>'+
+      '<div style="padding:8px 12px;"><div style="font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:6px;">Save a grocery deal too?</div>'+
+      '<div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;">'+
+      '<div style="min-width:120px;padding:10px;border:1px solid #e5e5e5;border-radius:10px;text-align:center;flex-shrink:0;"><div style="font-size:18px;margin-bottom:4px;">🛒</div><div style="font-size:10px;font-weight:700;">Kroger</div><div style="font-size:10px;color:#16a34a;font-weight:700;">12% back</div><div style="font-size:8px;color:#999;">1.8 mi · 3d left</div><div style="margin-top:6px;width:24px;height:24px;border-radius:50%;border:2px solid #2563eb;display:flex;align-items:center;justify-content:center;font-size:14px;color:#2563eb;margin:6px auto 0;">+</div></div>'+
+      '<div style="min-width:120px;padding:10px;border:1px solid #e5e5e5;border-radius:10px;text-align:center;flex-shrink:0;"><div style="font-size:18px;margin-bottom:4px;">🛒</div><div style="font-size:10px;font-weight:700;">ALDI</div><div style="font-size:10px;color:#16a34a;font-weight:700;">8% back</div><div style="font-size:8px;color:#999;">2.4 mi · 5d left</div><div style="margin-top:6px;width:24px;height:24px;border-radius:50%;border:2px solid #2563eb;display:flex;align-items:center;justify-content:center;font-size:14px;color:#2563eb;margin:6px auto 0;">+</div></div>'+
+      '<div style="min-width:120px;padding:10px;border:1px solid #e5e5e5;border-radius:10px;text-align:center;flex-shrink:0;"><div style="font-size:18px;margin-bottom:4px;">🛒</div><div style="font-size:10px;font-weight:700;">ShopRite</div><div style="font-size:10px;color:#16a34a;font-weight:700;">10% back</div><div style="font-size:8px;color:#999;">3.1 mi · 2d left</div><div style="margin-top:6px;width:24px;height:24px;border-radius:50%;border:2px solid #2563eb;display:flex;align-items:center;justify-content:center;font-size:14px;color:#2563eb;margin:6px auto 0;">+</div></div>'+
+      '</div></div>'+
+      '<div class="phone-bottom-nav"><span class="active">🏠 Home</span><span>📋 Activity</span><span>💰 Earn</span><span>👤 Account</span></div></div></div>',
+
+      '<p style="font-size:12px;color:var(--ink2);margin-bottom:8px;"><strong>Version C — "My Saved Deals" wallet view.</strong> All saved deals in one place. Reminder toggle so we can nudge them when near the store or before expiry. This is the payoff of the save model.</p>'+
+      '<div class="phone-frame" style="height:440px;"><div class="phone-screen" style="background:#fff;">'+
+      '<div style="padding:10px 12px;font-size:14px;font-weight:700;">My Saved Deals</div>'+
+      '<div style="padding:6px 12px;display:flex;gap:6px;"><span style="padding:4px 10px;border-radius:12px;background:#2563eb;color:#fff;font-size:10px;font-weight:600;">All (3)</span><span style="padding:4px 10px;border-radius:12px;border:1px solid #e5e5e5;font-size:10px;color:#666;">Grocery (2)</span><span style="padding:4px 10px;border-radius:12px;border:1px solid #e5e5e5;font-size:10px;color:#666;">Gas (1)</span></div>'+
+      '<div style="padding:8px 12px;display:flex;flex-direction:column;gap:8px;">'+
+      '<div style="padding:10px;border:1px solid #e5e5e5;border-radius:10px;display:flex;align-items:center;gap:8px;"><div style="width:32px;height:32px;background:#e8f5e9;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">🛒</div><div style="flex:1;"><div style="font-size:11px;font-weight:700;">Kroger · 12% back</div><div style="font-size:9px;color:#999;">1.8 mi · Expires Sep 12</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="font-size:8px;color:#999;">Remind</div><div style="width:28px;height:16px;background:#2563eb;border-radius:8px;position:relative;"><div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;"></div></div></div></div>'+
+      '<div style="padding:10px;border:1px solid #e5e5e5;border-radius:10px;display:flex;align-items:center;gap:8px;"><div style="width:32px;height:32px;background:#fff3e0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">🛒</div><div style="flex:1;"><div style="font-size:11px;font-weight:700;">ALDI · 8% back</div><div style="font-size:9px;color:#999;">2.4 mi · Expires Sep 14</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="font-size:8px;color:#999;">Remind</div><div style="width:28px;height:16px;background:#ccc;border-radius:8px;position:relative;"><div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;left:2px;top:2px;"></div></div></div></div>'+
+      '<div style="padding:10px;border:1px solid #e5e5e5;border-radius:10px;display:flex;align-items:center;gap:8px;opacity:.5;"><div style="width:32px;height:32px;background:#f0f0f0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;">⛽</div><div style="flex:1;"><div style="font-size:11px;font-weight:700;text-decoration:line-through;">BP · 10¢/gal</div><div style="font-size:9px;color:#d03b3b;">Expired Sep 8</div></div></div>'+
+      '</div>'+
+      '<div style="padding:8px 12px;font-size:10px;color:#999;text-align:center;">Deals are saved to your card — use them at checkout or we\'ll remind you before they expire.</div>'+
+      '<div class="phone-bottom-nav"><span>🏠 Home</span><span>📋 Activity</span><span class="active">💰 Earn</span><span>👤 Account</span></div></div></div>'
+    ]},
+  plaid:{title:'Plaid / Bank Integration',group:'G1',desc:'Connect credit/debit cards via Plaid to reveal shopping habits across all merchants, not just Upside partners.',
+    detail:'<div class="phone-frame" style="height:420px;"><div class="phone-screen dark" style="padding:24px;text-align:center;"><div style="font-size:18px;font-weight:700;text-align:left;margin-bottom:8px;">Earn at spots that don\'t have Upside offers</div><div style="font-size:12px;color:#999;text-align:left;margin-bottom:24px;">Activate <strong style="color:#fff;">Upside Expand</strong> by connecting your credit or debit cards to increase your Upside earnings.</div><div style="margin:20px auto;width:120px;height:140px;border-radius:12px;background:linear-gradient(180deg,#7c3aed 0%,#93c5fd 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;"><div style="font-size:20px;font-weight:700;">$</div><div style="font-size:20px;font-weight:700;opacity:.7;">$$</div></div><div style="font-size:11px;color:#999;margin-top:16px;">Powered by <strong>PLAID</strong></div><div style="margin-top:16px;padding:14px;background:#fff;color:#000;border-radius:28px;font-size:14px;font-weight:700;">Start earning</div></div></div>'},
+  receipt:{title:'Receipt Upload',group:'G1',desc:'Upload a photo of a grocery receipt to earn bonus cash back. Captures granular product-level data no other signal source provides.',
+    detail:'<div class="phone-frame" style="height:420px;"><div class="phone-screen dark" style="padding:24px;"><div style="font-size:16px;font-weight:700;margin-bottom:12px;">Upload a receipt</div><div style="font-size:12px;color:#999;margin-bottom:16px;">Snap a photo of your grocery receipt to earn bonus cash back and unlock personalized deals.</div><div style="border:2px dashed #444;border-radius:12px;padding:32px 16px;text-align:center;"><div style="font-size:32px;margin-bottom:8px;">📸</div><div style="font-size:12px;color:#999;">Tap to take photo or upload</div></div><div style="margin-top:16px;background:#1a1a1a;border-radius:8px;padding:12px;font-size:11px;color:#999;"><div style="color:#3cb5a4;font-weight:700;margin-bottom:4px;">What we capture:</div>Store name · Date · Items &amp; brands · Quantities · Prices · Payment method</div></div></div>'},
+  stack:{title:'Stack & Save Bundling',group:'G2',desc:'Escalating cash-back for combining verticals. 20¢/gal becomes 25¢ when paired with grocery — makes the switch itself pay off immediately.',
+    detail:'<div class="phone-frame" style="height:420px;"><div class="phone-screen"><div class="phone-search">🔍 Search</div><div class="phone-tabs"><span class="phone-tab active">All</span><span class="phone-tab">Gas</span><span class="phone-tab">Grocery</span></div><div class="phone-offer"><div class="phone-offer-logo">Q</div><div class="phone-offer-info"><div class="phone-offer-name">QuickChek</div><div class="phone-offer-dist">2.3 mi · 720 NJ-35</div><div class="phone-offer-cashback">15¢/gal back</div><div class="phone-offer-price">$4.02 <s>$4.17</s></div></div><button class="phone-claim">Claim</button></div><div style="background:linear-gradient(135deg,#f3e8ff,#eff6ff);margin:0 8px;border-radius:12px;padding:12px;"><div style="font-size:11px;font-weight:700;color:#7c3aed;margin-bottom:6px;">⚡ STACK &amp; SAVE</div><div style="font-size:12px;margin-bottom:4px;"><strong>Claim gas + grocery together:</strong></div><div style="display:flex;gap:8px;margin-top:8px;"><div style="flex:1;background:#fff;border-radius:8px;padding:8px;text-align:center;font-size:10px;"><div style="font-weight:700;">Gas only</div><div style="font-size:16px;font-weight:700;color:#16a34a;">15¢</div>/gal</div><div style="flex:1;background:#fff;border-radius:8px;padding:8px;text-align:center;font-size:10px;border:2px solid #7c3aed;"><div style="font-weight:700;color:#7c3aed;">Gas + Grocery</div><div style="font-size:16px;font-weight:700;color:#7c3aed;">25¢</div>/gal + 12%</div></div><button class="phone-claim bundle" style="width:100%;margin-top:8px;">Claim Bundle</button></div></div></div>'},
+  dynamic:{title:'Dynamic Offer Engine',group:'G2',desc:'Uses Group 1 signal data to determine and test cash-back amounts per customer, targeting the "magic number" (3+ purchases in 60 days → 60% 12-month retention).',
+    detail:'<p style="font-size:13px;font-weight:600;">Different users, different offers — same station:</p><div style="display:flex;gap:12px;margin:8px 0;flex-wrap:wrap;"><div class="phone-frame" style="width:180px;height:300px;"><div class="phone-screen" style="background:#fff;padding:8px;"><div style="font-size:9px;color:#999;text-align:center;margin-bottom:6px;">User: Sarah M. (returning)</div><div class="phone-offer" style="padding:8px;"><div class="phone-offer-logo" style="width:24px;height:24px;font-size:10px;">Q</div><div class="phone-offer-info"><div class="phone-offer-name" style="font-size:10px;">QuickChek Grocery</div><div class="phone-offer-cashback" style="font-size:10px;">5% cash back</div></div></div><div style="font-size:9px;padding:4px 8px;color:#999;">Returning customer → lower incentive needed</div></div></div><div class="phone-frame" style="width:180px;height:300px;"><div class="phone-screen" style="background:#fff;padding:8px;"><div style="font-size:9px;color:#999;text-align:center;margin-bottom:6px;">User: David K. (first grocery)</div><div class="phone-offer" style="padding:8px;"><div class="phone-offer-logo" style="width:24px;height:24px;font-size:10px;">Q</div><div class="phone-offer-info"><div class="phone-offer-name" style="font-size:10px;">QuickChek Grocery</div><div class="phone-offer-cashback" style="font-size:10px;color:#7c3aed;font-weight:700;">15% cash back</div></div></div><div style="font-size:9px;padding:4px 8px;color:#999;">First-time → higher incentive to convert</div></div></div></div>'},
+  urgency:{title:'Time-Based Urgency',group:'G2',desc:'Expiring offers and escalating messaging as deadlines approach. Creates urgency for browsers who haven\'t converted.',
+    detail:'<div class="phone-frame" style="height:420px;"><div class="phone-screen dark" style="padding:16px;text-align:center;"><div style="font-size:9px;color:#999;margin-bottom:8px;">PUSH NOTIFICATION</div><div style="background:#1a1a1a;border-radius:12px;padding:14px;text-align:left;margin-bottom:12px;"><div style="font-size:11px;font-weight:700;margin-bottom:4px;">⏰ Your 12% Kroger deal expires soon!</div><div style="font-size:10px;color:#999;">Save $8.04 on your next grocery run. Claim before it\'s gone.</div><div style="margin-top:8px;display:flex;gap:6px;"><span style="padding:6px 12px;background:#2563eb;color:#fff;border-radius:16px;font-size:10px;font-weight:700;">Claim Now</span><span style="padding:6px 12px;border:1px solid #444;color:#999;border-radius:16px;font-size:10px;">Later</span></div></div><div style="margin-top:12px;background:#1a1a1a;border-radius:12px;padding:14px;"><div style="font-size:10px;color:#e09540;font-weight:700;margin-bottom:8px;">⚡ HURRY — EXPIRES IN</div><div style="display:flex;justify-content:center;gap:8px;"><div style="text-align:center;"><div style="font-size:24px;font-weight:700;color:#fff;">02</div><div style="font-size:8px;color:#999;">HOURS</div></div><div style="font-size:24px;color:#444;">:</div><div style="text-align:center;"><div style="font-size:24px;font-weight:700;color:#fff;">47</div><div style="font-size:8px;color:#999;">MINS</div></div></div></div></div></div>'},
+  aware:{title:'Awareness Campaigns',group:'G3',desc:'Multi-channel education that Upside does grocery. Email, push, in-app interstitials, banners — on Braze (already integrated). Runs on marketing\'s parallel track.',
+    detail:'<div style="display:flex;flex-direction:column;gap:8px;margin:8px 0;"><div style="background:#f0f7ff;border-radius:8px;padding:10px;border-left:3px solid #2563eb;"><div style="font-size:11px;font-weight:700;color:#2563eb;">📧 Email</div><div style="font-size:11px;margin-top:3px;color:#333;">Subject: "You\'re saving on gas — did you know about groceries?"</div></div><div style="background:#f0fdf4;border-radius:8px;padding:10px;border-left:3px solid #16a34a;"><div style="font-size:11px;font-weight:700;color:#16a34a;">🔔 Push</div><div style="font-size:11px;margin-top:3px;color:#333;">Cash back on groceries at 200+ stores. Tap to browse.</div></div><div style="background:#faf5ff;border-radius:8px;padding:10px;border-left:3px solid #7c3aed;"><div style="font-size:11px;font-weight:700;color:#7c3aed;">📱 In-App Interstitial</div><div style="font-size:11px;margin-top:3px;color:#333;">Post-fuel-claim overlay: "Nice save! Want to save on groceries too?"</div></div><div style="background:#fffbeb;border-radius:8px;padding:10px;border-left:3px solid #d97706;"><div style="font-size:11px;font-weight:700;color:#d97706;">🏷 Banner</div><div style="font-size:11px;margin-top:3px;color:#333;">Persistent: "🛒 NEW — Grocery cash back now available"</div></div></div>'},
+  geo:{title:'Geo-Triggered Nudges',group:'G3',desc:'Location-aware push when near a grocery merchant. Dual-purpose: education + catching the moment of opportunity.',
+    detail:'<div class="phone-frame" style="height:380px;"><div class="phone-screen dark" style="padding:0;"><div style="background:#000;padding:12px 16px;"><div style="font-size:9px;color:#999;margin-bottom:4px;">NOW</div><div style="background:#1a1a1a;border-radius:12px;padding:12px;"><div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><div style="width:24px;height:24px;background:#16a34a;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;">U</div><div style="font-size:11px;font-weight:700;">Upside</div></div><div style="font-size:12px;font-weight:700;">Save 10% at Kroger down the block 🛒</div><div style="font-size:10px;color:#999;margin-top:4px;">0.3 mi away — save ~$6.70 on your next trip.</div><div style="margin-top:8px;display:flex;gap:6px;"><span style="padding:6px 14px;background:#2563eb;color:#fff;border-radius:16px;font-size:10px;font-weight:700;">Go Now</span><span style="padding:6px 14px;border:1px solid #444;color:#999;border-radius:16px;font-size:10px;">Save for Later</span></div></div></div><div style="padding:12px 16px;font-size:10px;color:#999;"><span style="color:#e09540;font-weight:700;">⚠ Privacy:</span> Requires opt-in + legal review. Geo-fencing via 3rd-party SDK.</div></div></div>'}
+};
+
+function showSol2(el){
+  document.querySelectorAll('.sol-col-item').forEach(function(i){i.classList.remove('active');});
+  el.classList.add('active');
+  var key=el.dataset.sol,s=sols[key],panel=document.getElementById('sol-top');
+  var html='<h3>'+s.title+'</h3><p>'+s.desc+'</p>';
+  if(s.hasVars){
+    html+='<div class="var-tabs">';
+    s.varLabels.forEach(function(l,i){html+='<div class="var-tab'+(i===0?' active':'')+'" onclick="showVar(this,'+i+')">'+l+'</div>';});
+    html+='</div>';
+    s.vars.forEach(function(v,i){html+='<div class="var-panel'+(i===0?' show':'')+'" data-vi="'+i+'">'+v+'</div>';});
+  } else {
+    html+='<div style="margin-top:8px;">'+s.detail+'</div>';
+  }
+  panel.innerHTML=html;
+  panel.classList.add('show');
+  panel.scrollTop=0;
+}
+
+function showVar(tab,idx){
+  var tabs=tab.parentElement;
+  tabs.querySelectorAll('.var-tab').forEach(function(t){t.classList.remove('active');});
+  tab.classList.add('active');
+  var panels=tabs.parentElement.querySelectorAll('.var-panel');
+  panels.forEach(function(p){p.classList.remove('show');});
+  panels[idx].classList.add('show');
+}
+
+showSol2(document.querySelector('.sol-col-item[data-sol="sig"]'));
+
+// RICE toggle
+function riceView(v){
+  document.querySelectorAll('#rice-toggle .tbtn').forEach(function(b){b.classList.remove('active');});
+  event.target.classList.add('active');
+  document.getElementById('rice-summary').hidden=(v!=='summary');
+  document.getElementById('rice-detail').hidden=(v!=='detail');
+}
+
+// Dashboard theme toggle
+function toggleDashTheme(btn){
+  var slide=btn.closest('.slide');
+  if(slide.classList.contains('dark-sl')){
+    slide.classList.remove('dark-sl');
+    slide.style.background='var(--surface)';slide.style.color='var(--ink)';
+    btn.textContent='🌙 Dark mode';
+  }else{
+    slide.classList.add('dark-sl');
+    slide.style.background='';slide.style.color='';
+    btn.textContent='☀ Light mode';
+  }
+}
+
+go(0);
+</script>
